@@ -1,0 +1,35 @@
+# Ignorar entorno virtual
+env/
+
+# Archivos de caché de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos de log
+*.log
+
+# Archivos de configuración de VSCode
+.vscode/
+
+# Archivos de bases de datos temporales
+*.sqlite3
+
+# Archivos de entorno
+.env
+
+# Archivos de testing
+.tox/
+.nox/
+coverage.*
+.cache
+.pytest_cache/
+
+# Paquetes creados
+dist/
+build/
+*.egg-info/
+
+# Archivos temporales del sistema
+.DS_Store
+Thumbs.db

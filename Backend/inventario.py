@@ -1,4 +1,4 @@
-from base_datos.conexion import obtener_conexion
+from Backend.conexion import obtener_conexion
 from modelos.claseProducto import Producto
 
 class Inventario():

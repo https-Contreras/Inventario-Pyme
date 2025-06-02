@@ -262,7 +262,7 @@ font: 12pt &quot;Swis721 BlkCn BT&quot;;
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
-       <widget class="QToolBox" name="toolBox">
+       <widget class="QToolBox" name="toolBox3">
         <property name="geometry">
          <rect>
           <x>-2</x>
@@ -302,6 +302,14 @@ font: 12pt &quot;Swis721 BlkCn BT&quot;;
          </widget>
         </widget>
         <widget class="QWidget" name="page_3">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>98</width>
+           <height>28</height>
+          </rect>
+         </property>
          <attribute name="icon">
           <iconset>
            <normaloff>../models/paginas.svg</normaloff>../models/paginas.svg</iconset>
@@ -325,8 +333,8 @@ font: 12pt &quot;Swis721 BlkCn BT&quot;;
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>591</width>
-           <height>311</height>
+           <width>98</width>
+           <height>28</height>
           </rect>
          </property>
          <attribute name="icon">
@@ -367,7 +375,7 @@ font: 12pt &quot;Swis721 BlkCn BT&quot;;
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
-       <widget class="QLabel" name="label">
+       <widget class="QLabel" name="logo_letras">
         <property name="geometry">
          <rect>
           <x>120</x>
@@ -440,7 +448,7 @@ border-radius: 20px;
           <number>0</number>
          </property>
          <item>
-          <widget class="QPushButton" name="pushButton_5">
+          <widget class="QPushButton" name="btn_minimizar">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -466,7 +474,7 @@ border-radius: 20px;
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_6">
+          <widget class="QPushButton" name="btn_achicar">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -489,7 +497,7 @@ border-radius: 20px;
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_7">
+          <widget class="QPushButton" name="btn_agrandar">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -512,7 +520,7 @@ border-radius: 20px;
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_4">
+          <widget class="QPushButton" name="btn_cerrar">
            <property name="minimumSize">
             <size>
              <width>0</width>

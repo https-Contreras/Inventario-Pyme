@@ -1,2 +1,15 @@
 **/env-py39
- 
+# Compilados de Python
+**__pycache__/
+*.pyc
+*.pyo
+
+# Archivos de log o base de datos local
+*.log
+*.sqlite3
+
+# Archivos de configuración locales
+*.env
+
+# Archivos de PyQt generados automáticamente
+*.py~  # backups

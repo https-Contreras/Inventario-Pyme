@@ -1,35 +1,15 @@
-# Ignorar entorno virtual
-env/
+**/env-py39
+# Compilados de Python
+**__pycache__/
+*.pyc
+*.pyo
 
-# Archivos de caché de Python
-__pycache__/
-*.py[cod]
-*$py.class
-
-# Archivos de log
+# Archivos de log o base de datos local
 *.log
-
-# Archivos de configuración de VSCode
-.vscode/
-
-# Archivos de bases de datos temporales
 *.sqlite3
 
-# Archivos de entorno
-.env
+# Archivos de configuración locales
+*.env
 
-# Archivos de testing
-.tox/
-.nox/
-coverage.*
-.cache
-.pytest_cache/
-
-# Paquetes creados
-dist/
-build/
-*.egg-info/
-
-# Archivos temporales del sistema
-.DS_Store
-Thumbs.db
+# Archivos de PyQt generados automáticamente
+*.py~  # backups

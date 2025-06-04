@@ -1,6 +1,6 @@
 import os
-from PyQt6.QtWidgets import QMainWindow
-from PyQt6.QtCore import QPropertyAnimation, QEasingCurve
+from PyQt6.QtWidgets import QMainWindow, QSizeGrip
+from PyQt6.QtCore import Qt, QPropertyAnimation, QEasingCurve
 from PyQt6.QtGui import QColor
 from PyQt6.QtGui import QIcon
 from PyQt6.QtGui import QPixmap
@@ -8,26 +8,108 @@ from ui.ventana_principal_ui import Ui_MainWindow
 from PyQt6 import QtWidgets, QtGui
 
 class VentanaPrincipal(QMainWindow):
-    def __init__(self):
+    def __init__(self):# constructor de la clase VentanaPrincipal
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
         self.cargar_iconos()
-
+        
         self.inicializar_animaciones()
         
-    def inicializar_animaciones(self):
-        # Ejemplo: animar opacidad de un botón
-        self.anim = QPropertyAnimation(self.ui.btn_reportes, b"windowOpacity")
-        self.anim.setDuration(1000)
-        self.anim.setStartValue(0.0)
-        self.anim.setEndValue(1.0)
-        self.anim.setEasingCurve(QEasingCurve.Type.InOutQuad)
-        self.anim.start()
-        
+    def inicializar_animaciones(self): # metodo para inicializar las animaciones y configuraciones de la ventana principal
+
+        self.ui.bt_ocultar.clicked.connect(self.animacion_barra)
+        self.ui.bt_mostrar.clicked.connect(self.animacion_barra)
+        # Ocultar el botón al inicio
+        self.ui.btn_achicar.hide()
+        self.ui.bt_mostrar.hide()
+        # Dando sombra a los frames
+        self.sombra_frame(self.ui.frame_barra)
+        self.sombra_frame(self.ui.frame_cuerpo)
+        self.sombra_frame(self.ui.toolBox3)
+        self.sombra_frame(self.ui.btn_alertas)
+        self.sombra_frame(self.ui.btn_configuracion)
+        self.sombra_frame(self.ui.btn_entradas)
+        self.sombra_frame(self.ui.btn_inventario)
+        self.sombra_frame(self.ui.btn_resumen)
+        self.sombra_frame(self.ui.btn_reportes)
+        self.sombra_frame(self.ui.btn_salidas)
+        #control barra de titulos
+        self.ui.btn_minimizar.clicked.connect(self.control_bt_minimizar)
+        self.ui.btn_agrandar.clicked.connect(self.control_bt_agrandar)
+        self.ui.btn_achicar.clicked.connect(self.control_bt_normal)
+        self.ui.btn_cerrar.clicked.connect(self.close)
+        #eliminar barra y titulo -opacidad
+        self.setWindowFlag(Qt.WindowType.FramelessWindowHint)
+        self.setWindowOpacity(1)
+        #SizeGrip
+        self.gripSize = 10
+        self.grip = QSizeGrip(self)
+        self.grip.resize(self.gripSize, self.gripSize)
+
+        self.evento_mover_desde_frame()
+
+    def animacion_barra(self): #metodo para animar la barra lateral a la izquierda
+        if True:
+            width = self.ui.frame_barra.width()
+            normal = 0
+            if width == 0:
+                extender = 300
+                self.ui.bt_mostrar.hide()
+                self.ui.bt_ocultar.show()
+                
+            else:
+                self.ui.bt_mostrar.show()
+                self.ui.bt_ocultar.hide()
+                extender = normal
+            self.animacion = QPropertyAnimation(self.ui.frame_barra, b"maximumWidth")
+            self.animacion.setStartValue(width)
+            self.animacion.setEndValue(extender)
+            self.animacion.setDuration(400)  # Duración de la animación en milisegundos
+            self.animacion.setEasingCurve(QEasingCurve.Type.InQuad)  # Curva de aceleración
+            self.animacion.start()
+   
+    def sombra_frame(self, frame): #metodo para dar sombra a los frames
+        sombra = QtWidgets.QGraphicsDropShadowEffect(self)
+        sombra.setBlurRadius(18)
+        sombra.setXOffset(4)
+        sombra.setYOffset(4)
+        sombra.setColor(QColor(0, 0, 0, 100))
+        frame.setGraphicsEffect(sombra)
+
+    def resizeEvent(self, event): #metodo para redimensionar la ventana
+        self.grip.move(self.width() - self.gripSize, self.height() - self.gripSize)
     
-    def cargar_iconos(self):
+    def control_bt_minimizar(self): #metodo para minimizar la ventana
+        self.showMinimized()
+
+    def control_bt_normal(self): #metodo para maximizar la ventana
+        self.showNormal()
+        self.ui.btn_achicar.hide()
+        self.ui.btn_agrandar.show()
+    
+    def control_bt_agrandar(self): #metodo para maximizar la ventana
+        self.showMaximized()
+        self.ui.btn_agrandar.hide()
+        self.ui.btn_achicar.show()
+ 
+    def evento_mover_desde_frame(self):
+        self.ui.frame_superior.mousePressEvent = self.frame_mouse_press_event
+        self.ui.frame_superior.mouseMoveEvent = self.frame_mouse_move_event
+
+    def frame_mouse_press_event(self, event):
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.clickPosition = event.globalPosition().toPoint()
+            event.accept()
+
+    def frame_mouse_move_event(self, event):
+        if event.buttons() == Qt.MouseButton.LeftButton and not self.isMaximized():
+            self.move(self.pos() + event.globalPosition().toPoint() - self.clickPosition)
+            self.clickPosition = event.globalPosition().toPoint()
+            event.accept()
+
+    def cargar_iconos(self):# metodo para cargar los íconos desde la carpeta /models
         # Carpeta raíz del proyecto
         root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 

@@ -9,282 +9,323 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(816, 647)
-        self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
-        self.centralwidget.setStyleSheet("background-color:#ffffff;")
-        self.centralwidget.setObjectName("centralwidget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
+class Ui_Form(object):
+    def setupUi(self, Form):
+        Form.setObjectName("Form")
+        Form.resize(870, 650)
+        self.verticalLayout = QtWidgets.QVBoxLayout(Form)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.frame = QtWidgets.QFrame(parent=self.centralwidget)
+        self.frame = QtWidgets.QFrame(parent=Form)
         self.frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame.setObjectName("frame")
-        self.frame_barra = QtWidgets.QFrame(parent=self.frame)
-        self.frame_barra.setGeometry(QtCore.QRect(0, 30, 201, 621))
-        self.frame_barra.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
-        self.frame_barra.setStyleSheet("QFrame{\n"
-"background-color: rgb(207, 207, 207);\n"
-"}\n"
-"QPushButton {\n"
-"background-color: #ffffff;\n"
-"border-radius: 20px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"background-color: #0068BB;\n"
-"border-radius: 20px;\n"
-"}")
-        self.frame_barra.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_barra.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_barra.setObjectName("frame_barra")
-        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.frame_barra)
-        self.verticalLayout_4.setObjectName("verticalLayout_4")
-        self.btn_resumen = QtWidgets.QPushButton(parent=self.frame_barra)
-        self.btn_resumen.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../models/logoIMSreduce.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_resumen.setIcon(icon)
-        self.btn_resumen.setIconSize(QtCore.QSize(90, 90))
-        self.btn_resumen.setShortcut("")
-        self.btn_resumen.setCheckable(False)
-        self.btn_resumen.setAutoRepeat(False)
-        self.btn_resumen.setAutoExclusive(False)
-        self.btn_resumen.setAutoDefault(False)
-        self.btn_resumen.setDefault(False)
-        self.btn_resumen.setFlat(True)
-        self.btn_resumen.setObjectName("btn_resumen")
-        self.verticalLayout_4.addWidget(self.btn_resumen)
-        self.btn_inventario = QtWidgets.QPushButton(parent=self.frame_barra)
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("../models/inventario.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_inventario.setIcon(icon1)
-        self.btn_inventario.setIconSize(QtCore.QSize(32, 32))
-        self.btn_inventario.setFlat(True)
-        self.btn_inventario.setObjectName("btn_inventario")
-        self.verticalLayout_4.addWidget(self.btn_inventario)
-        self.btn_entradas = QtWidgets.QPushButton(parent=self.frame_barra)
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("../models/entrada.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_entradas.setIcon(icon2)
-        self.btn_entradas.setIconSize(QtCore.QSize(32, 32))
-        self.btn_entradas.setFlat(True)
-        self.btn_entradas.setObjectName("btn_entradas")
-        self.verticalLayout_4.addWidget(self.btn_entradas)
-        self.btn_salidas = QtWidgets.QPushButton(parent=self.frame_barra)
-        icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("../models/salida.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_salidas.setIcon(icon3)
-        self.btn_salidas.setIconSize(QtCore.QSize(32, 32))
-        self.btn_salidas.setFlat(True)
-        self.btn_salidas.setObjectName("btn_salidas")
-        self.verticalLayout_4.addWidget(self.btn_salidas)
-        self.btn_reportes = QtWidgets.QPushButton(parent=self.frame_barra)
-        icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("../models/reportes.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_reportes.setIcon(icon4)
-        self.btn_reportes.setIconSize(QtCore.QSize(32, 32))
-        self.btn_reportes.setFlat(True)
-        self.btn_reportes.setObjectName("btn_reportes")
-        self.verticalLayout_4.addWidget(self.btn_reportes)
-        self.btn_alertas = QtWidgets.QPushButton(parent=self.frame_barra)
-        icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap("../models/alertas.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_alertas.setIcon(icon5)
-        self.btn_alertas.setIconSize(QtCore.QSize(32, 32))
-        self.btn_alertas.setFlat(True)
-        self.btn_alertas.setObjectName("btn_alertas")
-        self.verticalLayout_4.addWidget(self.btn_alertas)
-        self.btn_configuracion = QtWidgets.QPushButton(parent=self.frame_barra)
-        icon6 = QtGui.QIcon()
-        icon6.addPixmap(QtGui.QPixmap("../models/configuracion.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_configuracion.setIcon(icon6)
-        self.btn_configuracion.setIconSize(QtCore.QSize(32, 32))
-        self.btn_configuracion.setFlat(True)
-        self.btn_configuracion.setObjectName("btn_configuracion")
-        self.verticalLayout_4.addWidget(self.btn_configuracion)
-        self.frame_cuerpo = QtWidgets.QFrame(parent=self.frame)
-        self.frame_cuerpo.setGeometry(QtCore.QRect(210, 170, 611, 481))
-        self.frame_cuerpo.setStyleSheet("QToolBox::tab{\n"
-"background-color: rgb(207, 207, 207);\n"
-"border-radius: 5px;\n"
-"color: #0068BB;\n"
-"font: 12pt \"Swis721 BlkCn BT\";\n"
-"}\n"
-"QToolBox::tab::selected{\n"
-"background-color: rgb(20, 200, 220);\n"
-"border-radius: 5px;\n"
-"color: #000000;\n"
-"font: 12pt \"Swis721 BlkCn BT\";\n"
-"}")
-        self.frame_cuerpo.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_cuerpo.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_cuerpo.setObjectName("frame_cuerpo")
-        self.toolBox3 = QtWidgets.QToolBox(parent=self.frame_cuerpo)
-        self.toolBox3.setGeometry(QtCore.QRect(-2, -2, 601, 471))
-        self.toolBox3.setObjectName("toolBox3")
-        self.page = QtWidgets.QWidget()
-        self.page.setGeometry(QtCore.QRect(0, 0, 601, 381))
-        self.page.setObjectName("page")
-        self.list_totproductos = QtWidgets.QListView(parent=self.page)
-        self.list_totproductos.setGeometry(QtCore.QRect(10, 0, 571, 381))
-        self.list_totproductos.setObjectName("list_totproductos")
-        icon7 = QtGui.QIcon()
-        icon7.addPixmap(QtGui.QPixmap("../models/paginas.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.toolBox3.addItem(self.page, icon7, "")
-        self.page_3 = QtWidgets.QWidget()
-        self.page_3.setGeometry(QtCore.QRect(0, 0, 601, 381))
-        self.page_3.setObjectName("page_3")
-        self.list_producstockbajo = QtWidgets.QListView(parent=self.page_3)
-        self.list_producstockbajo.setGeometry(QtCore.QRect(10, 10, 571, 371))
-        self.list_producstockbajo.setObjectName("list_producstockbajo")
-        self.toolBox3.addItem(self.page_3, icon7, "")
-        self.page_2 = QtWidgets.QWidget()
-        self.page_2.setGeometry(QtCore.QRect(0, 0, 601, 381))
-        self.page_2.setObjectName("page_2")
-        self.table_movrecientes = QtWidgets.QTableView(parent=self.page_2)
-        self.table_movrecientes.setGeometry(QtCore.QRect(10, 0, 571, 381))
-        self.table_movrecientes.setObjectName("table_movrecientes")
-        self.toolBox3.addItem(self.page_2, icon7, "")
-        self.frame_2 = QtWidgets.QFrame(parent=self.frame)
-        self.frame_2.setGeometry(QtCore.QRect(200, 30, 621, 131))
-        self.frame_2.setStyleSheet("background-color: #ffffff")
-        self.frame_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_2.setObjectName("frame_2")
-        self.logo_letras = QtWidgets.QLabel(parent=self.frame_2)
-        self.logo_letras.setGeometry(QtCore.QRect(200, 0, 211, 151))
-        self.logo_letras.setText("")
-        self.logo_letras.setPixmap(QtGui.QPixmap("../models/logoIMSreduce2.png"))
-        self.logo_letras.setScaledContents(True)
-        self.logo_letras.setObjectName("logo_letras")
-        self.bt_ocultar = QtWidgets.QPushButton(parent=self.frame_2)
-        self.bt_ocultar.setGeometry(QtCore.QRect(-20, 60, 75, 40))
-        self.bt_ocultar.setMinimumSize(QtCore.QSize(0, 40))
-        self.bt_ocultar.setStyleSheet("QPushButton:hover {\n"
-"background-color: #0068BB;\n"
-"border-radius: 20px;\n"
-"}")
-        self.bt_ocultar.setText("")
-        icon8 = QtGui.QIcon()
-        icon8.addPixmap(QtGui.QPixmap("../models/izquierda.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.bt_ocultar.setIcon(icon8)
-        self.bt_ocultar.setIconSize(QtCore.QSize(32, 32))
-        self.bt_ocultar.setFlat(True)
-        self.bt_ocultar.setObjectName("bt_ocultar")
-        self.bt_mostrar = QtWidgets.QPushButton(parent=self.frame_2)
-        self.bt_mostrar.setGeometry(QtCore.QRect(-20, 60, 75, 40))
-        self.bt_mostrar.setMinimumSize(QtCore.QSize(0, 40))
-        self.bt_mostrar.setStyleSheet("QPushButton:hover {\n"
-"background-color: #0068BB;\n"
-"border-radius: 20px;\n"
-"}")
-        self.bt_mostrar.setText("")
-        icon9 = QtGui.QIcon()
-        icon9.addPixmap(QtGui.QPixmap("../models/derecha.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.bt_mostrar.setIcon(icon9)
-        self.bt_mostrar.setIconSize(QtCore.QSize(32, 32))
-        self.bt_mostrar.setFlat(True)
-        self.bt_mostrar.setObjectName("bt_mostrar")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.frame)
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_2.setSpacing(0)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.frame_superior = QtWidgets.QFrame(parent=self.frame)
-        self.frame_superior.setGeometry(QtCore.QRect(0, 0, 821, 31))
-        self.frame_superior.setMinimumSize(QtCore.QSize(0, 30))
-        self.frame_superior.setAutoFillBackground(False)
         self.frame_superior.setStyleSheet("QFrame{\n"
-"background-color: rgb(122, 122, 122);\n"
+"    background-color: #0068BC;\n"
 "}\n"
+"\n"
+"QLabel {\n"
+"    color: #FFFFFF;\n"
+"    border: none;\n"
+"    padding: 5px;\n"
+"    font: 20pt \"Swis721 BlkCn BT\";\n"
+"}\n"
+"\n"
 "QPushButton {\n"
-"background-color: rgb(122, 122, 122);\n"
-"border-radius: 20px;\n"
+"    background-color: transparent;\n"
+"    color: #FFFFFF;\n"
+"    border: none;\n"
+"    padding: 5px;\n"
 "}\n"
-"QPushButton:hover {\n"
-"background-color: #0068BB;\n"
-"border-radius: 20px;\n"
-"}")
+"QPushButton:hover { \n"
+"    background-color:#5DADE2; \n"
+"    min-width: 60px;\n"
+"    min-height: 60px;\n"
+"    border-radius: 30px; \n"
+"}\n"
+"")
         self.frame_superior.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_superior.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_superior.setObjectName("frame_superior")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.frame_superior)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout.setSpacing(5)
+        self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.label = QtWidgets.QLabel(parent=self.frame_superior)
-        self.label.setStyleSheet("QLabel{\n"
-"border-radius: 5px;\n"
-"color: #000000;\n"
-"font: 12pt \"Swis721 BlkCn BT\";\n"
-"}")
-        self.label.setScaledContents(False)
         self.label.setObjectName("label")
         self.horizontalLayout.addWidget(self.label)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(377, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
         self.btn_minimizar = QtWidgets.QPushButton(parent=self.frame_superior)
-        self.btn_minimizar.setMinimumSize(QtCore.QSize(0, 30))
         self.btn_minimizar.setText("")
-        icon10 = QtGui.QIcon()
-        icon10.addPixmap(QtGui.QPixmap("../models/minimizar.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_minimizar.setIcon(icon10)
-        self.btn_minimizar.setIconSize(QtCore.QSize(28, 28))
-        self.btn_minimizar.setFlat(True)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("../models/minimizar.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_minimizar.setIcon(icon)
+        self.btn_minimizar.setIconSize(QtCore.QSize(40, 40))
         self.btn_minimizar.setObjectName("btn_minimizar")
         self.horizontalLayout.addWidget(self.btn_minimizar)
-        self.btn_agrandar = QtWidgets.QPushButton(parent=self.frame_superior)
-        self.btn_agrandar.setMinimumSize(QtCore.QSize(0, 30))
-        self.btn_agrandar.setText("")
-        icon11 = QtGui.QIcon()
-        icon11.addPixmap(QtGui.QPixmap("../models/hacergrande.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_agrandar.setIcon(icon11)
-        self.btn_agrandar.setIconSize(QtCore.QSize(28, 28))
-        self.btn_agrandar.setObjectName("btn_agrandar")
-        self.horizontalLayout.addWidget(self.btn_agrandar)
         self.btn_achicar = QtWidgets.QPushButton(parent=self.frame_superior)
-        self.btn_achicar.setMinimumSize(QtCore.QSize(0, 30))
         self.btn_achicar.setText("")
-        icon12 = QtGui.QIcon()
-        icon12.addPixmap(QtGui.QPixmap("../models/hacerchico.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_achicar.setIcon(icon12)
-        self.btn_achicar.setIconSize(QtCore.QSize(28, 28))
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("../models/hacerchico.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_achicar.setIcon(icon1)
+        self.btn_achicar.setIconSize(QtCore.QSize(40, 40))
         self.btn_achicar.setObjectName("btn_achicar")
         self.horizontalLayout.addWidget(self.btn_achicar)
+        self.btn_agrandar = QtWidgets.QPushButton(parent=self.frame_superior)
+        self.btn_agrandar.setText("")
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("../models/hacergrande.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_agrandar.setIcon(icon2)
+        self.btn_agrandar.setIconSize(QtCore.QSize(40, 40))
+        self.btn_agrandar.setObjectName("btn_agrandar")
+        self.horizontalLayout.addWidget(self.btn_agrandar)
         self.btn_cerrar = QtWidgets.QPushButton(parent=self.frame_superior)
-        self.btn_cerrar.setMinimumSize(QtCore.QSize(0, 30))
         self.btn_cerrar.setText("")
-        icon13 = QtGui.QIcon()
-        icon13.addPixmap(QtGui.QPixmap("../models/cerrar.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_cerrar.setIcon(icon13)
-        self.btn_cerrar.setIconSize(QtCore.QSize(28, 28))
-        self.btn_cerrar.setFlat(True)
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap("../models/cerrar.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_cerrar.setIcon(icon3)
+        self.btn_cerrar.setIconSize(QtCore.QSize(40, 40))
         self.btn_cerrar.setObjectName("btn_cerrar")
         self.horizontalLayout.addWidget(self.btn_cerrar)
-        spacerItem2 = QtWidgets.QSpacerItem(10, 40, QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem2 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem2)
-        self.frame_2.raise_()
-        self.frame_barra.raise_()
-        self.frame_cuerpo.raise_()
-        self.frame_superior.raise_()
+        self.verticalLayout_2.addWidget(self.frame_superior)
+        self.frame_cuerpo = QtWidgets.QFrame(parent=self.frame)
+        self.frame_cuerpo.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_cuerpo.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_cuerpo.setLineWidth(0)
+        self.frame_cuerpo.setObjectName("frame_cuerpo")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.frame_cuerpo)
+        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_2.setSpacing(0)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.frame_barra = QtWidgets.QFrame(parent=self.frame_cuerpo)
+        self.frame_barra.setStyleSheet("QFrame {\n"
+"    background-color: #60B0C3\n"
+"}\n"
+"QPushButton{\n"
+"    background-color: #0068BC;       \n"
+"    color: #FFFFFF;                    /* Texto blanco */\n"
+"    border: none;                    /* Sin borde de línea */\n"
+"    border-radius: 12px;             /* Bordes redondeados */\n"
+"    padding: 10px 20px;              /* Relleno interno */\n"
+"    font: bold 12pt \"Arial\"; \n"
+"}\n"
+"QPushButton#btn_resumen{\n"
+"background-color: #ffffff\n"
+"}\n"
+"QPushButton#btn_resumen:hover{\n"
+"background-color: #5DADE2;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #5DADE2;       /* Color cuando el mouse pasa encima */\n"
+"}\n"
+"\n"
+"")
+        self.frame_barra.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_barra.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_barra.setLineWidth(0)
+        self.frame_barra.setObjectName("frame_barra")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.frame_barra)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.btn_resumen = QtWidgets.QPushButton(parent=self.frame_barra)
+        self.btn_resumen.setText("")
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap("../models/logoIMSreduce.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_resumen.setIcon(icon4)
+        self.btn_resumen.setIconSize(QtCore.QSize(120, 120))
+        self.btn_resumen.setObjectName("btn_resumen")
+        self.verticalLayout_3.addWidget(self.btn_resumen)
+        self.btn_inventario = QtWidgets.QPushButton(parent=self.frame_barra)
+        icon5 = QtGui.QIcon()
+        icon5.addPixmap(QtGui.QPixmap("../models/inventario.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_inventario.setIcon(icon5)
+        self.btn_inventario.setIconSize(QtCore.QSize(30, 30))
+        self.btn_inventario.setObjectName("btn_inventario")
+        self.verticalLayout_3.addWidget(self.btn_inventario)
+        self.btn_entradas = QtWidgets.QPushButton(parent=self.frame_barra)
+        icon6 = QtGui.QIcon()
+        icon6.addPixmap(QtGui.QPixmap("../models/entrada.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_entradas.setIcon(icon6)
+        self.btn_entradas.setIconSize(QtCore.QSize(30, 30))
+        self.btn_entradas.setObjectName("btn_entradas")
+        self.verticalLayout_3.addWidget(self.btn_entradas)
+        self.btn_salidas = QtWidgets.QPushButton(parent=self.frame_barra)
+        icon7 = QtGui.QIcon()
+        icon7.addPixmap(QtGui.QPixmap("../models/salida.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_salidas.setIcon(icon7)
+        self.btn_salidas.setIconSize(QtCore.QSize(30, 30))
+        self.btn_salidas.setObjectName("btn_salidas")
+        self.verticalLayout_3.addWidget(self.btn_salidas)
+        self.btn_reportes = QtWidgets.QPushButton(parent=self.frame_barra)
+        icon8 = QtGui.QIcon()
+        icon8.addPixmap(QtGui.QPixmap("../models/reportes.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_reportes.setIcon(icon8)
+        self.btn_reportes.setIconSize(QtCore.QSize(30, 30))
+        self.btn_reportes.setObjectName("btn_reportes")
+        self.verticalLayout_3.addWidget(self.btn_reportes)
+        self.btn_alertas = QtWidgets.QPushButton(parent=self.frame_barra)
+        icon9 = QtGui.QIcon()
+        icon9.addPixmap(QtGui.QPixmap("../models/alertas.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_alertas.setIcon(icon9)
+        self.btn_alertas.setIconSize(QtCore.QSize(30, 30))
+        self.btn_alertas.setObjectName("btn_alertas")
+        self.verticalLayout_3.addWidget(self.btn_alertas)
+        self.btn_configuracion = QtWidgets.QPushButton(parent=self.frame_barra)
+        icon10 = QtGui.QIcon()
+        icon10.addPixmap(QtGui.QPixmap("../models/configuracion.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_configuracion.setIcon(icon10)
+        self.btn_configuracion.setIconSize(QtCore.QSize(30, 30))
+        self.btn_configuracion.setObjectName("btn_configuracion")
+        self.verticalLayout_3.addWidget(self.btn_configuracion)
+        self.horizontalLayout_2.addWidget(self.frame_barra)
+        self.frame_contenido = QtWidgets.QFrame(parent=self.frame_cuerpo)
+        self.frame_contenido.setStyleSheet("background-color: #99D8DD")
+        self.frame_contenido.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_contenido.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_contenido.setObjectName("frame_contenido")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.frame_contenido)
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_4.setSpacing(0)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.frame_logo = QtWidgets.QFrame(parent=self.frame_contenido)
+        self.frame_logo.setStyleSheet("QFrame{\n"
+"    background-color: #ffffff\n"
+"}\n"
+"QPushButton {\n"
+"    background-color: transparent;\n"
+"    color: #FFFFFF;\n"
+"    border: none;\n"
+"    padding: 5px;\n"
+"}\n"
+"QPushButton:hover { \n"
+"    background-color:#5DADE2; \n"
+"    min-width: 60px;\n"
+"    min-height: 60px;\n"
+"    border-radius: 30px; \n"
+"}")
+        self.frame_logo.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_logo.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_logo.setObjectName("frame_logo")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.frame_logo)
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_3.setSpacing(0)
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.bt_ocultar = QtWidgets.QPushButton(parent=self.frame_logo)
+        self.bt_ocultar.setText("")
+        icon11 = QtGui.QIcon()
+        icon11.addPixmap(QtGui.QPixmap("../models/izquierda.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.bt_ocultar.setIcon(icon11)
+        self.bt_ocultar.setIconSize(QtCore.QSize(50, 50))
+        self.bt_ocultar.setObjectName("bt_ocultar")
+        self.horizontalLayout_3.addWidget(self.bt_ocultar)
+        self.bt_mostrar = QtWidgets.QPushButton(parent=self.frame_logo)
+        self.bt_mostrar.setText("")
+        icon12 = QtGui.QIcon()
+        icon12.addPixmap(QtGui.QPixmap("../models/derecha.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.bt_mostrar.setIcon(icon12)
+        self.bt_mostrar.setIconSize(QtCore.QSize(50, 50))
+        self.bt_mostrar.setObjectName("bt_mostrar")
+        self.horizontalLayout_3.addWidget(self.bt_mostrar)
+        spacerItem3 = QtWidgets.QSpacerItem(131, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem3)
+        self.logo_letras = QtWidgets.QLabel(parent=self.frame_logo)
+        self.logo_letras.setMaximumSize(QtCore.QSize(220, 160))
+        self.logo_letras.setText("")
+        self.logo_letras.setPixmap(QtGui.QPixmap("../models/logoIMSreduce2.png"))
+        self.logo_letras.setScaledContents(True)
+        self.logo_letras.setObjectName("logo_letras")
+        self.horizontalLayout_3.addWidget(self.logo_letras)
+        spacerItem4 = QtWidgets.QSpacerItem(130, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem4)
+        self.verticalLayout_4.addWidget(self.frame_logo)
+        self.frame_informacion = QtWidgets.QFrame(parent=self.frame_contenido)
+        self.frame_informacion.setStyleSheet("QFrame{\n"
+"    background-color: #C0E4E5\n"
+"}\n"
+"QToolBox::tab{\n"
+"background-color: #61ADC1;\n"
+"border-radius: 5px;\n"
+"color: #ffffff;\n"
+"font: 12pt \"Swis721 BlkCn BT\";\n"
+"}\n"
+"QToolBox::tab::selected{\n"
+"background-color: #005999;\n"
+"border-radius: 5px;\n"
+"color: #ffffff;\n"
+"font: 12pt \"Swis721 BlkCn BT\";\n"
+"}")
+        self.frame_informacion.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_informacion.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_informacion.setObjectName("frame_informacion")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.frame_informacion)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.toolBox = QtWidgets.QToolBox(parent=self.frame_informacion)
+        self.toolBox.setObjectName("toolBox")
+        self.page_resumen = QtWidgets.QWidget()
+        self.page_resumen.setGeometry(QtCore.QRect(0, 0, 597, 299))
+        self.page_resumen.setObjectName("page_resumen")
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.page_resumen)
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.listWidget = QtWidgets.QListWidget(parent=self.page_resumen)
+        self.listWidget.setObjectName("listWidget")
+        self.verticalLayout_6.addWidget(self.listWidget)
+        icon13 = QtGui.QIcon()
+        icon13.addPixmap(QtGui.QPixmap("../models/paginas.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.toolBox.addItem(self.page_resumen, icon13, "")
+        self.page_stock = QtWidgets.QWidget()
+        self.page_stock.setObjectName("page_stock")
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.page_stock)
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
+        self.listWidget_2 = QtWidgets.QListWidget(parent=self.page_stock)
+        self.listWidget_2.setObjectName("listWidget_2")
+        self.verticalLayout_7.addWidget(self.listWidget_2)
+        self.toolBox.addItem(self.page_stock, icon13, "")
+        self.page_movimientos = QtWidgets.QWidget()
+        self.page_movimientos.setGeometry(QtCore.QRect(0, 0, 597, 299))
+        self.page_movimientos.setObjectName("page_movimientos")
+        self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.page_movimientos)
+        self.verticalLayout_8.setObjectName("verticalLayout_8")
+        self.tableWidget = QtWidgets.QTableWidget(parent=self.page_movimientos)
+        self.tableWidget.setObjectName("tableWidget")
+        self.tableWidget.setColumnCount(0)
+        self.tableWidget.setRowCount(0)
+        self.verticalLayout_8.addWidget(self.tableWidget)
+        self.toolBox.addItem(self.page_movimientos, icon13, "")
+        self.verticalLayout_5.addWidget(self.toolBox)
+        self.verticalLayout_4.addWidget(self.frame_informacion)
+        self.verticalLayout_4.setStretch(0, 2)
+        self.verticalLayout_4.setStretch(1, 5)
+        self.horizontalLayout_2.addWidget(self.frame_contenido)
+        self.horizontalLayout_2.setStretch(0, 2)
+        self.horizontalLayout_2.setStretch(1, 5)
+        self.verticalLayout_2.addWidget(self.frame_cuerpo)
+        self.verticalLayout_2.setStretch(0, 1)
+        self.verticalLayout_2.setStretch(1, 8)
         self.verticalLayout.addWidget(self.frame)
-        MainWindow.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(MainWindow)
-        self.toolBox3.setCurrentIndex(0)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslateUi(Form)
+        self.toolBox.setCurrentIndex(0)
+        QtCore.QMetaObject.connectSlotsByName(Form)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.btn_inventario.setText(_translate("MainWindow", "Inventario"))
-        self.btn_entradas.setText(_translate("MainWindow", "Entradas"))
-        self.btn_salidas.setText(_translate("MainWindow", "Salidas"))
-        self.btn_reportes.setText(_translate("MainWindow", "Reportes"))
-        self.btn_alertas.setText(_translate("MainWindow", "Alertas"))
-        self.btn_configuracion.setText(_translate("MainWindow", "Configuración"))
-        self.toolBox3.setItemText(self.toolBox3.indexOf(self.page), _translate("MainWindow", "Total de productos"))
-        self.toolBox3.setItemText(self.toolBox3.indexOf(self.page_3), _translate("MainWindow", "Productos con stock bajo"))
-        self.toolBox3.setItemText(self.toolBox3.indexOf(self.page_2), _translate("MainWindow", "Movimientos recientes"))
-        self.label.setText(_translate("MainWindow", "Menu Resumen"))
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.label.setText(_translate("Form", "Ventana Resumen"))
+        self.btn_inventario.setText(_translate("Form", "Inventario"))
+        self.btn_entradas.setText(_translate("Form", "Entradas"))
+        self.btn_salidas.setText(_translate("Form", "Salidas"))
+        self.btn_reportes.setText(_translate("Form", "Reportes"))
+        self.btn_alertas.setText(_translate("Form", "Alertas"))
+        self.btn_configuracion.setText(_translate("Form", "Configuracion"))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.page_resumen), _translate("Form", "Total de productos"))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.page_stock), _translate("Form", "Productos con stock bajo"))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.page_movimientos), _translate("Form", "Movimientos recientes"))

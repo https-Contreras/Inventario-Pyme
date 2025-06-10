@@ -1,17 +1,22 @@
 import os
-from PyQt6.QtWidgets import QMainWindow, QSizeGrip
+from PyQt6.QtWidgets import QWidget, QSizeGrip
 from PyQt6.QtCore import Qt, QPropertyAnimation, QEasingCurve
 from PyQt6.QtGui import QColor
 from PyQt6.QtGui import QIcon
 from PyQt6.QtGui import QPixmap
-from ui.ventana_principal_ui import Ui_MainWindow
+from ui.ventana_principal_ui import Ui_Form
 from PyQt6 import QtWidgets, QtGui
 
-class VentanaPrincipal(QMainWindow):
+class VentanaPrincipal(QWidget):
     def __init__(self):# constructor de la clase VentanaPrincipal
         super().__init__()
-        self.ui = Ui_MainWindow()
+        self.ui = Ui_Form()
         self.ui.setupUi(self)
+
+        self.setFixedSize(self.sizeHint())  # ✅ Esto asegura que la ventana tenga el tamaño correcto inicial
+
+        self.ui.frame_barra.setMinimumWidth(0)         
+        self.ui.frame_barra.setMaximumWidth(260)     
 
         self.cargar_iconos()
         
@@ -25,9 +30,8 @@ class VentanaPrincipal(QMainWindow):
         self.ui.btn_achicar.hide()
         self.ui.bt_mostrar.hide()
         # Dando sombra a los frames
-        self.sombra_frame(self.ui.frame_barra)
         self.sombra_frame(self.ui.frame_cuerpo)
-        self.sombra_frame(self.ui.toolBox3)
+        self.sombra_frame(self.ui.toolBox)
         self.sombra_frame(self.ui.btn_alertas)
         self.sombra_frame(self.ui.btn_configuracion)
         self.sombra_frame(self.ui.btn_entradas)
@@ -44,32 +48,33 @@ class VentanaPrincipal(QMainWindow):
         self.setWindowFlag(Qt.WindowType.FramelessWindowHint)
         self.setWindowOpacity(1)
         #SizeGrip
-        self.gripSize = 10
+        self.gripSize = 15
         self.grip = QSizeGrip(self)
         self.grip.resize(self.gripSize, self.gripSize)
 
         self.evento_mover_desde_frame()
 
-    def animacion_barra(self): #metodo para animar la barra lateral a la izquierda
-        if True:
-            width = self.ui.frame_barra.width()
-            normal = 0
-            if width == 0:
-                extender = 300
-                self.ui.bt_mostrar.hide()
-                self.ui.bt_ocultar.show()
-                
-            else:
-                self.ui.bt_mostrar.show()
-                self.ui.bt_ocultar.hide()
-                extender = normal
-            self.animacion = QPropertyAnimation(self.ui.frame_barra, b"maximumWidth")
-            self.animacion.setStartValue(width)
-            self.animacion.setEndValue(extender)
-            self.animacion.setDuration(400)  # Duración de la animación en milisegundos
-            self.animacion.setEasingCurve(QEasingCurve.Type.InQuad)  # Curva de aceleración
-            self.animacion.start()
-   
+    def animacion_barra(self): 
+        width = self.ui.frame_barra.width()
+        normal = 0
+        extender = 260
+
+        if width == 0:
+            self.ui.bt_mostrar.hide()
+            self.ui.bt_ocultar.show()
+            final_width = extender
+        else:
+            self.ui.bt_mostrar.show()
+            self.ui.bt_ocultar.hide()
+            final_width = normal
+
+        self.animacion = QPropertyAnimation(self.ui.frame_barra, b"maximumWidth")
+        self.animacion.setStartValue(width)
+        self.animacion.setEndValue(final_width)
+        self.animacion.setDuration(400)
+        self.animacion.setEasingCurve(QEasingCurve.Type.InQuad)
+        self.animacion.start()
+
     def sombra_frame(self, frame): #metodo para dar sombra a los frames
         sombra = QtWidgets.QGraphicsDropShadowEffect(self)
         sombra.setBlurRadius(18)
@@ -143,8 +148,8 @@ class VentanaPrincipal(QMainWindow):
         self.ui.btn_resumen.setIcon(QtGui.QIcon(ruta_logo1))
         self.ui.logo_letras.setPixmap(QPixmap(ruta_logo2))
         self.ui.btn_minimizar.setIcon(QtGui.QIcon(ruta_minimizar))
-        self.ui.toolBox3.setItemIcon(0, QIcon(ruta_paginas))
-        self.ui.toolBox3.setItemIcon(1, QIcon(ruta_paginas))
-        self.ui.toolBox3.setItemIcon(2, QIcon(ruta_paginas))
+        self.ui.toolBox.setItemIcon(0, QIcon(ruta_paginas))
+        self.ui.toolBox.setItemIcon(1, QIcon(ruta_paginas))
+        self.ui.toolBox.setItemIcon(2, QIcon(ruta_paginas))
         self.ui.btn_reportes.setIcon(QtGui.QIcon(ruta_reportes))
         self.ui.btn_salidas.setIcon(QtGui.QIcon(ruta_salidas))

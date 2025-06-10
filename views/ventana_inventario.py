@@ -4,12 +4,11 @@ from PyQt6.QtCore import Qt, QPropertyAnimation, QEasingCurve
 from PyQt6.QtGui import QColor
 from PyQt6.QtGui import QIcon
 from PyQt6.QtGui import QPixmap
-from ui.ventana_principal_ui import Ui_Form
-from views.ventana_inventario import VentanaInventario
+from ui.ventana_inventario_ui import Ui_Form
 from PyQt6 import QtWidgets, QtGui
 
-class VentanaPrincipal(QWidget):
-    def __init__(self):# constructor de la clase VentanaPrincipal
+class VentanaInventario(QWidget):
+    def __init__(self, ventana_principal):# constructor de la clase VentanaPrincipal
         super().__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
@@ -22,9 +21,10 @@ class VentanaPrincipal(QWidget):
         self.cargar_iconos()
         
         self.inicializar_animaciones()
-        
+        #Guardando referencias de ventanas
+        self.ventana_principal = ventana_principal
         self.eventos()
-
+        
     def inicializar_animaciones(self): # metodo para inicializar las animaciones y configuraciones de la ventana principal
 
         self.ui.bt_ocultar.clicked.connect(self.animacion_barra)
@@ -33,8 +33,11 @@ class VentanaPrincipal(QWidget):
         self.ui.btn_achicar.hide()
         self.ui.bt_mostrar.hide()
         # Dando sombra a los frames
+        self.sombra_frame(self.ui.btn_busqueda)
+        self.sombra_frame(self.ui.btn_filtrar)
+        self.sombra_frame(self.ui.Linedit_busqueda)
+
         self.sombra_frame(self.ui.frame_cuerpo)
-        self.sombra_frame(self.ui.toolBox)
         self.sombra_frame(self.ui.btn_alertas)
         self.sombra_frame(self.ui.btn_configuracion)
         self.sombra_frame(self.ui.btn_entradas)
@@ -136,6 +139,8 @@ class VentanaPrincipal(QWidget):
         ruta_paginas = os.path.join(root_dir, "models", "paginas.svg")
         ruta_reportes = os.path.join(root_dir, "models", "reportes.svg")
         ruta_salidas = os.path.join(root_dir, "models", "salida.svg")
+        ruta_filtrar = os.path.join(root_dir, "models", "filtrar.svg")
+        ruta_buscar = os.path.join(root_dir, "models", "buscar.svg")
         
         # Establecer íconos
         self.ui.btn_alertas.setIcon(QtGui.QIcon(ruta_alertas))
@@ -148,19 +153,15 @@ class VentanaPrincipal(QWidget):
         self.ui.btn_inventario.setIcon(QtGui.QIcon(ruta_inventario))
         self.ui.bt_ocultar.setIcon(QtGui.QIcon(ruta_izquierda))
         self.ui.btn_resumen.setIcon(QtGui.QIcon(ruta_logo1))
-        self.ui.logo_letras.setPixmap(QPixmap(ruta_logo2))
         self.ui.btn_minimizar.setIcon(QtGui.QIcon(ruta_minimizar))
-        self.ui.toolBox.setItemIcon(0, QIcon(ruta_paginas))
-        self.ui.toolBox.setItemIcon(1, QIcon(ruta_paginas))
-        self.ui.toolBox.setItemIcon(2, QIcon(ruta_paginas))
         self.ui.btn_reportes.setIcon(QtGui.QIcon(ruta_reportes))
         self.ui.btn_salidas.setIcon(QtGui.QIcon(ruta_salidas))
+        self.ui.btn_filtrar.setIcon(QtGui.QIcon(ruta_filtrar))
+        self.ui.btn_busqueda.setIcon(QtGui.QIcon(ruta_buscar))
 
     def eventos(self): # metodo para conectar los eventos de los botones
-        self.ui.btn_inventario.clicked.connect(self.mostrar_ventana_inventario)
+        self.ui.btn_resumen.clicked.connect(self.volver_a_ventana_principal)
     
-    def mostrar_ventana_inventario(self): # metodo para mostrar la ventana de inventario
-        self.inventario_window = VentanaInventario(self)
-        self.inventario_window.show()
-        self.hide()
-        
+    def volver_a_ventana_principal(self): # metodo para mostrar la ventana de inventario
+        self.hide()  # Oculta esta ventana
+        self.ventana_principal.show()  # Muestra la principal

@@ -5,9 +5,10 @@ from PyQt6.QtGui import QColor
 from PyQt6.QtGui import QIcon
 from PyQt6.QtGui import QPixmap
 from ui.ventana_principal_ui import Ui_Form
+from PyQt6.QtWidgets import QHeaderView
 from PyQt6 import QtWidgets, QtGui
 from Backend.inventario import Inventario
-
+from Backend.conexion import Miconexion
 class VentanaPrincipal(QWidget):
     def __init__(self):# constructor de la clase VentanaPrincipal
         super().__init__()
@@ -26,6 +27,7 @@ class VentanaPrincipal(QWidget):
     
     
         #EVENTOS DE BOTONES
+        
         self.ui.toolBox.currentChanged.connect(self.seccion_toolbox)
         
         
@@ -167,14 +169,21 @@ class VentanaPrincipal(QWidget):
         #EVENTOS DE BOTONES 
         
     def seccion_toolbox(self, index):
-        print("👉 Sección cambiada:", index)
         try:
             if index == 0:
                 self.ui.listWidget.clear()
                 productos = Inventario.obtener_lista_productos()
-                self.ui.listWidget.addItems([productos])
+                self.ui.listWidget.addItems(productos)
             elif index == 1:
                 self.ui.listWidget_2.clear()
-                self.ui.listWidget_2.addItems(["Esto sí funciona"])
+                productos_stock_bajo=Inventario.prod_stock_bajo()
+                self.ui.listWidget_2.addItems(productos_stock_bajo)
+            elif index == 2:
+                self.ui.tableWidget.clear()
+                self.ui.tableWidget.setColumnCount(4)
+                self.ui.tableWidget.setHorizontalHeaderLabels(["Tipo de movimiento", "Artículo", "Stock", "Fecha"])
+                self.ui.tableWidget.resizeColumnsToContents()
+                self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+                self.ui.tableWidget.horizontalHeader().setDefaultAlignment(Qt.AlignmentFlag.AlignCenter)
         except Exception as e:
             print("❌ Excepción atrapada:", e)

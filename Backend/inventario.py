@@ -1,6 +1,7 @@
 from Backend.conexion import Miconexion
 from Backend.modelos.claseProducto import Producto
 
+
 class Inventario():
     def agregar_producto(self, producto):
         conexion=Miconexion.obtener_conexion()
@@ -104,24 +105,41 @@ class Inventario():
         
 
     def obtener_lista_productos():
-        print("Entró a funcion listar productos")
-        productos = []
-        
         conexion = Miconexion.obtener_conexion()
-        print("Despues de conexion.")
-        if not conexion:
-            print("❌ No se pudo establecer conexión con la base de datos")
-            return productos
+        productos = []
+        try:
+            with conexion.cursor() as cursor:
+                cursor.execute("SELECT Nombre, Stock, Precio FROM productos WHERE Activo = 1")
+                resultados = cursor.fetchall()
+                # Construir textos amigables para la lista
+                productos = [
+                    f"{nombre.ljust(35)} | Stock: {str(stock).ljust(20)} | Precio unitario: ${precio:>7.2f}"
+                    for nombre, stock, precio in resultados
+                ]
+        except Exception as e:
+            print("❌ Error:", e)
+        finally:
+            conexion.close()
+        return productos
+
+
+
+    def prod_stock_bajo():
+        conexion = Miconexion.obtener_conexion()
+        productos_stock_bajo = []
 
         try:
-            cursor = conexion.cursor()
-            cursor.execute("SELECT Nombre FROM productos WHERE Activo = 1")
-            productos = [fila[0] for fila in cursor.fetchall()]
-            print(" Productos recibidos:", productos)
+            with conexion.cursor() as cursor:
+                cursor.execute("SELECT Nombre, Stock, Stock_minimo FROM productos WHERE Stock < Stock_minimo AND Activo = 1")
+                resultados = cursor.fetchall()
+                productos_stock_bajo = [
+                    f"{nombre.ljust(25)} | Stock: {str(stock).ljust(25)} | Mínimo requerido: {stock_minimo}"
+                    for nombre, stock, stock_minimo in resultados
+                ]
         except Exception as e:
-            print("❌ Error al consultar productos:", e)
+            print("❌ Error al obtener productos con stock bajo:", e)
         finally:
-            cursor.close()
             conexion.close()
 
-        return productos
+        return productos_stock_bajo
+

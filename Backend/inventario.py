@@ -1,9 +1,9 @@
-from Backend.conexion import obtener_conexion
-from modelos.claseProducto import Producto
+from Backend.conexion import Miconexion
+from Backend.modelos.claseProducto import Producto
 
 class Inventario():
     def agregar_producto(self, producto):
-        conexion=obtener_conexion()
+        conexion=Miconexion.obtener_conexion()
         if not conexion:
             print("No se pudo conectar para agregar el producto.")
             return
@@ -21,7 +21,7 @@ class Inventario():
             conexion.close()
             
     def ListarProductos(self):
-        conexion=obtener_conexion()
+        conexion=Miconexion.obtener_conexion()
         if not conexion:
             print("No se pudo conectar a la base de datos.")
             return
@@ -39,7 +39,7 @@ class Inventario():
             conexion.close()
     
     def BuscarProductos(self, criterio, valor):
-        conexion = obtener_conexion()
+        conexion = Miconexion.obtener_conexion()
         if not conexion:
             print("Error al conectarse a la base de datos")
             return None
@@ -80,7 +80,7 @@ class Inventario():
 
             
     def BajaProducto(self, codigo_producto):
-        conexion=obtener_conexion()
+        conexion=Miconexion.obtener_conexion()
         if not conexion:
             print("No se pudo enlazar a la base de datos.")
             return 
@@ -100,3 +100,28 @@ class Inventario():
             cursor.close()
             conexion.close()
             
+            
+        
+
+    def obtener_lista_productos():
+        print("Entró a funcion listar productos")
+        productos = []
+        
+        conexion = Miconexion.obtener_conexion()
+        print("Despues de conexion.")
+        if not conexion:
+            print("❌ No se pudo establecer conexión con la base de datos")
+            return productos
+
+        try:
+            cursor = conexion.cursor()
+            cursor.execute("SELECT Nombre FROM productos WHERE Activo = 1")
+            productos = [fila[0] for fila in cursor.fetchall()]
+            print(" Productos recibidos:", productos)
+        except Exception as e:
+            print("❌ Error al consultar productos:", e)
+        finally:
+            cursor.close()
+            conexion.close()
+
+        return productos

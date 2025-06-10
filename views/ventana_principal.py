@@ -6,6 +6,7 @@ from PyQt6.QtGui import QIcon
 from PyQt6.QtGui import QPixmap
 from ui.ventana_principal_ui import Ui_Form
 from PyQt6 import QtWidgets, QtGui
+from Backend.inventario import Inventario
 
 class VentanaPrincipal(QWidget):
     def __init__(self):# constructor de la clase VentanaPrincipal
@@ -17,11 +18,18 @@ class VentanaPrincipal(QWidget):
 
         self.ui.frame_barra.setMinimumWidth(0)         
         self.ui.frame_barra.setMaximumWidth(260)     
+    
 
         self.cargar_iconos()
         
         self.inicializar_animaciones()
+    
+    
+        #EVENTOS DE BOTONES
+        self.ui.toolBox.currentChanged.connect(self.seccion_toolbox)
         
+        
+            
     def inicializar_animaciones(self): # metodo para inicializar las animaciones y configuraciones de la ventana principal
 
         self.ui.bt_ocultar.clicked.connect(self.animacion_barra)
@@ -53,7 +61,8 @@ class VentanaPrincipal(QWidget):
         layout = QtWidgets.QVBoxLayout(self)
         layout.addWidget(self.grip, 0, Qt.AlignmentFlag.AlignBottom | Qt.AlignmentFlag.AlignRight)
         layout.setContentsMargins(0, 0, 0, 0)
-        self.setLayout(layout)
+        self.setLayout(layout)  # ⛔ ESTA LÍNEA CIERRA TU APP SI YA HAY LAYOUT
+
         self.evento_mover_desde_frame()
 
     def animacion_barra(self): 
@@ -152,3 +161,20 @@ class VentanaPrincipal(QWidget):
         self.ui.toolBox.setItemIcon(2, QIcon(ruta_paginas))
         self.ui.btn_reportes.setIcon(QtGui.QIcon(ruta_reportes))
         self.ui.btn_salidas.setIcon(QtGui.QIcon(ruta_salidas))
+        
+
+        
+        #EVENTOS DE BOTONES 
+        
+    def seccion_toolbox(self, index):
+        print("👉 Sección cambiada:", index)
+        try:
+            if index == 0:
+                self.ui.listWidget.clear()
+                productos = Inventario.obtener_lista_productos()
+                self.ui.listWidget.addItems([productos])
+            elif index == 1:
+                self.ui.listWidget_2.clear()
+                self.ui.listWidget_2.addItems(["Esto sí funciona"])
+        except Exception as e:
+            print("❌ Excepción atrapada:", e)

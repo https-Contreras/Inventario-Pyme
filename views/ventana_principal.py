@@ -13,7 +13,7 @@ class VentanaPrincipal(QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
-        self.setFixedSize(self.sizeHint())  # ✅ Esto asegura que la ventana tenga el tamaño correcto inicial
+        self.resize(870, 650)  # Esto asegura que la ventana tenga el tamaño correcto inicial
 
         self.ui.frame_barra.setMinimumWidth(0)         
         self.ui.frame_barra.setMaximumWidth(260)     
@@ -48,10 +48,12 @@ class VentanaPrincipal(QWidget):
         self.setWindowFlag(Qt.WindowType.FramelessWindowHint)
         self.setWindowOpacity(1)
         #SizeGrip
-        self.gripSize = 15
+        self.gripSize = 10
         self.grip = QSizeGrip(self)
-        self.grip.resize(self.gripSize, self.gripSize)
-
+        layout = QtWidgets.QVBoxLayout(self)
+        layout.addWidget(self.grip, 0, Qt.AlignmentFlag.AlignBottom | Qt.AlignmentFlag.AlignRight)
+        layout.setContentsMargins(0, 0, 0, 0)
+        self.setLayout(layout)
         self.evento_mover_desde_frame()
 
     def animacion_barra(self): 
@@ -83,9 +85,6 @@ class VentanaPrincipal(QWidget):
         sombra.setColor(QColor(0, 0, 0, 100))
         frame.setGraphicsEffect(sombra)
 
-    def resizeEvent(self, event): #metodo para redimensionar la ventana
-        self.grip.move(self.width() - self.gripSize, self.height() - self.gripSize)
-    
     def control_bt_minimizar(self): #metodo para minimizar la ventana
         self.showMinimized()
 

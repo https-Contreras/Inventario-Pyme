@@ -20,6 +20,8 @@ class VentanaInventario(QWidget):
         self.ui.frame_barra.setMinimumWidth(0)         
         self.ui.frame_barra.setMaximumWidth(260)     
 
+        self.ui.frame_barrafiltro.setMaximumWidth(0)
+
         self.cargar_iconos()
         
         self.inicializar_animaciones()
@@ -37,6 +39,7 @@ class VentanaInventario(QWidget):
 
         self.ui.bt_ocultar.clicked.connect(self.animacion_barra)
         self.ui.bt_mostrar.clicked.connect(self.animacion_barra)
+        self.ui.btn_filtrar.clicked.connect(self.animacion_barra_filtro)
         # Ocultar el botón al inicio
         self.ui.btn_achicar.hide()
         self.ui.bt_mostrar.hide()
@@ -44,6 +47,9 @@ class VentanaInventario(QWidget):
         self.sombra_frame(self.ui.btn_busqueda)
         self.sombra_frame(self.ui.btn_filtrar)
         self.sombra_frame(self.ui.Linedit_busqueda)
+        self.sombra_frame(self.ui.btn_alfabeticamente)
+        self.sombra_frame(self.ui.btn_mayoramenor)
+        self.sombra_frame(self.ui.btn_menormayor)
 
         self.sombra_frame(self.ui.frame_cuerpo)
         self.sombra_frame(self.ui.btn_alertas)
@@ -85,6 +91,26 @@ class VentanaInventario(QWidget):
             final_width = normal
 
         self.animacion = QPropertyAnimation(self.ui.frame_barra, b"maximumWidth")
+        self.animacion.setStartValue(width)
+        self.animacion.setEndValue(final_width)
+        self.animacion.setDuration(400)
+        self.animacion.setEasingCurve(QEasingCurve.Type.InQuad)
+        self.animacion.start()
+
+    def animacion_barra_filtro(self):
+        # Asegurarse de que el frame esté visible para poder animarlo
+        self.ui.frame_barrafiltro.show()
+
+        width = self.ui.frame_barrafiltro.maximumWidth()
+        normal = 0
+        extender = 260
+
+        if width == 0:
+            final_width = extender
+        else:
+            final_width = normal
+
+        self.animacion = QPropertyAnimation(self.ui.frame_barrafiltro, b"maximumWidth")
         self.animacion.setStartValue(width)
         self.animacion.setEndValue(final_width)
         self.animacion.setDuration(400)
@@ -149,6 +175,9 @@ class VentanaInventario(QWidget):
         ruta_salidas = os.path.join(root_dir, "models", "salida.svg")
         ruta_filtrar = os.path.join(root_dir, "models", "filtrar.svg")
         ruta_buscar = os.path.join(root_dir, "models", "buscar.svg")
+        ruta_alfabeticamente = os.path.join(root_dir, "models", "alfabeticamente.svg")
+        ruta_mayor_a_menor = os.path.join(root_dir, "models", "mayor_a_menor.svg")
+        ruta_menor_a_mayor = os.path.join(root_dir, "models", "menor_a_mayor.svg")
         
         # Establecer íconos
         self.ui.btn_alertas.setIcon(QtGui.QIcon(ruta_alertas))
@@ -166,6 +195,9 @@ class VentanaInventario(QWidget):
         self.ui.btn_salidas.setIcon(QtGui.QIcon(ruta_salidas))
         self.ui.btn_filtrar.setIcon(QtGui.QIcon(ruta_filtrar))
         self.ui.btn_busqueda.setIcon(QtGui.QIcon(ruta_buscar))
+        self.ui.btn_alfabeticamente.setIcon(QtGui.QIcon(ruta_alfabeticamente))
+        self.ui.btn_mayoramenor.setIcon(QtGui.QIcon(ruta_mayor_a_menor))
+        self.ui.btn_menormayor.setIcon(QtGui.QIcon(ruta_menor_a_mayor))
 
     def eventos(self): # metodo para conectar los eventos de los botones
         self.ui.btn_resumen.clicked.connect(self.volver_a_ventana_principal)

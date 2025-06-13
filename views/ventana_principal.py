@@ -5,14 +5,13 @@ from PyQt6.QtGui import QColor
 from PyQt6.QtGui import QIcon
 from PyQt6.QtGui import QPixmap
 from ui.ventana_principal_ui import Ui_Form
-<<<<<<< HEAD
 from PyQt6.QtWidgets import QHeaderView
-=======
 from views.ventana_inventario import VentanaInventario
->>>>>>> origin/mi-rama-yael
 from PyQt6 import QtWidgets, QtGui
 from Backend.inventario import Inventario
 from Backend.conexion import Miconexion
+
+
 class VentanaPrincipal(QWidget):
     def __init__(self):# constructor de la clase VentanaPrincipal
         super().__init__()
@@ -32,15 +31,12 @@ class VentanaPrincipal(QWidget):
     
         #EVENTOS DE BOTONES
         
-<<<<<<< HEAD
         self.ui.toolBox.currentChanged.connect(self.seccion_toolbox)
         
         
             
-=======
         self.eventos()
 
->>>>>>> origin/mi-rama-yael
     def inicializar_animaciones(self): # metodo para inicializar las animaciones y configuraciones de la ventana principal
 
         self.ui.bt_ocultar.clicked.connect(self.animacion_barra)
@@ -172,12 +168,12 @@ class VentanaPrincipal(QWidget):
         self.ui.toolBox.setItemIcon(2, QIcon(ruta_paginas))
         self.ui.btn_reportes.setIcon(QtGui.QIcon(ruta_reportes))
         self.ui.btn_salidas.setIcon(QtGui.QIcon(ruta_salidas))
-<<<<<<< HEAD
         
 
         
-        #EVENTOS DE BOTONES 
-        
+    
+    
+    #Esto es para las listas de la ventana principal
     def seccion_toolbox(self, index):
         try:
             if index == 0:
@@ -197,14 +193,15 @@ class VentanaPrincipal(QWidget):
                 self.ui.tableWidget.horizontalHeader().setDefaultAlignment(Qt.AlignmentFlag.AlignCenter)
         except Exception as e:
             print("❌ Excepción atrapada:", e)
-=======
-
+            
+            
+    #Esto es para mostrar ventana de inventario
     def eventos(self): # metodo para conectar los eventos de los botones
         self.ui.btn_inventario.clicked.connect(self.mostrar_ventana_inventario)
-    
+        
+        
     def mostrar_ventana_inventario(self): # metodo para mostrar la ventana de inventario
         self.inventario_window = VentanaInventario(self)
         self.inventario_window.show()
         self.hide()
         
->>>>>>> origin/mi-rama-yael

@@ -21,29 +21,27 @@ class Inventario():
             cursor.close()
             conexion.close()
             
-    def ListarProductos(self):
-        conexion=Miconexion.obtener_conexion()
-        if not conexion:
-            print("No se pudo conectar a la base de datos.")
-            return
-        try:
-            cursor=conexion.cursor()
-            cursor.execute("SELECT codigo, nombre, stock, stock_minimo, precio FROM productos WHERE activo = 1")
-            productos=cursor.fetchall()
-            for p in productos:
-                codigo, nombre, stock, minimo, precio = p
-                print(f"Código: {codigo} | Nombre: {nombre} | Stock: {stock} | Mínimo: {minimo} | Precio: ${precio:.2f}")
-        except Exception as e:
-            print("Error en listar los productos", e)
-        finally:
-            cursor.close()
-            conexion.close()
-    
-    def BuscarProductos(self, criterio, valor):
+    def ListarProductos():
         conexion = Miconexion.obtener_conexion()
+        productos = []
+        try:
+            with conexion.cursor() as cursor:
+                cursor.execute("SELECT Codigo, Nombre, Stock, Stock_minimo, Precio FROM productos WHERE Activo = 1")
+                productos = cursor.fetchall()
+        except Exception as e:
+            print("❌ Error al obtener productos:", e)
+        finally:
+            conexion.close()
+        return productos
+        
+    def BuscarProductos( criterio, valor):
+        conexion = Miconexion.obtener_conexion()
+        productos = []
+
         if not conexion:
             print("Error al conectarse a la base de datos")
-            return None
+            return productos
+
         try:
             cursor = conexion.cursor()
             if criterio == "codigo":
@@ -60,24 +58,19 @@ class Inventario():
                 """
                 valor = f"%{valor}%"
             else:
-                print("Criterio inválido. Usa 'codigo' o 'nombre'.")
-                return None
+                return productos
 
             cursor.execute(sql, (valor,))
-            resultado = cursor.fetchone()
+            productos = cursor.fetchall()
 
-            if resultado:
-                producto = Producto(*resultado)
-                return producto
-            else:
-                print("Producto no encontrado o dado de baja.")
-                return None
         except Exception as e:
             print("Error al buscar el producto:", e)
-            return None
         finally:
             cursor.close()
             conexion.close()
+
+        return productos
+
 
             
     def BajaProducto(self, codigo_producto):
@@ -113,7 +106,7 @@ class Inventario():
                 resultados = cursor.fetchall()
                 # Construir textos amigables para la lista
                 productos = [
-                    f"{nombre.ljust(35)} | Stock: {str(stock).ljust(20)} | Precio unitario: ${precio:>7.2f}"
+                    f"{nombre.ljust(35)} | Stock: {str(stock).ljust(20)} | Precio unitario:  ${precio:>7.2f}"
                     for nombre, stock, precio in resultados
                 ]
         except Exception as e:

@@ -6,7 +6,9 @@ from PyQt6.QtGui import QIcon
 from PyQt6.QtGui import QPixmap
 from ui.ventana_inventario_ui import Ui_Form
 from PyQt6 import QtWidgets, QtGui
-
+from PyQt6.QtGui import QStandardItemModel, QStandardItem
+from Backend.inventario import Inventario
+from PyQt6.QtWidgets import QHeaderView
 class VentanaInventario(QWidget):
     def __init__(self, ventana_principal):# constructor de la clase VentanaPrincipal
         super().__init__()
@@ -24,6 +26,12 @@ class VentanaInventario(QWidget):
         #Guardando referencias de ventanas
         self.ventana_principal = ventana_principal
         self.eventos()
+        
+        #Eventos
+        self.ui.btn_inventario.clicked.connect(self.mostrar_inventario)
+        self.ui.Linedit_busqueda.returnPressed.connect(self.buscar_producto)
+        self.ui.btn_busqueda.clicked.connect(self.buscar_producto)
+        
         
     def inicializar_animaciones(self): # metodo para inicializar las animaciones y configuraciones de la ventana principal
 
@@ -161,7 +169,58 @@ class VentanaInventario(QWidget):
 
     def eventos(self): # metodo para conectar los eventos de los botones
         self.ui.btn_resumen.clicked.connect(self.volver_a_ventana_principal)
+        
     
     def volver_a_ventana_principal(self): # metodo para mostrar la ventana de inventario
         self.hide()  # Oculta esta ventana
         self.ventana_principal.show()  # Muestra la principal
+        
+        
+        
+    #Esto es para mostrar el inventario en la ventana de inventario:
+    def mostrar_inventario(self):
+        productos = Inventario.ListarProductos()
+
+        # Crear el modelo
+        model = QStandardItemModel()
+        model.setHorizontalHeaderLabels(["Código", "Nombre", "Stock", "Stock mínimo", "Precio en pesos"])
+
+        # Agregar filas
+        for fila in productos:
+            items = [QStandardItem(str(campo)) for campo in fila]
+            model.appendRow(items)
+
+            # Asignar el modelo a la tabla
+            self.ui.tableInventario.setModel(model)
+            # Ajustar columnas
+            self.ui.tableInventario.resizeColumnsToContents()
+            self.ui.tableInventario.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+    
+    def buscar_producto(self):
+        #funcion para la barra de busqueda del inventario
+        texto=self.ui.Linedit_busqueda.text().strip()
+        
+        
+        if not texto:
+            self.mostrar_inventario()
+            
+        # Determinar el criterio
+        if texto.isdigit():
+            criterio = "codigo"
+        else:
+            criterio = "nombre"
+        
+        productos = Inventario.BuscarProductos(criterio,texto)
+        # Crear modelo para la tabla
+        model = QStandardItemModel()
+        model.setHorizontalHeaderLabels(["Código", "Nombre", "Stock", "Stock mínimo", "Precio en pesos"])
+        
+        if productos:
+            for fila in productos:
+                items = [QStandardItem(str(campo)) for campo in fila]
+                model.appendRow(items)
+        else:
+            model.appendRow([QStandardItem("NINGUNA COINCIDENCIA")])
+
+        self.ui.tableInventario.setModel(model)
+        self.ui.tableInventario.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)

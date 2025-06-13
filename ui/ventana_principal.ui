@@ -593,7 +593,7 @@ font: 12pt &quot;Swis721 BlkCn BT&quot;;
                <item>
                 <widget class="QToolBox" name="toolBox">
                  <property name="currentIndex">
-                  <number>0</number>
+                  <number>1</number>
                  </property>
                  <widget class="QWidget" name="page_resumen">
                   <property name="geometry">
@@ -613,7 +613,14 @@ font: 12pt &quot;Swis721 BlkCn BT&quot;;
                   </attribute>
                   <layout class="QVBoxLayout" name="verticalLayout_6">
                    <item>
-                    <widget class="QListWidget" name="listWidget"/>
+                    <widget class="QListWidget" name="listWidget">
+                     <property name="font">
+                      <font>
+                       <pointsize>16</pointsize>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                    </widget>
                    </item>
                   </layout>
                  </widget>
@@ -622,8 +629,8 @@ font: 12pt &quot;Swis721 BlkCn BT&quot;;
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>98</width>
-                    <height>91</height>
+                    <width>597</width>
+                    <height>299</height>
                    </rect>
                   </property>
                   <attribute name="icon">
@@ -635,7 +642,14 @@ font: 12pt &quot;Swis721 BlkCn BT&quot;;
                   </attribute>
                   <layout class="QVBoxLayout" name="verticalLayout_7">
                    <item>
-                    <widget class="QListWidget" name="listWidget_2"/>
+                    <widget class="QListWidget" name="listWidget_2">
+                     <property name="font">
+                      <font>
+                       <pointsize>16</pointsize>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                    </widget>
                    </item>
                   </layout>
                  </widget>

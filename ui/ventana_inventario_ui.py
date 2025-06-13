@@ -266,11 +266,62 @@ class Ui_Form(object):
         self.frame_informacion.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_informacion.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_informacion.setObjectName("frame_informacion")
-        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.frame_informacion)
+        self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.frame_informacion)
+        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_5.setSpacing(0)
+        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
+        self.frame_barrafiltro = QtWidgets.QFrame(parent=self.frame_informacion)
+        self.frame_barrafiltro.setStyleSheet("QFrame {\n"
+"    background-color: #60B0C3\n"
+"}\n"
+"QPushButton{\n"
+"    background-color: #0068BC;       \n"
+"    color: #FFFFFF;                    /* Texto blanco */\n"
+"    border: none;                    /* Sin borde de línea */\n"
+"    border-radius: 12px;             /* Bordes redondeados */\n"
+"    padding: 10px 20px;              /* Relleno interno */\n"
+"    font: bold 12pt \"Arial\"; \n"
+"}\n"
+"QPushButton#btn_resumen{\n"
+"background-color: #ffffff\n"
+"}\n"
+"QPushButton#btn_resumen:hover{\n"
+"background-color: #5DADE2;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #5DADE2;       /* Color cuando el mouse pasa encima */\n"
+"}")
+        self.frame_barrafiltro.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_barrafiltro.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_barrafiltro.setObjectName("frame_barrafiltro")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.frame_barrafiltro)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.btn_alfabeticamente = QtWidgets.QPushButton(parent=self.frame_barrafiltro)
+        icon15 = QtGui.QIcon()
+        icon15.addPixmap(QtGui.QPixmap("../models/alfabeticamente.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_alfabeticamente.setIcon(icon15)
+        self.btn_alfabeticamente.setIconSize(QtCore.QSize(30, 30))
+        self.btn_alfabeticamente.setObjectName("btn_alfabeticamente")
+        self.verticalLayout_5.addWidget(self.btn_alfabeticamente)
+        self.btn_mayoramenor = QtWidgets.QPushButton(parent=self.frame_barrafiltro)
+        icon16 = QtGui.QIcon()
+        icon16.addPixmap(QtGui.QPixmap("../models/mayor_a_menor.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_mayoramenor.setIcon(icon16)
+        self.btn_mayoramenor.setIconSize(QtCore.QSize(30, 30))
+        self.btn_mayoramenor.setObjectName("btn_mayoramenor")
+        self.verticalLayout_5.addWidget(self.btn_mayoramenor)
+        self.btn_menormayor = QtWidgets.QPushButton(parent=self.frame_barrafiltro)
+        icon17 = QtGui.QIcon()
+        icon17.addPixmap(QtGui.QPixmap("../models/menor_a_mayor.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_menormayor.setIcon(icon17)
+        self.btn_menormayor.setIconSize(QtCore.QSize(30, 30))
+        self.btn_menormayor.setObjectName("btn_menormayor")
+        self.verticalLayout_5.addWidget(self.btn_menormayor)
+        self.horizontalLayout_5.addWidget(self.frame_barrafiltro)
         self.tableInventario = QtWidgets.QTableView(parent=self.frame_informacion)
         self.tableInventario.setObjectName("tableInventario")
-        self.verticalLayout_5.addWidget(self.tableInventario)
+        self.horizontalLayout_5.addWidget(self.tableInventario)
+        self.horizontalLayout_5.setStretch(1, 5)
         self.verticalLayout_4.addWidget(self.frame_informacion)
         self.frame_exportar = QtWidgets.QFrame(parent=self.frame_contenido)
         self.frame_exportar.setStyleSheet("QFrame{\n"
@@ -334,6 +385,9 @@ class Ui_Form(object):
         self.btn_reportes.setText(_translate("Form", "Reportes"))
         self.btn_alertas.setText(_translate("Form", "Alertas"))
         self.btn_configuracion.setText(_translate("Form", "Configuracion"))
+        self.btn_alfabeticamente.setText(_translate("Form", "Alfabeticamente"))
+        self.btn_mayoramenor.setText(_translate("Form", "Mayor a menor"))
+        self.btn_menormayor.setText(_translate("Form", "Menor a mayor"))
         self.btn_exportar.setText(_translate("Form", "Exportar a txt"))
         self.btn_agregar.setText(_translate("Form", "Agregar producto"))
         self.btn_editareliminar.setText(_translate("Form", "Editar o eliminar"))

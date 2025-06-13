@@ -588,7 +588,107 @@ QLineEdit{
               <property name="frameShadow">
                <enum>QFrame::Raised</enum>
               </property>
-              <layout class="QVBoxLayout" name="verticalLayout_5">
+              <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="0,5">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QFrame" name="frame_barrafiltro">
+                 <property name="styleSheet">
+                  <string notr="true">QFrame {
+	background-color: #60B0C3
+}
+QPushButton{
+	background-color: #0068BC;       
+    color: #FFFFFF;                    /* Texto blanco */
+    border: none;                    /* Sin borde de línea */
+    border-radius: 12px;             /* Bordes redondeados */
+    padding: 10px 20px;              /* Relleno interno */
+    font: bold 12pt &quot;Arial&quot;; 
+}
+QPushButton#btn_resumen{
+background-color: #ffffff
+}
+QPushButton#btn_resumen:hover{
+background-color: #5DADE2;
+}
+QPushButton:hover {
+    background-color: #5DADE2;       /* Color cuando el mouse pasa encima */
+}</string>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_5">
+                  <item>
+                   <widget class="QPushButton" name="btn_alfabeticamente">
+                    <property name="text">
+                     <string>Alfabeticamente</string>
+                    </property>
+                    <property name="icon">
+                     <iconset>
+                      <normaloff>../models/alfabeticamente.svg</normaloff>../models/alfabeticamente.svg</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>30</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="btn_mayoramenor">
+                    <property name="text">
+                     <string>Mayor a menor</string>
+                    </property>
+                    <property name="icon">
+                     <iconset>
+                      <normaloff>../models/mayor_a_menor.svg</normaloff>../models/mayor_a_menor.svg</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>30</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="btn_menormayor">
+                    <property name="text">
+                     <string>Menor a mayor</string>
+                    </property>
+                    <property name="icon">
+                     <iconset>
+                      <normaloff>../models/menor_a_mayor.svg</normaloff>../models/menor_a_mayor.svg</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>30</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
                <item>
                 <widget class="QTableView" name="tableInventario"/>
                </item>

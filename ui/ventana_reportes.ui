@@ -120,7 +120,7 @@ QPushButton:hover {
          <item>
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Ventana Inventario</string>
+            <string>Ventana Reportes</string>
            </property>
           </widget>
          </item>
@@ -419,7 +419,7 @@ QPushButton:hover {
            <property name="frameShadow">
             <enum>QFrame::Raised</enum>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,6,1">
+           <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,6,0">
             <property name="spacing">
              <number>0</number>
             </property>
@@ -457,6 +457,12 @@ QLineEdit{
 	border: 1px solid #000000;
 	border-radius:10px;
 	height:40px;
+	font: 20pt &quot;Swis721 BlkCn BT&quot;;
+}
+QLabel {
+	color: black;
+    border: none;
+    padding: 5px;
 	font: 20pt &quot;Swis721 BlkCn BT&quot;;
 }</string>
               </property>
@@ -518,32 +524,9 @@ QLineEdit{
                 </spacer>
                </item>
                <item>
-                <widget class="QLineEdit" name="Linedit_busqueda">
-                 <property name="inputMask">
-                  <string/>
-                 </property>
+                <widget class="QLabel" name="label_4">
                  <property name="text">
-                  <string/>
-                 </property>
-                 <property name="placeholderText">
-                  <string>Buscar producto</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="btn_busqueda">
-                 <property name="text">
-                  <string/>
-                 </property>
-                 <property name="icon">
-                  <iconset>
-                   <normaloff>../models/buscar.svg</normaloff>../models/buscar.svg</iconset>
-                 </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>50</width>
-                   <height>50</height>
-                  </size>
+                  <string>Lista de movimientos</string>
                  </property>
                 </widget>
                </item>
@@ -629,7 +612,15 @@ background-color: #5DADE2;
 }
 QPushButton:hover {
     background-color: #5DADE2;       /* Color cuando el mouse pasa encima */
-}</string>
+}
+
+QLabel {
+	color: #FFFFFF;
+    border: none;
+    padding: 5px;
+	font: 20pt &quot;Swis721 BlkCn BT&quot;;
+}
+</string>
                  </property>
                  <property name="frameShape">
                   <enum>QFrame::StyledPanel</enum>
@@ -639,26 +630,71 @@ QPushButton:hover {
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_5">
                   <item>
-                   <widget class="QPushButton" name="btn_alfabeticamente">
-                    <property name="text">
-                     <string>Alfabeticamente</string>
-                    </property>
-                    <property name="icon">
-                     <iconset>
-                      <normaloff>../models/alfabeticamente.svg</normaloff>../models/alfabeticamente.svg</iconset>
-                    </property>
-                    <property name="iconSize">
+                   <widget class="QFrame" name="frame_2">
+                    <property name="maximumSize">
                      <size>
-                      <width>30</width>
-                      <height>30</height>
+                      <width>16777215</width>
+                      <height>50</height>
                      </size>
                     </property>
+                    <property name="frameShape">
+                     <enum>QFrame::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Raised</enum>
+                    </property>
+                    <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="5,5">
+                     <property name="leftMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <widget class="QLabel" name="label_2">
+                       <property name="maximumSize">
+                        <size>
+                         <width>160</width>
+                         <height>16777215</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>Por Fecha</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_3">
+                       <property name="maximumSize">
+                        <size>
+                         <width>60</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="pixmap">
+                        <pixmap>../models/calendario.svg</pixmap>
+                       </property>
+                       <property name="scaledContents">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="btn_mayoramenor">
+                   <widget class="QPushButton" name="btn_antiguo_a_actual">
                     <property name="text">
-                     <string>Mayor a menor</string>
+                     <string>Mas antiguo al mas reciente</string>
                     </property>
                     <property name="icon">
                      <iconset>
@@ -673,13 +709,109 @@ QPushButton:hover {
                    </widget>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="btn_menormayor">
+                   <widget class="QPushButton" name="btn_actual_a_antiguo">
                     <property name="text">
-                     <string>Menor a mayor</string>
+                     <string>Mas reciente al mas antiguo</string>
                     </property>
                     <property name="icon">
                      <iconset>
                       <normaloff>../models/menor_a_mayor.svg</normaloff>../models/menor_a_mayor.svg</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>30</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QFrame" name="frame_3">
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>50</height>
+                     </size>
+                    </property>
+                    <property name="frameShape">
+                     <enum>QFrame::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Raised</enum>
+                    </property>
+                    <layout class="QHBoxLayout" name="horizontalLayout_7">
+                     <property name="leftMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <widget class="QLabel" name="label_5">
+                       <property name="maximumSize">
+                        <size>
+                         <width>160</width>
+                         <height>16777215</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>Tipo Ent/Sal</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_6">
+                       <property name="maximumSize">
+                        <size>
+                         <width>60</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="pixmap">
+                        <pixmap>../models/stock.svg</pixmap>
+                       </property>
+                       <property name="scaledContents">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="btn_entradas_2">
+                    <property name="text">
+                     <string>Entradas</string>
+                    </property>
+                    <property name="icon">
+                     <iconset>
+                      <normaloff>../models/entrada.svg</normaloff>../models/entrada.svg</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>30</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="btn_menormayor">
+                    <property name="text">
+                     <string>Salidas</string>
+                    </property>
+                    <property name="icon">
+                     <iconset>
+                      <normaloff>../models/salida.svg</normaloff>../models/salida.svg</iconset>
                     </property>
                     <property name="iconSize">
                      <size>
@@ -730,19 +862,19 @@ QLineEdit{
               </property>
               <layout class="QHBoxLayout" name="horizontalLayout_4">
                <property name="spacing">
-                <number>6</number>
+                <number>5</number>
                </property>
                <property name="leftMargin">
                 <number>5</number>
                </property>
                <property name="topMargin">
-                <number>0</number>
+                <number>3</number>
                </property>
                <property name="rightMargin">
                 <number>5</number>
                </property>
                <property name="bottomMargin">
-                <number>0</number>
+                <number>3</number>
                </property>
                <item>
                 <widget class="QPushButton" name="btn_exportar">
@@ -762,30 +894,13 @@ QLineEdit{
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="btn_agregar">
+                <widget class="QPushButton" name="btn_graficar">
                  <property name="text">
-                  <string>Agregar producto</string>
+                  <string>Graficar datos</string>
                  </property>
                  <property name="icon">
                   <iconset>
-                   <normaloff>../models/agregar.svg</normaloff>../models/agregar.svg</iconset>
-                 </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>25</width>
-                   <height>25</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="btn_editareliminar">
-                 <property name="text">
-                  <string>Editar o eliminar</string>
-                 </property>
-                 <property name="icon">
-                  <iconset>
-                   <normaloff>../models/basura.svg</normaloff>../models/basura.svg</iconset>
+                   <normaloff>../models/grafica.svg</normaloff>../models/grafica.svg</iconset>
                  </property>
                  <property name="iconSize">
                   <size>

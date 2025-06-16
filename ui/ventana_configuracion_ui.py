@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'ventana_alertas.ui'
+# Form implementation generated from reading ui file 'ventana_configuracion.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -245,7 +245,6 @@ class Ui_Form(object):
         spacerItem3 = QtWidgets.QSpacerItem(10, 20, QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem3)
         self.label_4 = QtWidgets.QLabel(parent=self.frame_busqueda)
-        self.label_4.setTextFormat(QtCore.Qt.TextFormat.AutoText)
         self.label_4.setObjectName("label_4")
         self.horizontalLayout_3.addWidget(self.label_4)
         spacerItem4 = QtWidgets.QSpacerItem(30, 20, QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -259,70 +258,136 @@ class Ui_Form(object):
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_5.setSpacing(0)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
-        self.frame_productos = QtWidgets.QFrame(parent=self.frame_informacion)
-        self.frame_productos.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_productos.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_productos.setObjectName("frame_productos")
-        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.frame_productos)
+        self.frame_2 = QtWidgets.QFrame(parent=self.frame_informacion)
+        self.frame_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_2.setObjectName("frame_2")
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.frame_2)
         self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_4.setSpacing(0)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-        self.tableproductostock = QtWidgets.QTableWidget(parent=self.frame_productos)
-        self.tableproductostock.setObjectName("tableproductostock")
-        self.tableproductostock.setColumnCount(0)
-        self.tableproductostock.setRowCount(0)
-        self.horizontalLayout_4.addWidget(self.tableproductostock)
-        self.verticalLayout_5.addWidget(self.frame_productos)
+        self.frame_4 = QtWidgets.QFrame(parent=self.frame_2)
+        self.frame_4.setStyleSheet("QLabel {\n"
+"    color: #FFFFFF;\n"
+"    border: none;\n"
+"    padding: 5px;\n"
+"    font: 15pt \"Swis721 BlkCn BT\";\n"
+"    text-align: right;\n"
+"}")
+        self.frame_4.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_4.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_4.setObjectName("frame_4")
+        self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.frame_4)
+        self.verticalLayout_8.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_8.setSpacing(0)
+        self.verticalLayout_8.setObjectName("verticalLayout_8")
+        spacerItem5 = QtWidgets.QSpacerItem(20, 65, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.verticalLayout_8.addItem(spacerItem5)
+        self.label_5 = QtWidgets.QLabel(parent=self.frame_4)
+        self.label_5.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight|QtCore.Qt.AlignmentFlag.AlignTrailing|QtCore.Qt.AlignmentFlag.AlignVCenter)
+        self.label_5.setWordWrap(True)
+        self.label_5.setObjectName("label_5")
+        self.verticalLayout_8.addWidget(self.label_5)
+        spacerItem6 = QtWidgets.QSpacerItem(20, 66, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.verticalLayout_8.addItem(spacerItem6)
+        self.label_3 = QtWidgets.QLabel(parent=self.frame_4)
+        self.label_3.setTextFormat(QtCore.Qt.TextFormat.AutoText)
+        self.label_3.setScaledContents(False)
+        self.label_3.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight|QtCore.Qt.AlignmentFlag.AlignTrailing|QtCore.Qt.AlignmentFlag.AlignVCenter)
+        self.label_3.setWordWrap(True)
+        self.label_3.setOpenExternalLinks(False)
+        self.label_3.setObjectName("label_3")
+        self.verticalLayout_8.addWidget(self.label_3)
+        spacerItem7 = QtWidgets.QSpacerItem(20, 66, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.verticalLayout_8.addItem(spacerItem7)
+        self.label_2 = QtWidgets.QLabel(parent=self.frame_4)
+        self.label_2.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight|QtCore.Qt.AlignmentFlag.AlignTrailing|QtCore.Qt.AlignmentFlag.AlignVCenter)
+        self.label_2.setWordWrap(True)
+        self.label_2.setObjectName("label_2")
+        self.verticalLayout_8.addWidget(self.label_2)
+        spacerItem8 = QtWidgets.QSpacerItem(20, 65, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.verticalLayout_8.addItem(spacerItem8)
+        self.horizontalLayout_4.addWidget(self.frame_4)
+        self.frame_5 = QtWidgets.QFrame(parent=self.frame_2)
+        self.frame_5.setStyleSheet("QFrame{\n"
+"    background-color: #C0E4E5\n"
+"}\n"
+"QLineEdit{\n"
+"    background-color: rgb(232, 232, 232);\n"
+"    border-radius: 10px;\n"
+"    height: 30px;\n"
+"    font: 20pt \"Swis721 BlkCn BT\";\n"
+"    \n"
+"}")
+        self.frame_5.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_5.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_5.setObjectName("frame_5")
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.frame_5)
+        self.verticalLayout_7.setContentsMargins(9, 0, 9, 0)
+        self.verticalLayout_7.setSpacing(0)
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
+        spacerItem9 = QtWidgets.QSpacerItem(20, 80, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
+        self.verticalLayout_7.addItem(spacerItem9)
+        self.lineEdit = QtWidgets.QLineEdit(parent=self.frame_5)
+        self.lineEdit.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignVCenter)
+        self.lineEdit.setObjectName("lineEdit")
+        self.verticalLayout_7.addWidget(self.lineEdit)
+        spacerItem10 = QtWidgets.QSpacerItem(20, 89, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.verticalLayout_7.addItem(spacerItem10)
+        self.lineEdit_2 = QtWidgets.QLineEdit(parent=self.frame_5)
+        self.lineEdit_2.setObjectName("lineEdit_2")
+        self.verticalLayout_7.addWidget(self.lineEdit_2)
+        spacerItem11 = QtWidgets.QSpacerItem(20, 88, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.verticalLayout_7.addItem(spacerItem11)
+        self.lineEdit_3 = QtWidgets.QLineEdit(parent=self.frame_5)
+        self.lineEdit_3.setObjectName("lineEdit_3")
+        self.verticalLayout_7.addWidget(self.lineEdit_3)
+        spacerItem12 = QtWidgets.QSpacerItem(20, 89, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.verticalLayout_7.addItem(spacerItem12)
+        self.horizontalLayout_4.addWidget(self.frame_5)
+        self.horizontalLayout_4.setStretch(0, 5)
+        self.horizontalLayout_4.setStretch(1, 5)
+        self.verticalLayout_5.addWidget(self.frame_2)
         self.frame_3 = QtWidgets.QFrame(parent=self.frame_informacion)
         self.frame_3.setStyleSheet("QFrame{\n"
-"    background-color: #ffffff;\n"
+"    background-color: #ffffff\n"
 "}\n"
-"\n"
-"QLabel {\n"
-"    color: black;\n"
-"    border: none;\n"
+"QPushButton {\n"
+"    background-color: transparent;\n"
+"    color: #000000;\n"
 "    padding: 5px;\n"
-"    font: 18pt \"Swis721 BlkCn BT\";\n"
+"    font: 16pt \"Swis721 BlkCn BT\";\n"
+"    border: 1px solid #000000;\n"
+"    border-radius:10px;\n"
 "}\n"
-"QSpinBox::up-button { width: 0px; height: 0px; border: none; }\n"
-"QSpinBox::down-button { width: 0px; height: 0px; border: none; }\n"
-"QSpinBox{\n"
-"    background-color:#ffffff;\n"
-"    color: black;\n"
-"    border: none;\n"
-"    padding: 5px;\n"
-"    font: 18pt \"Swis721 BlkCn BT\";\n"
+"QPushButton:hover {\n"
+"    background-color: #5DADE2;       /* Color cuando el mouse pasa encima */\n"
 "}\n"
-"\n"
-"")
+"QLineEdit{\n"
+"    border: 1px solid #000000;\n"
+"    border-radius:10px;\n"
+"    height:40px;\n"
+"    font: 20pt \"Swis721 BlkCn BT\";\n"
+"}")
         self.frame_3.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_3.setObjectName("frame_3")
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.frame_3)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-        spacerItem5 = QtWidgets.QSpacerItem(127, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem5)
-        self.label_2 = QtWidgets.QLabel(parent=self.frame_3)
-        self.label_2.setObjectName("label_2")
-        self.horizontalLayout_5.addWidget(self.label_2)
-        self.spinBox_sinstock = QtWidgets.QSpinBox(parent=self.frame_3)
-        self.spinBox_sinstock.setEnabled(False)
-        self.spinBox_sinstock.setFocusPolicy(QtCore.Qt.FocusPolicy.NoFocus)
-        self.spinBox_sinstock.setObjectName("spinBox_sinstock")
-        self.horizontalLayout_5.addWidget(self.spinBox_sinstock)
-        spacerItem6 = QtWidgets.QSpacerItem(126, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem6)
-        self.label_3 = QtWidgets.QLabel(parent=self.frame_3)
-        self.label_3.setObjectName("label_3")
-        self.horizontalLayout_5.addWidget(self.label_3)
-        self.spinBox_bajostock = QtWidgets.QSpinBox(parent=self.frame_3)
-        self.spinBox_bajostock.setEnabled(False)
-        self.spinBox_bajostock.setFocusPolicy(QtCore.Qt.FocusPolicy.NoFocus)
-        self.spinBox_bajostock.setWrapping(False)
-        self.spinBox_bajostock.setObjectName("spinBox_bajostock")
-        self.horizontalLayout_5.addWidget(self.spinBox_bajostock)
-        spacerItem7 = QtWidgets.QSpacerItem(127, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem7)
+        self.btn_modificar = QtWidgets.QPushButton(parent=self.frame_3)
+        icon13 = QtGui.QIcon()
+        icon13.addPixmap(QtGui.QPixmap("../models/añadirtiempo.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_modificar.setIcon(icon13)
+        self.btn_modificar.setIconSize(QtCore.QSize(25, 25))
+        self.btn_modificar.setObjectName("btn_modificar")
+        self.horizontalLayout_5.addWidget(self.btn_modificar)
+        self.btn_mostrar = QtWidgets.QPushButton(parent=self.frame_3)
+        icon14 = QtGui.QIcon()
+        icon14.addPixmap(QtGui.QPixmap("../models/tiempo.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_mostrar.setIcon(icon14)
+        self.btn_mostrar.setIconSize(QtCore.QSize(25, 25))
+        self.btn_mostrar.setObjectName("btn_mostrar")
+        self.horizontalLayout_5.addWidget(self.btn_mostrar)
         self.verticalLayout_5.addWidget(self.frame_3)
         self.verticalLayout_5.setStretch(0, 7)
         self.verticalLayout_5.setStretch(1, 1)
@@ -343,13 +408,19 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.label.setText(_translate("Form", "Ventana Alertas"))
+        self.label.setText(_translate("Form", "Ventana Configuracion"))
         self.btn_inventario.setText(_translate("Form", "Inventario"))
         self.btn_entradas.setText(_translate("Form", "Entradas"))
         self.btn_salidas.setText(_translate("Form", "Salidas"))
         self.btn_reportes.setText(_translate("Form", "Reportes"))
         self.btn_alertas.setText(_translate("Form", "Alertas"))
         self.btn_configuracion.setText(_translate("Form", "Configuracion"))
-        self.label_4.setText(_translate("Form", "Productos con stock bajo o sin stock"))
-        self.label_2.setText(_translate("Form", "Productos sin stock"))
-        self.label_3.setText(_translate("Form", "Productos con stock bajo"))
+        self.label_4.setText(_translate("Form", "Configuracion de tiempos"))
+        self.label_5.setText(_translate("Form", "Tiempo en actualizar el stock automáticamente"))
+        self.label_3.setText(_translate("Form", "Tiempo en verificar si hay productos con stock bajo "))
+        self.label_2.setText(_translate("Form", "Tiempo en generar reportes automáticos "))
+        self.lineEdit.setPlaceholderText(_translate("Form", "En minutos..."))
+        self.lineEdit_2.setPlaceholderText(_translate("Form", "En minutos..."))
+        self.lineEdit_3.setPlaceholderText(_translate("Form", "En semanas..."))
+        self.btn_modificar.setText(_translate("Form", "Modificar tiempos"))
+        self.btn_mostrar.setText(_translate("Form", "Mostrar actuales tiempos"))

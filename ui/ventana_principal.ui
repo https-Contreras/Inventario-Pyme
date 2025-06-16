@@ -574,7 +574,7 @@ font: 12pt &quot;Swis721 BlkCn BT&quot;;
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_5" stretch="1,7">
                <item>
-                <widget class="QFrame" name="frame_2">
+                <widget class="QFrame" name="frame_adicional">
                  <property name="styleSheet">
                   <string notr="true">QFrame {
 	background-color: #C0E4E5
@@ -582,9 +582,11 @@ font: 12pt &quot;Swis721 BlkCn BT&quot;;
 QPushButton{
 	background-color: #0068BC;       
     color: #FFFFFF;                    /* Texto blanco */
-    border: none;                    /* Sin borde de línea */
-    border-radius: 12px;             /* Bordes redondeados */
-    padding: 10px 20px;              /* Relleno interno */
+    border: 1px solid #ccc;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-right: none; /* Elimina borde derecho para unión */
+    padding: 8px;              /* Relleno interno */
     font: bold 12pt &quot;Arial&quot;; 
 }
 QPushButton#btn_resumen{
@@ -603,71 +605,126 @@ QPushButton:hover {
                  <property name="frameShadow">
                   <enum>QFrame::Raised</enum>
                  </property>
-                 <widget class="QPushButton" name="btn_alertas">
-                  <property name="geometry">
-                   <rect>
-                    <x>0</x>
-                    <y>0</y>
-                    <width>227</width>
-                    <height>50</height>
-                   </rect>
+                 <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="7,7">
+                  <property name="spacing">
+                   <number>0</number>
                   </property>
-                  <property name="text">
-                   <string>Alertas</string>
+                  <property name="leftMargin">
+                   <number>0</number>
                   </property>
-                  <property name="icon">
-                   <iconset>
-                    <normaloff>../models/alertas.svg</normaloff>../models/alertas.svg</iconset>
+                  <property name="topMargin">
+                   <number>0</number>
                   </property>
-                  <property name="iconSize">
-                   <size>
-                    <width>30</width>
-                    <height>30</height>
-                   </size>
+                  <property name="rightMargin">
+                   <number>0</number>
                   </property>
-                 </widget>
-                 <widget class="QLabel" name="label_notificaciones">
-                  <property name="enabled">
-                   <bool>false</bool>
+                  <property name="bottomMargin">
+                   <number>0</number>
                   </property>
-                  <property name="geometry">
-                   <rect>
-                    <x>180</x>
-                    <y>15</y>
-                    <width>30</width>
-                    <height>20</height>
-                   </rect>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">background-color: red;
-color: white;
-border-radius: 8px;
-min-width: 16px;
-min-height: 16px;
-font: bold 15px;
-qproperty-alignment: AlignCenter;</string>
-                  </property>
-                  <property name="text">
-                   <string>0</string>
-                  </property>
-                 </widget>
-                 <widget class="QDateTimeEdit" name="dateTimeEdit">
-                  <property name="geometry">
-                   <rect>
-                    <x>240</x>
-                    <y>1</y>
-                    <width>321</width>
-                    <height>41</height>
-                   </rect>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">QDateTimeEdit {
+                  <item>
+                   <widget class="QFrame" name="frame_alertas">
+                    <property name="frameShape">
+                     <enum>QFrame::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Raised</enum>
+                    </property>
+                    <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="8,1">
+                     <property name="spacing">
+                      <number>0</number>
+                     </property>
+                     <property name="leftMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <widget class="QPushButton" name="btn_alertas">
+                       <property name="text">
+                        <string>Alertas</string>
+                       </property>
+                       <property name="icon">
+                        <iconset>
+                         <normaloff>../models/alertas.svg</normaloff>../models/alertas.svg</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>30</width>
+                         <height>30</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_notificaciones">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">QLabel {
+    background-color: red;
+    border: 1px solid #ccc;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-left: none; /* Elimina borde izquierdo para unión */
+    padding: 5px;
+	color: black;
+	font: bold 12pt &quot;Arial&quot;; 
+}</string>
+                       </property>
+                       <property name="text">
+                        <string>0</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QFrame" name="frame_fecha">
+                    <property name="frameShape">
+                     <enum>QFrame::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Raised</enum>
+                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_10" stretch="0">
+                     <property name="spacing">
+                      <number>0</number>
+                     </property>
+                     <property name="leftMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <widget class="QDateTimeEdit" name="dateTimeEdit_tiempo">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">QDateTimeEdit {
     background-color: #d1f4f9;       /* Fondo celeste claro */
     color: #003366;                  /* Texto azul oscuro */
     border: 2px solid #0077b6;       /* Borde azul */
     border-radius: 10px;
     padding: 5px 8px;
-    font: bold 12px &quot;Segoe UI&quot;;
+    font: bold 16px &quot;Segoe UI&quot;;
+	height: 30px;
 }
 
 QDateTimeEdit::up-button, QDateTimeEdit::down-button {
@@ -689,11 +746,16 @@ QDateTimeEdit:focus {
     border: 2px solid #00b4d8; /* Azul más claro al enfocar */
     background-color: #caf0f8;
 }</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                 </widget>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                </item>
                <item>
@@ -707,7 +769,7 @@ QDateTimeEdit:focus {
                     <x>0</x>
                     <y>0</y>
                     <width>567</width>
-                    <height>243</height>
+                    <height>239</height>
                    </rect>
                   </property>
                   <attribute name="icon">
@@ -729,7 +791,7 @@ QDateTimeEdit:focus {
                     <x>0</x>
                     <y>0</y>
                     <width>567</width>
-                    <height>243</height>
+                    <height>239</height>
                    </rect>
                   </property>
                   <attribute name="icon">
@@ -751,7 +813,7 @@ QDateTimeEdit:focus {
                     <x>0</x>
                     <y>0</y>
                     <width>567</width>
-                    <height>243</height>
+                    <height>239</height>
                    </rect>
                   </property>
                   <attribute name="icon">

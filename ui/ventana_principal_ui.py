@@ -262,16 +262,18 @@ class Ui_Form(object):
         self.frame_informacion.setObjectName("frame_informacion")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.frame_informacion)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
-        self.frame_2 = QtWidgets.QFrame(parent=self.frame_informacion)
-        self.frame_2.setStyleSheet("QFrame {\n"
+        self.frame_adicional = QtWidgets.QFrame(parent=self.frame_informacion)
+        self.frame_adicional.setStyleSheet("QFrame {\n"
 "    background-color: #C0E4E5\n"
 "}\n"
 "QPushButton{\n"
 "    background-color: #0068BC;       \n"
 "    color: #FFFFFF;                    /* Texto blanco */\n"
-"    border: none;                    /* Sin borde de línea */\n"
-"    border-radius: 12px;             /* Bordes redondeados */\n"
-"    padding: 10px 20px;              /* Relleno interno */\n"
+"    border: 1px solid #ccc;\n"
+"    border-top-left-radius: 10px;\n"
+"    border-bottom-left-radius: 10px;\n"
+"    border-right: none; /* Elimina borde derecho para unión */\n"
+"    padding: 8px;              /* Relleno interno */\n"
 "    font: bold 12pt \"Arial\"; \n"
 "}\n"
 "QPushButton#btn_resumen{\n"
@@ -283,36 +285,63 @@ class Ui_Form(object):
 "QPushButton:hover {\n"
 "    background-color: #5DADE2;       /* Color cuando el mouse pasa encima */\n"
 "}")
-        self.frame_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_2.setObjectName("frame_2")
-        self.btn_alertas = QtWidgets.QPushButton(parent=self.frame_2)
-        self.btn_alertas.setGeometry(QtCore.QRect(0, 0, 227, 50))
+        self.frame_adicional.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_adicional.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_adicional.setObjectName("frame_adicional")
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.frame_adicional)
+        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_4.setSpacing(0)
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.frame_alertas = QtWidgets.QFrame(parent=self.frame_adicional)
+        self.frame_alertas.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_alertas.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_alertas.setObjectName("frame_alertas")
+        self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.frame_alertas)
+        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_5.setSpacing(0)
+        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
+        self.btn_alertas = QtWidgets.QPushButton(parent=self.frame_alertas)
         icon12 = QtGui.QIcon()
         icon12.addPixmap(QtGui.QPixmap("../models/alertas.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btn_alertas.setIcon(icon12)
         self.btn_alertas.setIconSize(QtCore.QSize(30, 30))
         self.btn_alertas.setObjectName("btn_alertas")
-        self.label_notificaciones = QtWidgets.QLabel(parent=self.frame_2)
+        self.horizontalLayout_5.addWidget(self.btn_alertas)
+        self.label_notificaciones = QtWidgets.QLabel(parent=self.frame_alertas)
         self.label_notificaciones.setEnabled(False)
-        self.label_notificaciones.setGeometry(QtCore.QRect(180, 15, 30, 20))
-        self.label_notificaciones.setStyleSheet("background-color: red;\n"
-"color: white;\n"
-"border-radius: 8px;\n"
-"min-width: 16px;\n"
-"min-height: 16px;\n"
-"font: bold 15px;\n"
-"qproperty-alignment: AlignCenter;")
+        self.label_notificaciones.setStyleSheet("QLabel {\n"
+"    background-color: red;\n"
+"    border: 1px solid #ccc;\n"
+"    border-top-right-radius: 10px;\n"
+"    border-bottom-right-radius: 10px;\n"
+"    border-left: none; /* Elimina borde izquierdo para unión */\n"
+"    padding: 5px;\n"
+"    color: black;\n"
+"    font: bold 12pt \"Arial\"; \n"
+"}")
         self.label_notificaciones.setObjectName("label_notificaciones")
-        self.dateTimeEdit = QtWidgets.QDateTimeEdit(parent=self.frame_2)
-        self.dateTimeEdit.setGeometry(QtCore.QRect(240, 1, 321, 41))
-        self.dateTimeEdit.setStyleSheet("QDateTimeEdit {\n"
+        self.horizontalLayout_5.addWidget(self.label_notificaciones)
+        self.horizontalLayout_5.setStretch(0, 8)
+        self.horizontalLayout_5.setStretch(1, 1)
+        self.horizontalLayout_4.addWidget(self.frame_alertas)
+        self.frame_fecha = QtWidgets.QFrame(parent=self.frame_adicional)
+        self.frame_fecha.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_fecha.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_fecha.setObjectName("frame_fecha")
+        self.verticalLayout_10 = QtWidgets.QVBoxLayout(self.frame_fecha)
+        self.verticalLayout_10.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_10.setSpacing(0)
+        self.verticalLayout_10.setObjectName("verticalLayout_10")
+        self.dateTimeEdit_tiempo = QtWidgets.QDateTimeEdit(parent=self.frame_fecha)
+        self.dateTimeEdit_tiempo.setEnabled(False)
+        self.dateTimeEdit_tiempo.setStyleSheet("QDateTimeEdit {\n"
 "    background-color: #d1f4f9;       /* Fondo celeste claro */\n"
 "    color: #003366;                  /* Texto azul oscuro */\n"
 "    border: 2px solid #0077b6;       /* Borde azul */\n"
 "    border-radius: 10px;\n"
 "    padding: 5px 8px;\n"
-"    font: bold 12px \"Segoe UI\";\n"
+"    font: bold 16px \"Segoe UI\";\n"
+"    height: 30px;\n"
 "}\n"
 "\n"
 "QDateTimeEdit::up-button, QDateTimeEdit::down-button {\n"
@@ -334,13 +363,17 @@ class Ui_Form(object):
 "    border: 2px solid #00b4d8; /* Azul más claro al enfocar */\n"
 "    background-color: #caf0f8;\n"
 "}")
-        self.dateTimeEdit.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.dateTimeEdit.setObjectName("dateTimeEdit")
-        self.verticalLayout_5.addWidget(self.frame_2)
+        self.dateTimeEdit_tiempo.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.dateTimeEdit_tiempo.setObjectName("dateTimeEdit_tiempo")
+        self.verticalLayout_10.addWidget(self.dateTimeEdit_tiempo)
+        self.horizontalLayout_4.addWidget(self.frame_fecha)
+        self.horizontalLayout_4.setStretch(0, 7)
+        self.horizontalLayout_4.setStretch(1, 7)
+        self.verticalLayout_5.addWidget(self.frame_adicional)
         self.toolBox = QtWidgets.QToolBox(parent=self.frame_informacion)
         self.toolBox.setObjectName("toolBox")
         self.page_resumen = QtWidgets.QWidget()
-        self.page_resumen.setGeometry(QtCore.QRect(0, 0, 567, 243))
+        self.page_resumen.setGeometry(QtCore.QRect(0, 0, 567, 239))
         self.page_resumen.setObjectName("page_resumen")
         self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.page_resumen)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
@@ -351,7 +384,7 @@ class Ui_Form(object):
         icon13.addPixmap(QtGui.QPixmap("../models/paginas.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.toolBox.addItem(self.page_resumen, icon13, "")
         self.page_stock = QtWidgets.QWidget()
-        self.page_stock.setGeometry(QtCore.QRect(0, 0, 567, 243))
+        self.page_stock.setGeometry(QtCore.QRect(0, 0, 567, 239))
         self.page_stock.setObjectName("page_stock")
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.page_stock)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
@@ -360,7 +393,7 @@ class Ui_Form(object):
         self.verticalLayout_7.addWidget(self.listWidget_2)
         self.toolBox.addItem(self.page_stock, icon13, "")
         self.page_movimientos = QtWidgets.QWidget()
-        self.page_movimientos.setGeometry(QtCore.QRect(0, 0, 567, 243))
+        self.page_movimientos.setGeometry(QtCore.QRect(0, 0, 567, 239))
         self.page_movimientos.setObjectName("page_movimientos")
         self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.page_movimientos)
         self.verticalLayout_8.setObjectName("verticalLayout_8")

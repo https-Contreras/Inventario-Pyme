@@ -9,16 +9,18 @@ class Controlador:
         self.ventana_principal.show()
 
     def mostrar_ventana_inventario(self):
+        self.ventana_anterior = self.ventana_principal  # Guardar anterior
         self.ventana_inventario = VentanaInventario(self)
-        self.ventana_principal.hide()
+        self.ventana_anterior.hide()
         self.ventana_inventario.show()
 
     def mostrar_ventana_agregar(self):
+        self.ventana_anterior = self.ventana_inventario  # Guardar anterior
         self.ventana_agregar = VentanaAgregar(self)
-        self.ventana_inventario.hide()
+        self.ventana_anterior.hide()
         self.ventana_agregar.show()
 
-    def volver_a_principal(self, ventana_actual):
+    def volver_a_anterior(self, ventana_actual):
         ventana_actual.hide()
-        self.ventana_principal.show()
+        self.ventana_anterior.show()
 

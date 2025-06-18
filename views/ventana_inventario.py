@@ -191,5 +191,5 @@ class VentanaInventario(QWidget):
         self.ui.btn_menormayor.setIcon(QtGui.QIcon(ruta_menor_a_mayor))
 
     def eventos(self): # metodo para conectar los eventos de los botones
-        self.ui.btn_resumen.clicked.connect(lambda: self.controlador.volver_a_principal(self))
+        self.ui.btn_resumen.clicked.connect(lambda: self.controlador.volver_a_anterior(self))
         self.ui.btn_agregar.clicked.connect(self.controlador.mostrar_ventana_agregar)

@@ -117,7 +117,7 @@ class VentanaAgregar(QWidget):
         self.ui.btn_minimizar.setIcon(QtGui.QIcon(ruta_minimizar))
 
     def eventos(self): # metodo para conectar los eventos de los botones
-        self.ui.btn_regresar.clicked.connect(self.controlador.mostrar_ventana_inventario)
+        self.ui.btn_regresar.clicked.connect(lambda: self.controlador.volver_a_anterior(self))
     
     
         

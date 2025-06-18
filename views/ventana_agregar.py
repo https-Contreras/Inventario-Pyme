@@ -28,12 +28,6 @@ class VentanaAgregar(QWidget):
         self.ui.btn_achicar.hide()
         # Dando sombra a los frames
         self.sombra_frame(self.ui.frame_cuerpo)
-        self.sombra_frame(self.ui.label_2)
-        self.sombra_frame(self.ui.label_3)
-        self.sombra_frame(self.ui.label_4)
-        self.sombra_frame(self.ui.label_5)
-        self.sombra_frame(self.ui.label_6)
-        self.sombra_frame(self.ui.label_7)
         self.sombra_frame(self.ui.LnEdit_id)
         self.sombra_frame(self.ui.LnEdit_producto)
         self.sombra_frame(self.ui.LnEdit_descripcion)

@@ -158,6 +158,7 @@ class VentanaPrincipal(QWidget):
 
     def eventos(self): # metodo para conectar los eventos de los botones
         self.ui.btn_inventario.clicked.connect(self.controlador.mostrar_ventana_inventario)
+        self.ui.btn_entradas.clicked.connect(self.controlador.mostrar_ventana_entradas)
     
     
         

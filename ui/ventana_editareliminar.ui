@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>923</width>
-    <height>745</height>
+    <width>780</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -304,22 +304,6 @@ QLabel {
             <string>Editar producto por ID o nombre</string>
            </property>
           </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_7">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Preferred</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
          </item>
          <item>
           <widget class="QLineEdit" name="LnEdit_buscar">
@@ -637,7 +621,7 @@ QLineEdit{
              <number>9</number>
             </property>
             <property name="topMargin">
-             <number>0</number>
+             <number>9</number>
             </property>
             <property name="rightMargin">
              <number>9</number>
@@ -645,22 +629,6 @@ QLineEdit{
             <property name="bottomMargin">
              <number>5</number>
             </property>
-            <item>
-             <spacer name="verticalSpacer_8">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::Preferred</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>45</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
             <item>
              <widget class="QLineEdit" name="LnEdit_id_edit">
               <property name="placeholderText">

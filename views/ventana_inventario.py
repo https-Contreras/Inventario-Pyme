@@ -169,7 +169,9 @@ class VentanaInventario(QWidget):
         ruta_alfabeticamente = os.path.join(root_dir, "models", "alfabeticamente.svg")
         ruta_mayor_a_menor = os.path.join(root_dir, "models", "mayor_a_menor.svg")
         ruta_menor_a_mayor = os.path.join(root_dir, "models", "menor_a_mayor.svg")
-        
+        ruta_exportar = os.path.join(root_dir, "models", "exportar.svg")
+        ruta_agregar = os.path.join(root_dir, "models", "agregar.svg")
+        ruta_basura = os.path.join(root_dir, "models", "basura.svg")
         # Establecer íconos
         self.ui.btn_alertas.setIcon(QtGui.QIcon(ruta_alertas))
         self.ui.btn_cerrar.setIcon(QtGui.QIcon(ruta_cerrar))
@@ -189,7 +191,12 @@ class VentanaInventario(QWidget):
         self.ui.btn_alfabeticamente.setIcon(QtGui.QIcon(ruta_alfabeticamente))
         self.ui.btn_mayoramenor.setIcon(QtGui.QIcon(ruta_mayor_a_menor))
         self.ui.btn_menormayor.setIcon(QtGui.QIcon(ruta_menor_a_mayor))
+        self.ui.btn_exportar.setIcon(QtGui.QIcon(ruta_exportar))
+        self.ui.btn_agregar.setIcon(QtGui.QIcon(ruta_agregar))
+        self.ui.btn_editareliminar.setIcon(QtGui.QIcon(ruta_basura))
 
     def eventos(self): # metodo para conectar los eventos de los botones
-        self.ui.btn_resumen.clicked.connect(lambda: self.controlador.volver_a_anterior(self))
-        self.ui.btn_agregar.clicked.connect(self.controlador.mostrar_ventana_agregar)
+        self.ui.btn_resumen.clicked.connect(lambda: self.controlador.mostrar_ventana_principal())
+        self.ui.btn_entradas.clicked.connect(lambda: self.controlador.mostrar_ventana_entradas())
+        self.ui.btn_agregar.clicked.connect(lambda: self.controlador.mostrar_ventana_agregar())
+        self.ui.btn_editareliminar.clicked.connect(lambda: self.controlador.mostrar_ventana_editareliminar())

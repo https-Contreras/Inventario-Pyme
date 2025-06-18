@@ -8,7 +8,8 @@ from ui.ventana_inventario_ui import Ui_Form
 from PyQt6 import QtWidgets, QtGui
 
 class VentanaInventario(QWidget):
-    def __init__(self, ventana_principal):# constructor de la clase VentanaPrincipal
+    def __init__(self, controlador):# constructor de la clase VentanaPrincipal
+        self.controlador = controlador
         super().__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
@@ -23,8 +24,6 @@ class VentanaInventario(QWidget):
         self.cargar_iconos()
         
         self.inicializar_animaciones()
-        #Guardando referencias de ventanas
-        self.ventana_principal = ventana_principal
         self.eventos()
         
     def inicializar_animaciones(self): # metodo para inicializar las animaciones y configuraciones de la ventana principal
@@ -192,8 +191,5 @@ class VentanaInventario(QWidget):
         self.ui.btn_menormayor.setIcon(QtGui.QIcon(ruta_menor_a_mayor))
 
     def eventos(self): # metodo para conectar los eventos de los botones
-        self.ui.btn_resumen.clicked.connect(self.volver_a_ventana_principal)
-    
-    def volver_a_ventana_principal(self): # metodo para mostrar la ventana de inventario
-        self.hide()  # Oculta esta ventana
-        self.ventana_principal.show()  # Muestra la principal
+        self.ui.btn_resumen.clicked.connect(lambda: self.controlador.volver_a_principal(self))
+        self.ui.btn_agregar.clicked.connect(self.controlador.mostrar_ventana_agregar)

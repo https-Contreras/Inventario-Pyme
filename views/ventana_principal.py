@@ -5,12 +5,12 @@ from PyQt6.QtGui import QColor
 from PyQt6.QtGui import QIcon
 from PyQt6.QtGui import QPixmap
 from ui.ventana_principal_ui import Ui_Form
-from views.ventana_inventario import VentanaInventario
 from PyQt6 import QtWidgets, QtGui
 
 class VentanaPrincipal(QWidget):
-    def __init__(self):# constructor de la clase VentanaPrincipal
+    def __init__(self, controlador):# constructor de la clase VentanaPrincipal
         super().__init__()
+        self.controlador = controlador
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
@@ -157,10 +157,7 @@ class VentanaPrincipal(QWidget):
         self.ui.btn_salidas.setIcon(QtGui.QIcon(ruta_salidas))
 
     def eventos(self): # metodo para conectar los eventos de los botones
-        self.ui.btn_inventario.clicked.connect(self.mostrar_ventana_inventario)
+        self.ui.btn_inventario.clicked.connect(self.controlador.mostrar_ventana_inventario)
     
-    def mostrar_ventana_inventario(self): # metodo para mostrar la ventana de inventario
-        self.inventario_window = VentanaInventario(self)
-        self.inventario_window.show()
-        self.hide()
+    
         

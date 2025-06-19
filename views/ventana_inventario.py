@@ -196,7 +196,14 @@ class VentanaInventario(QWidget):
         self.ui.btn_editareliminar.setIcon(QtGui.QIcon(ruta_basura))
 
     def eventos(self): # metodo para conectar los eventos de los botones
+        #ventanas principales
         self.ui.btn_resumen.clicked.connect(lambda: self.controlador.mostrar_ventana_principal())
         self.ui.btn_entradas.clicked.connect(lambda: self.controlador.mostrar_ventana_entradas())
+        self.ui.btn_salidas.clicked.connect(lambda: self.controlador.mostrar_ventana_salidas())
+        self.ui.btn_reportes.clicked.connect(lambda: self.controlador.mostrar_ventana_reportes())
+        self.ui.btn_alertas.clicked.connect(lambda: self.controlador.mostrar_ventana_alertas())
+        self.ui.btn_configuracion.clicked.connect(lambda: self.controlador.mostrar_ventana_configuracion())
+
+        #ventanas secundarias
         self.ui.btn_agregar.clicked.connect(lambda: self.controlador.mostrar_ventana_agregar())
         self.ui.btn_editareliminar.clicked.connect(lambda: self.controlador.mostrar_ventana_editareliminar())

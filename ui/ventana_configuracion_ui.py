@@ -376,7 +376,7 @@ class Ui_Form(object):
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.btn_modificar = QtWidgets.QPushButton(parent=self.frame_3)
         icon13 = QtGui.QIcon()
-        icon13.addPixmap(QtGui.QPixmap("../models/añadirtiempo.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon13.addPixmap(QtGui.QPixmap("../models/agregartiempo.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btn_modificar.setIcon(icon13)
         self.btn_modificar.setIconSize(QtCore.QSize(25, 25))
         self.btn_modificar.setObjectName("btn_modificar")

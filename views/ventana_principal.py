@@ -157,8 +157,13 @@ class VentanaPrincipal(QWidget):
         self.ui.btn_salidas.setIcon(QtGui.QIcon(ruta_salidas))
 
     def eventos(self): # metodo para conectar los eventos de los botones
+        #vetanas principales
         self.ui.btn_inventario.clicked.connect(self.controlador.mostrar_ventana_inventario)
         self.ui.btn_entradas.clicked.connect(self.controlador.mostrar_ventana_entradas)
+        self.ui.btn_salidas.clicked.connect(self.controlador.mostrar_ventana_salidas)
+        self.ui.btn_reportes.clicked.connect(self.controlador.mostrar_ventana_reportes)
+        self.ui.btn_alertas.clicked.connect(self.controlador.mostrar_ventana_alertas)
+        self.ui.btn_configuracion.clicked.connect(self.controlador.mostrar_ventana_configuracion)
     
     
         

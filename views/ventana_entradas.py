@@ -158,6 +158,10 @@ class VentanaEntradas(QWidget):
         self.ui.btn_registrar_entrada.setIcon(QtGui.QIcon(ruta_like))
 
     def eventos(self): # metodo para conectar los eventos de los botones
-        self.ui.btn_resumen.clicked.connect(lambda: self.controlador.volver_a_principal(self))
-        self.ui.btn_inventario.clicked.connect(self.controlador.mostrar_ventana_inventario)
-        
+        self.ui.btn_resumen.clicked.connect(lambda: self.controlador.mostrar_ventana_principal())
+        self.ui.btn_inventario.clicked.connect(lambda: self.controlador.mostrar_ventana_inventario())
+        self.ui.btn_salidas.clicked.connect(lambda: self.controlador.mostrar_ventana_salidas())
+        self.ui.btn_reportes.clicked.connect(lambda: self.controlador.mostrar_ventana_reportes())
+        self.ui.btn_salidas.clicked.connect(lambda: self.controlador.mostrar_ventana_salidas())
+        self.ui.btn_configuracion.clicked.connect(lambda: self.controlador.mostrar_ventana_configuracion())
+

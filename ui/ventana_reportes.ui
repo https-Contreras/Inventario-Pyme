@@ -805,7 +805,7 @@ QLabel {
                    </widget>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="btn_menormayor">
+                   <widget class="QPushButton" name="btn_salidas_2">
                     <property name="text">
                      <string>Salidas</string>
                     </property>

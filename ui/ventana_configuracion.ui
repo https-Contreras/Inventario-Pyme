@@ -892,7 +892,7 @@ QLineEdit{
                     </property>
                     <property name="icon">
                      <iconset>
-                      <normaloff>../models/añadirtiempo.svg</normaloff>../models/añadirtiempo.svg</iconset>
+                      <normaloff>../models/agregartiempo.svg</normaloff>../models/agregartiempo.svg</iconset>
                     </property>
                     <property name="iconSize">
                      <size>

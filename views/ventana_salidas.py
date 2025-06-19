@@ -1,18 +1,17 @@
 import os
-from PyQt6.QtWidgets import QWidget, QSizeGrip, QHeaderView, QTableWidgetItem
-from PyQt6.QtCore import Qt, QPropertyAnimation, QEasingCurve, QDateTime
-from PyQt6.QtGui import QColor, QIcon, QPixmap
-from ui.ventana_principal_ui import Ui_Form
-from views.ventana_inventario import VentanaInventario
+from PyQt6.QtWidgets import QWidget, QSizeGrip, QMessageBox, QHeaderView
+from PyQt6.QtCore import Qt, QPropertyAnimation, QEasingCurve
+from PyQt6.QtGui import QColor, QIcon, QPixmap, QStandardItemModel, QStandardItem
+from ui.ventana_salidas_ui import Ui_Form
 from PyQt6 import QtWidgets, QtGui
-from Backend.inventario import Inventario
-from Backend.claseHilo import RelojThread, NotificacionesThread
+from datetime import datetime
 from Backend.conexion import Miconexion
+from Backend.inventario import Inventario
 
-class VentanaPrincipal(QWidget):
+class VentanaSalidas(QWidget):
     def __init__(self, controlador):# constructor de la clase VentanaPrincipal
-        super().__init__()
         self.controlador = controlador
+        super().__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
@@ -20,23 +19,14 @@ class VentanaPrincipal(QWidget):
 
         self.ui.frame_barra.setMinimumWidth(0)         
         self.ui.frame_barra.setMaximumWidth(260)     
-    
 
         self.cargar_iconos()
         
         self.inicializar_animaciones()
-    
-    
-        #EVENTOS DE BOTONES
-        
-        self.ui.toolBox.currentChanged.connect(self.seccion_toolbox)
-        
-        self.inicializar_reloj()
-        self.inicializar_hilo_alertas()
-
-            
         self.eventos()
-
+        self.ui.btn_registrar_entrada.clicked.connect(self.registrar_salida)
+        self.ui.btn_busqueda.clicked.connect(self.buscar_producto)
+        
     def inicializar_animaciones(self): # metodo para inicializar las animaciones y configuraciones de la ventana principal
 
         self.ui.bt_ocultar.clicked.connect(self.animacion_barra)
@@ -45,8 +35,10 @@ class VentanaPrincipal(QWidget):
         self.ui.btn_achicar.hide()
         self.ui.bt_mostrar.hide()
         # Dando sombra a los frames
+        self.sombra_frame(self.ui.btn_busqueda)
+        self.sombra_frame(self.ui.Linedit_busqueda)
+
         self.sombra_frame(self.ui.frame_cuerpo)
-        self.sombra_frame(self.ui.toolBox)
         self.sombra_frame(self.ui.btn_alertas)
         self.sombra_frame(self.ui.btn_configuracion)
         self.sombra_frame(self.ui.btn_entradas)
@@ -68,8 +60,7 @@ class VentanaPrincipal(QWidget):
         layout = QtWidgets.QVBoxLayout(self)
         layout.addWidget(self.grip, 0, Qt.AlignmentFlag.AlignBottom | Qt.AlignmentFlag.AlignRight)
         layout.setContentsMargins(0, 0, 0, 0)
-        self.setLayout(layout)  # ⛔ ESTA LÍNEA CIERRA TU APP SI YA HAY LAYOUT
-
+        self.setLayout(layout)
         self.evento_mover_desde_frame()
 
     def animacion_barra(self): 
@@ -92,6 +83,7 @@ class VentanaPrincipal(QWidget):
         self.animacion.setDuration(400)
         self.animacion.setEasingCurve(QEasingCurve.Type.InQuad)
         self.animacion.start()
+
 
     def sombra_frame(self, frame): #metodo para dar sombra a los frames
         sombra = QtWidgets.QGraphicsDropShadowEffect(self)
@@ -143,13 +135,14 @@ class VentanaPrincipal(QWidget):
         ruta_hacergrande = os.path.join(root_dir, "models", "hacergrande.svg")
         ruta_inventario = os.path.join(root_dir, "models", "inventario.svg")
         ruta_izquierda = os.path.join(root_dir, "models", "izquierda.svg")
-        ruta_logo1 = os.path.join(root_dir, "models", "logoIMSreduce.png")
-        ruta_logo2 = os.path.join(root_dir, "models", "logoIMSreduce2.png")
         ruta_minimizar = os.path.join(root_dir, "models", "minimizar.svg")
-        ruta_paginas = os.path.join(root_dir, "models", "paginas.svg")
         ruta_reportes = os.path.join(root_dir, "models", "reportes.svg")
         ruta_salidas = os.path.join(root_dir, "models", "salida.svg")
+        ruta_filtrar = os.path.join(root_dir, "models", "filtrar.svg")
+        ruta_buscar = os.path.join(root_dir, "models", "buscar.svg")
+        ruta_logo1 = os.path.join(root_dir, "models", "logoIMSreduce.png")
         
+        ruta_like = os.path.join(root_dir, "models", "like.svg")
         # Establecer íconos
         self.ui.btn_alertas.setIcon(QtGui.QIcon(ruta_alertas))
         self.ui.btn_cerrar.setIcon(QtGui.QIcon(ruta_cerrar))
@@ -161,87 +154,112 @@ class VentanaPrincipal(QWidget):
         self.ui.btn_inventario.setIcon(QtGui.QIcon(ruta_inventario))
         self.ui.bt_ocultar.setIcon(QtGui.QIcon(ruta_izquierda))
         self.ui.btn_resumen.setIcon(QtGui.QIcon(ruta_logo1))
-        self.ui.logo_letras.setPixmap(QPixmap(ruta_logo2))
         self.ui.btn_minimizar.setIcon(QtGui.QIcon(ruta_minimizar))
-        self.ui.toolBox.setItemIcon(0, QIcon(ruta_paginas))
-        self.ui.toolBox.setItemIcon(1, QIcon(ruta_paginas))
-        self.ui.toolBox.setItemIcon(2, QIcon(ruta_paginas))
         self.ui.btn_reportes.setIcon(QtGui.QIcon(ruta_reportes))
         self.ui.btn_salidas.setIcon(QtGui.QIcon(ruta_salidas))
-        
+        self.ui.btn_busqueda.setIcon(QtGui.QIcon(ruta_buscar))
+        self.ui.btn_registrar_entrada.setIcon(QtGui.QIcon(ruta_like))
 
-        
-    
-    
-    #Esto es para las listas de la ventana principal
-    def seccion_toolbox(self, index):
-        try:
-            if index == 0:
-                self.ui.listWidget.clear()
-                productos = Inventario.obtener_lista_productos()
-                self.ui.listWidget.addItems(productos)
-            elif index == 1:
-                self.ui.listWidget_2.clear()
-                productos_stock_bajo=Inventario.prod_stock_bajo()
-                self.ui.listWidget_2.addItems(productos_stock_bajo)
-            elif index == 2:
-                self.ui.tableWidget.clear()
-                self.ui.tableWidget.setColumnCount(4)
-                self.ui.tableWidget.setHorizontalHeaderLabels(["Tipo de movimiento", "Artículo", "Stock", "Fecha"])
-                self.ui.tableWidget.setRowCount(0)
-
-                try:
-                    conexion = Miconexion.obtener_conexion()
-                    with conexion.cursor() as cursor:
-                        cursor.execute("""
-                                SELECT tipo, producto, cantidad, fecha 
-                                FROM movimientos 
-                                ORDER BY fecha DESC 
-                                LIMIT 10
-                            """)
-                        resultados = cursor.fetchall()
-
-                    for fila_idx, fila in enumerate(resultados):
-                        self.ui.tableWidget.insertRow(fila_idx)
-                        for col_idx, valor in enumerate(fila):
-                            item = QTableWidgetItem(str(valor))
-                            self.ui.tableWidget.setItem(fila_idx, col_idx, item)
-
-                    self.ui.tableWidget.resizeColumnsToContents()
-                    self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-                    self.ui.tableWidget.horizontalHeader().setDefaultAlignment(Qt.AlignmentFlag.AlignCenter)
-                except Exception as e:
-                        print("❌ Error al cargar movimientos recientes:", e)
-                finally:
-                    if conexion:
-                        conexion.close()
-        except Exception as e:
-            print("❌ Excepción atrapada:", e)
-            
-            
-    #Esto es para mostrar ventana de inventario
     def eventos(self): # metodo para conectar los eventos de los botones
-        #vetanas principales
-        self.ui.btn_inventario.clicked.connect(self.controlador.mostrar_ventana_inventario)
-        self.ui.btn_entradas.clicked.connect(self.controlador.mostrar_ventana_entradas)
-        self.ui.btn_salidas.clicked.connect(self.controlador.mostrar_ventana_salidas)
-        self.ui.btn_reportes.clicked.connect(self.controlador.mostrar_ventana_reportes)
-        self.ui.btn_alertas.clicked.connect(self.controlador.mostrar_ventana_alertas)
-        self.ui.btn_configuracion.clicked.connect(self.controlador.mostrar_ventana_configuracion)
-    
-    
-    def inicializar_reloj(self):
-        self.reloj = RelojThread()
-        self.reloj.nueva_fecha.connect(self.actualizar_fecha)
-        self.reloj.start()
+        self.ui.btn_resumen.clicked.connect(lambda: self.controlador.mostrar_ventana_principal())
+        self.ui.btn_inventario.clicked.connect(lambda: self.controlador.mostrar_ventana_inventario())
+        self.ui.btn_entradas.clicked.connect(lambda: self.controlador.mostrar_ventana_entradas())
+        self.ui.btn_reportes.clicked.connect(lambda: self.controlador.mostrar_ventana_reportes())
+        self.ui.btn_alertas.clicked.connect(lambda: self.controlador.mostrar_ventana_alertas())
+        self.ui.btn_configuracion.clicked.connect(lambda: self.controlador.mostrar_ventana_configuracion())
+        
 
-    def actualizar_fecha(self, fecha):
-        self.ui.dateTimeEdit_tiempo.setDateTime(fecha)  # Suponiendo que tu QDateTimeEdit se llama así
+
+    def buscar_producto(self):
+        #funcion para la barra de busqueda del inventario
+        texto=self.ui.Linedit_busqueda.text().strip()
+            
+                
+        # Determinar el criterio
+        if texto.isdigit():
+            criterio = "codigo"
+        else:
+            criterio = "nombre"
+            
+        productos = Inventario.BuscarProductos(criterio,texto)
+        # Crear modelo para la tabla
+        model = QStandardItemModel()
+        model.setHorizontalHeaderLabels(["Código", "Nombre", "Stock", "Stock mínimo", "Precio en pesos"])
+            
+        if productos:
+            for fila in productos:
+                items = [QStandardItem(str(campo)) for campo in fila]
+                model.appendRow(items)
+        else:
+            model.appendRow([QStandardItem("NINGUNA COINCIDENCIA")])
+
+        self.ui.tbView_actualProducto.setModel(model)
+        self.ui.tbView_actualProducto.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+
+    def registrar_salida(self):
+        codigo = self.ui.Linedit_busqueda.text().strip()
+        cantidad = self.ui.LnEdit_entrada.text().strip()
+        fecha = self.ui.LnEdit_fecha.text().strip()
+        observacion= self.ui.LnEdit_observaciones.text().strip()
+        if not codigo or not cantidad:
+            QMessageBox.warning(self,"Campos vacios", "Debe ingresar codigo o cantidad")
+            return
         
-    def inicializar_hilo_alertas(self):
-        self.hilo_alertas = NotificacionesThread()
-        self.hilo_alertas.nuevas_alertas.connect(self.actualizar_label_alertas)
-        self.hilo_alertas.start()
+        # Validar formato de fecha
+        try:
+            datetime.strptime(fecha, "%Y-%m-%d")  # Si falla, lanza ValueError
+        except ValueError:
+            QMessageBox.warning(self, "Fecha inválida", "La fecha debe estar en formato YYYY-MM-DD.")
+            return
         
-    def actualizar_label_alertas(self, cantidad):
-        self.ui.label_notificaciones.setText(f"🔔 {cantidad} productos con stock bajo")
+        try:
+            cantidad = int(cantidad)
+            if cantidad <=0:
+                raise ValueError
+        except ValueError:
+            QMessageBox.warning(self,"Cantidad inválida","La cantidad debe ser mayor a 0")
+            
+        conexion=Miconexion.obtener_conexion()
+        try:
+            with conexion.cursor() as cursor:
+                #Buscar producto por nombre o codigo
+                sql_buscar = """
+                        SELECT Stock, Nombre FROM productos 
+                        WHERE Activo = 1 AND (codigo = %s OR nombre = %s)
+                    """
+                
+                cursor.execute(sql_buscar, (codigo, codigo))
+                resultado = cursor.fetchone()
+                
+                if not resultado:
+                    QMessageBox.warning(self, "No encontrado", "El producto no existe o esta dado de baja")
+                    return
+
+                stock_actual, nombre = resultado
+                nuevo_stock= stock_actual-cantidad
+                
+                #Actualizar stock
+                sql_actualizar = "UPDATE productos SET Stock = %s WHERE Codigo = %s OR Nombre = %s"
+                
+                cursor.execute(sql_actualizar, (nuevo_stock, codigo, codigo))
+
+                cursor.execute(sql_actualizar, (nuevo_stock, codigo, codigo))
+                
+                #Registrar movimiento
+                sql_movimiento = """
+                        INSERT INTO movimientos (tipo, producto, cantidad, fecha,observacion)
+                        VALUES (%s, %s, %s, %s,%s)
+                        """
+                        
+                cursor.execute(sql_movimiento, ("Salida", nombre, cantidad, fecha, observacion))
+                conexion.commit()
+                QMessageBox.information(self, "Éxito", "Entrada registrada y stock actualizado.")
+                self.ui.LnEdit_entrada.clear()
+                self.ui.LnEdit_fecha.clear()
+                self.ui.LnEdit_observaciones.clear()
+        except Exception as e:
+            conexion.rollback()
+            print("❌ Error en registrar entrada:", e)
+            QMessageBox.critical(self, "Error", f"Falló la operación:\n{e}")
+        finally:
+            conexion.close()

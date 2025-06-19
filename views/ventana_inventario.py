@@ -1,16 +1,14 @@
 import os
-from PyQt6.QtWidgets import QWidget, QSizeGrip
+from PyQt6.QtWidgets import QWidget, QSizeGrip, QHeaderView
 from PyQt6.QtCore import Qt, QPropertyAnimation, QEasingCurve
-from PyQt6.QtGui import QColor
-from PyQt6.QtGui import QIcon
-from PyQt6.QtGui import QPixmap
+from PyQt6.QtGui import QColor, QIcon, QPixmap, QStandardItemModel, QStandardItem
 from ui.ventana_inventario_ui import Ui_Form
 from PyQt6 import QtWidgets, QtGui
-from PyQt6.QtGui import QStandardItemModel, QStandardItem
 from Backend.inventario import Inventario
-from PyQt6.QtWidgets import QHeaderView
+
 class VentanaInventario(QWidget):
-    def __init__(self, ventana_principal):# constructor de la clase VentanaPrincipal
+    def __init__(self, controlador):# constructor de la clase VentanaPrincipal
+        self.controlador = controlador
         super().__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
@@ -25,8 +23,6 @@ class VentanaInventario(QWidget):
         self.cargar_iconos()
         
         self.inicializar_animaciones()
-        #Guardando referencias de ventanas
-        self.ventana_principal = ventana_principal
         self.eventos()
         
         #Eventos
@@ -178,7 +174,9 @@ class VentanaInventario(QWidget):
         ruta_alfabeticamente = os.path.join(root_dir, "models", "alfabeticamente.svg")
         ruta_mayor_a_menor = os.path.join(root_dir, "models", "mayor_a_menor.svg")
         ruta_menor_a_mayor = os.path.join(root_dir, "models", "menor_a_mayor.svg")
-        
+        ruta_exportar = os.path.join(root_dir, "models", "exportar.svg")
+        ruta_agregar = os.path.join(root_dir, "models", "agregar.svg")
+        ruta_basura = os.path.join(root_dir, "models", "basura.svg")
         # Establecer íconos
         self.ui.btn_alertas.setIcon(QtGui.QIcon(ruta_alertas))
         self.ui.btn_cerrar.setIcon(QtGui.QIcon(ruta_cerrar))
@@ -198,11 +196,24 @@ class VentanaInventario(QWidget):
         self.ui.btn_alfabeticamente.setIcon(QtGui.QIcon(ruta_alfabeticamente))
         self.ui.btn_mayoramenor.setIcon(QtGui.QIcon(ruta_mayor_a_menor))
         self.ui.btn_menormayor.setIcon(QtGui.QIcon(ruta_menor_a_mayor))
+        self.ui.btn_exportar.setIcon(QtGui.QIcon(ruta_exportar))
+        self.ui.btn_agregar.setIcon(QtGui.QIcon(ruta_agregar))
+        self.ui.btn_editareliminar.setIcon(QtGui.QIcon(ruta_basura))
 
     def eventos(self): # metodo para conectar los eventos de los botones
-        self.ui.btn_resumen.clicked.connect(self.volver_a_ventana_principal)
-        
-    
+        #ventanas principales
+        self.ui.btn_resumen.clicked.connect(lambda: self.controlador.mostrar_ventana_principal())
+        self.ui.btn_entradas.clicked.connect(lambda: self.controlador.mostrar_ventana_entradas())
+        self.ui.btn_salidas.clicked.connect(lambda: self.controlador.mostrar_ventana_salidas())
+        self.ui.btn_reportes.clicked.connect(lambda: self.controlador.mostrar_ventana_reportes())
+        self.ui.btn_alertas.clicked.connect(lambda: self.controlador.mostrar_ventana_alertas())
+        self.ui.btn_configuracion.clicked.connect(lambda: self.controlador.mostrar_ventana_configuracion())
+
+        #ventanas secundarias
+        self.ui.btn_agregar.clicked.connect(lambda: self.controlador.mostrar_ventana_agregar())
+        self.ui.btn_editareliminar.clicked.connect(lambda: self.controlador.mostrar_ventana_editareliminar())
+
+
     def volver_a_ventana_principal(self): # metodo para mostrar la ventana de inventario
         self.hide()  # Oculta esta ventana
         self.ventana_principal.show()  # Muestra la principal
@@ -256,3 +267,4 @@ class VentanaInventario(QWidget):
 
         self.ui.tableInventario.setModel(model)
         self.ui.tableInventario.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+   

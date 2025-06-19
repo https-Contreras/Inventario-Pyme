@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(870, 650)
+        Form.resize(829, 648)
         self.verticalLayout = QtWidgets.QVBoxLayout(Form)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -108,6 +108,7 @@ class Ui_Form(object):
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.frame_barra = QtWidgets.QFrame(parent=self.frame_cuerpo)
+        self.frame_barra.setMaximumSize(QtCore.QSize(300, 16777215))
         self.frame_barra.setStyleSheet("QFrame {\n"
 "    background-color: #60B0C3\n"
 "}\n"
@@ -172,17 +173,10 @@ class Ui_Form(object):
         self.btn_reportes.setIconSize(QtCore.QSize(30, 30))
         self.btn_reportes.setObjectName("btn_reportes")
         self.verticalLayout_3.addWidget(self.btn_reportes)
-        self.btn_alertas = QtWidgets.QPushButton(parent=self.frame_barra)
-        icon9 = QtGui.QIcon()
-        icon9.addPixmap(QtGui.QPixmap("../models/alertas.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_alertas.setIcon(icon9)
-        self.btn_alertas.setIconSize(QtCore.QSize(30, 30))
-        self.btn_alertas.setObjectName("btn_alertas")
-        self.verticalLayout_3.addWidget(self.btn_alertas)
         self.btn_configuracion = QtWidgets.QPushButton(parent=self.frame_barra)
-        icon10 = QtGui.QIcon()
-        icon10.addPixmap(QtGui.QPixmap("../models/configuracion.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_configuracion.setIcon(icon10)
+        icon9 = QtGui.QIcon()
+        icon9.addPixmap(QtGui.QPixmap("../models/configuracion.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_configuracion.setIcon(icon9)
         self.btn_configuracion.setIconSize(QtCore.QSize(30, 30))
         self.btn_configuracion.setObjectName("btn_configuracion")
         self.verticalLayout_3.addWidget(self.btn_configuracion)
@@ -221,17 +215,17 @@ class Ui_Form(object):
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.bt_ocultar = QtWidgets.QPushButton(parent=self.frame_logo)
         self.bt_ocultar.setText("")
-        icon11 = QtGui.QIcon()
-        icon11.addPixmap(QtGui.QPixmap("../models/izquierda.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.bt_ocultar.setIcon(icon11)
+        icon10 = QtGui.QIcon()
+        icon10.addPixmap(QtGui.QPixmap("../models/izquierda.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.bt_ocultar.setIcon(icon10)
         self.bt_ocultar.setIconSize(QtCore.QSize(50, 50))
         self.bt_ocultar.setObjectName("bt_ocultar")
         self.horizontalLayout_3.addWidget(self.bt_ocultar)
         self.bt_mostrar = QtWidgets.QPushButton(parent=self.frame_logo)
         self.bt_mostrar.setText("")
-        icon12 = QtGui.QIcon()
-        icon12.addPixmap(QtGui.QPixmap("../models/derecha.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.bt_mostrar.setIcon(icon12)
+        icon11 = QtGui.QIcon()
+        icon11.addPixmap(QtGui.QPixmap("../models/derecha.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.bt_mostrar.setIcon(icon11)
         self.bt_mostrar.setIconSize(QtCore.QSize(50, 50))
         self.bt_mostrar.setObjectName("bt_mostrar")
         self.horizontalLayout_3.addWidget(self.bt_mostrar)
@@ -268,10 +262,118 @@ class Ui_Form(object):
         self.frame_informacion.setObjectName("frame_informacion")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.frame_informacion)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.frame_adicional = QtWidgets.QFrame(parent=self.frame_informacion)
+        self.frame_adicional.setStyleSheet("QFrame {\n"
+"    background-color: #C0E4E5\n"
+"}\n"
+"QPushButton{\n"
+"    background-color: #0068BC;       \n"
+"    color: #FFFFFF;                    /* Texto blanco */\n"
+"    border: 1px solid #ccc;\n"
+"    border-top-left-radius: 10px;\n"
+"    border-bottom-left-radius: 10px;\n"
+"    border-right: none; /* Elimina borde derecho para unión */\n"
+"    padding: 8px;              /* Relleno interno */\n"
+"    font: bold 12pt \"Arial\"; \n"
+"}\n"
+"QPushButton#btn_resumen{\n"
+"background-color: #ffffff\n"
+"}\n"
+"QPushButton#btn_resumen:hover{\n"
+"background-color: #5DADE2;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #5DADE2;       /* Color cuando el mouse pasa encima */\n"
+"}")
+        self.frame_adicional.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_adicional.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_adicional.setObjectName("frame_adicional")
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.frame_adicional)
+        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_4.setSpacing(0)
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.frame_alertas = QtWidgets.QFrame(parent=self.frame_adicional)
+        self.frame_alertas.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_alertas.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_alertas.setObjectName("frame_alertas")
+        self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.frame_alertas)
+        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_5.setSpacing(0)
+        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
+        self.btn_alertas = QtWidgets.QPushButton(parent=self.frame_alertas)
+        icon12 = QtGui.QIcon()
+        icon12.addPixmap(QtGui.QPixmap("../models/alertas.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_alertas.setIcon(icon12)
+        self.btn_alertas.setIconSize(QtCore.QSize(30, 30))
+        self.btn_alertas.setObjectName("btn_alertas")
+        self.horizontalLayout_5.addWidget(self.btn_alertas)
+        self.label_notificaciones = QtWidgets.QLabel(parent=self.frame_alertas)
+        self.label_notificaciones.setEnabled(False)
+        self.label_notificaciones.setStyleSheet("QLabel {\n"
+"    background-color: red;\n"
+"    border: 1px solid #ccc;\n"
+"    border-top-right-radius: 10px;\n"
+"    border-bottom-right-radius: 10px;\n"
+"    border-left: none; /* Elimina borde izquierdo para unión */\n"
+"    padding: 5px;\n"
+"    color: black;\n"
+"    font: bold 12pt \"Arial\"; \n"
+"}")
+        self.label_notificaciones.setObjectName("label_notificaciones")
+        self.horizontalLayout_5.addWidget(self.label_notificaciones)
+        self.horizontalLayout_5.setStretch(0, 8)
+        self.horizontalLayout_5.setStretch(1, 1)
+        self.horizontalLayout_4.addWidget(self.frame_alertas)
+        self.frame_fecha = QtWidgets.QFrame(parent=self.frame_adicional)
+        self.frame_fecha.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_fecha.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_fecha.setObjectName("frame_fecha")
+        self.verticalLayout_10 = QtWidgets.QVBoxLayout(self.frame_fecha)
+        self.verticalLayout_10.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_10.setSpacing(0)
+        self.verticalLayout_10.setObjectName("verticalLayout_10")
+        self.dateTimeEdit_tiempo = QtWidgets.QDateTimeEdit(parent=self.frame_fecha)
+        self.dateTimeEdit_tiempo.setEnabled(False)
+        self.dateTimeEdit_tiempo.setStyleSheet("QDateTimeEdit {\n"
+"    background-color: #d1f4f9;       /* Fondo celeste claro */\n"
+"    color: #003366;                  /* Texto azul oscuro */\n"
+"    border: 2px solid #0077b6;       /* Borde azul */\n"
+"    border-radius: 10px;\n"
+"    padding: 5px 8px;\n"
+"    font: bold 16px \"Segoe UI\";\n"
+"    height: 30px;\n"
+"}\n"
+"\n"
+"QDateTimeEdit::up-button, QDateTimeEdit::down-button {\n"
+"    width: 0px;\n"
+"    height: 0px;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"QDateTimeEdit::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 20px;\n"
+"    border-left: 1px solid #0077b6;\n"
+"    image: url(:/icons/calendar.png); /* Usa un ícono personalizado si lo tienes */\n"
+"    background: transparent;\n"
+"}\n"
+"\n"
+"QDateTimeEdit:focus {\n"
+"    border: 2px solid #00b4d8; /* Azul más claro al enfocar */\n"
+"    background-color: #caf0f8;\n"
+"}")
+        self.dateTimeEdit_tiempo.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.dateTimeEdit_tiempo.setObjectName("dateTimeEdit_tiempo")
+        self.verticalLayout_10.addWidget(self.dateTimeEdit_tiempo)
+        self.horizontalLayout_4.addWidget(self.frame_fecha)
+        self.horizontalLayout_4.setStretch(0, 7)
+        self.horizontalLayout_4.setStretch(1, 7)
+        self.verticalLayout_5.addWidget(self.frame_adicional)
         self.toolBox = QtWidgets.QToolBox(parent=self.frame_informacion)
         self.toolBox.setObjectName("toolBox")
         self.page_resumen = QtWidgets.QWidget()
-        self.page_resumen.setGeometry(QtCore.QRect(0, 0, 597, 299))
+        self.page_resumen.setGeometry(QtCore.QRect(0, 0, 567, 239))
         self.page_resumen.setObjectName("page_resumen")
         self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.page_resumen)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
@@ -282,6 +384,7 @@ class Ui_Form(object):
         icon13.addPixmap(QtGui.QPixmap("../models/paginas.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.toolBox.addItem(self.page_resumen, icon13, "")
         self.page_stock = QtWidgets.QWidget()
+        self.page_stock.setGeometry(QtCore.QRect(0, 0, 567, 239))
         self.page_stock.setObjectName("page_stock")
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.page_stock)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
@@ -290,7 +393,7 @@ class Ui_Form(object):
         self.verticalLayout_7.addWidget(self.listWidget_2)
         self.toolBox.addItem(self.page_stock, icon13, "")
         self.page_movimientos = QtWidgets.QWidget()
-        self.page_movimientos.setGeometry(QtCore.QRect(0, 0, 597, 299))
+        self.page_movimientos.setGeometry(QtCore.QRect(0, 0, 567, 239))
         self.page_movimientos.setObjectName("page_movimientos")
         self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.page_movimientos)
         self.verticalLayout_8.setObjectName("verticalLayout_8")
@@ -301,6 +404,8 @@ class Ui_Form(object):
         self.verticalLayout_8.addWidget(self.tableWidget)
         self.toolBox.addItem(self.page_movimientos, icon13, "")
         self.verticalLayout_5.addWidget(self.toolBox)
+        self.verticalLayout_5.setStretch(0, 1)
+        self.verticalLayout_5.setStretch(1, 7)
         self.verticalLayout_4.addWidget(self.frame_informacion)
         self.verticalLayout_4.setStretch(0, 2)
         self.verticalLayout_4.setStretch(1, 5)
@@ -324,8 +429,9 @@ class Ui_Form(object):
         self.btn_entradas.setText(_translate("Form", "Entradas"))
         self.btn_salidas.setText(_translate("Form", "Salidas"))
         self.btn_reportes.setText(_translate("Form", "Reportes"))
-        self.btn_alertas.setText(_translate("Form", "Alertas"))
         self.btn_configuracion.setText(_translate("Form", "Configuracion"))
+        self.btn_alertas.setText(_translate("Form", "Alertas"))
+        self.label_notificaciones.setText(_translate("Form", "0"))
         self.toolBox.setItemText(self.toolBox.indexOf(self.page_resumen), _translate("Form", "Total de productos"))
         self.toolBox.setItemText(self.toolBox.indexOf(self.page_stock), _translate("Form", "Productos con stock bajo"))
         self.toolBox.setItemText(self.toolBox.indexOf(self.page_movimientos), _translate("Form", "Movimientos recientes"))

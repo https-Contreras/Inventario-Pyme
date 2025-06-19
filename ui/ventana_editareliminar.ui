@@ -13,7 +13,10 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <property name="spacing">
+    <number>0</number>
+   </property>
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -34,7 +37,7 @@
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,8">
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,7">
       <property name="spacing">
        <number>0</number>
       </property>
@@ -149,7 +152,7 @@ QPushButton:hover {
          <item>
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Ventana Agregar producto</string>
+            <string>Ventana Editar/Eliminar producto</string>
            </property>
           </widget>
          </item>
@@ -163,7 +166,7 @@ QPushButton:hover {
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>139</width>
+             <width>262</width>
              <height>20</height>
             </size>
            </property>
@@ -257,6 +260,95 @@ QPushButton:hover {
        </widget>
       </item>
       <item>
+       <widget class="QFrame" name="frame_busqueda">
+        <property name="styleSheet">
+         <string notr="true">QFrame {
+	background-color: #60B0C3
+}
+QPushButton {
+	background-color: transparent;
+    color: #FFFFFF;
+    border: none;
+    padding: 5px;
+}
+QPushButton:hover { 
+	background-color:#5DADE2; 
+	min-width: 60px;
+    min-height: 60px;
+    border-radius: 30px; 
+}
+QLineEdit{
+	border: 1px solid #000000;
+	border-radius:10px;
+	height:40px;
+	font: 20pt &quot;Swis721 BlkCn BT&quot;;
+}
+QLabel {
+	color: #FFFFFF;
+    border: none;
+    padding: 5px;
+	font: 20pt &quot;Swis721 BlkCn BT&quot;;
+}
+</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QLabel" name="label_buscar">
+           <property name="text">
+            <string>Editar producto por ID o nombre</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="LnEdit_buscar">
+           <property name="placeholderText">
+            <string>Buscar producto a editar/eliminar</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_buscar">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../models/buscar.svg</normaloff>../models/buscar.svg</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>50</width>
+             <height>50</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Preferred</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
        <widget class="QFrame" name="frame_cuerpo">
         <property name="styleSheet">
          <string notr="true">background-color: #99D8DD</string>
@@ -267,10 +359,7 @@ QPushButton:hover {
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="3,4">
-         <property name="spacing">
-          <number>0</number>
-         </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
          <property name="leftMargin">
           <number>0</number>
          </property>
@@ -317,20 +406,17 @@ QPushButton:hover {
              <number>0</number>
             </property>
             <property name="bottomMargin">
-             <number>0</number>
+             <number>5</number>
             </property>
             <item>
              <spacer name="verticalSpacer">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
               </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::Preferred</enum>
-              </property>
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>17</height>
+                <height>10</height>
                </size>
               </property>
              </spacer>
@@ -338,7 +424,7 @@ QPushButton:hover {
             <item>
              <widget class="QLabel" name="label_2">
               <property name="text">
-               <string>ID del nuevo producto</string>
+               <string>ID del producto</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -353,7 +439,7 @@ QPushButton:hover {
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>22</height>
+                <height>32</height>
                </size>
               </property>
              </spacer>
@@ -361,7 +447,7 @@ QPushButton:hover {
             <item>
              <widget class="QLabel" name="label_3">
               <property name="text">
-               <string>Nombre del nuevo producto</string>
+               <string>Nombre del producto</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -376,7 +462,7 @@ QPushButton:hover {
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>22</height>
+                <height>32</height>
                </size>
               </property>
              </spacer>
@@ -399,7 +485,7 @@ QPushButton:hover {
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>23</height>
+                <height>33</height>
                </size>
               </property>
              </spacer>
@@ -422,7 +508,7 @@ QPushButton:hover {
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>22</height>
+                <height>32</height>
                </size>
               </property>
              </spacer>
@@ -445,7 +531,7 @@ QPushButton:hover {
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>22</height>
+                <height>32</height>
                </size>
               </property>
              </spacer>
@@ -465,13 +551,47 @@ QPushButton:hover {
               <property name="orientation">
                <enum>Qt::Vertical</enum>
               </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Preferred</enum>
+              </property>
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>65</height>
+                <height>3</height>
                </size>
               </property>
              </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btn_eliminar">
+              <property name="styleSheet">
+               <string notr="true">QPushButton{
+	background-color: red;       
+    color: #FFFFFF;                    /* Texto blanco */
+    border: none;                    /* Sin borde de línea */
+    border-radius: 12px;             /* Bordes redondeados */
+    padding: 10px 20px;              /* Relleno interno */
+    font: bold 12pt &quot;Arial&quot;; 
+}
+QPushButton:hover {
+    background-color: #5DADE2;       /* Color cuando el mouse pasa encima */
+}
+</string>
+              </property>
+              <property name="text">
+               <string>Eliminar</string>
+              </property>
+              <property name="icon">
+               <iconset>
+                <normaloff>../models/basura.svg</normaloff>../models/basura.svg</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>30</width>
+                <height>30</height>
+               </size>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -497,24 +617,20 @@ QLineEdit{
             <enum>QFrame::Raised</enum>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">
+            <property name="leftMargin">
+             <number>9</number>
+            </property>
+            <property name="topMargin">
+             <number>9</number>
+            </property>
+            <property name="rightMargin">
+             <number>9</number>
+            </property>
+            <property name="bottomMargin">
+             <number>5</number>
+            </property>
             <item>
-             <spacer name="verticalSpacer_8">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::Preferred</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>17</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="LnEdit_id">
+             <widget class="QLineEdit" name="LnEdit_id_edit">
               <property name="placeholderText">
                <string>ID...</string>
               </property>
@@ -528,13 +644,13 @@ QLineEdit{
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>34</height>
+                <height>39</height>
                </size>
               </property>
              </spacer>
             </item>
             <item>
-             <widget class="QLineEdit" name="LnEdit_producto">
+             <widget class="QLineEdit" name="LnEdit_producto_edit">
               <property name="placeholderText">
                <string>Nombre...</string>
               </property>
@@ -548,13 +664,13 @@ QLineEdit{
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>32</height>
+                <height>38</height>
                </size>
               </property>
              </spacer>
             </item>
             <item>
-             <widget class="QLineEdit" name="LnEdit_descripcion">
+             <widget class="QLineEdit" name="LnEdit_descripcion_edit">
               <property name="placeholderText">
                <string>Descripcion...</string>
               </property>
@@ -568,13 +684,13 @@ QLineEdit{
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>31</height>
+                <height>39</height>
                </size>
               </property>
              </spacer>
             </item>
             <item>
-             <widget class="QLineEdit" name="LnEdit_categoria">
+             <widget class="QLineEdit" name="LnEdit_categoria_edit">
               <property name="placeholderText">
                <string>Categoria...</string>
               </property>
@@ -588,13 +704,13 @@ QLineEdit{
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>32</height>
+                <height>38</height>
                </size>
               </property>
              </spacer>
             </item>
             <item>
-             <widget class="QLineEdit" name="LnEdit_stockactual">
+             <widget class="QLineEdit" name="LnEdit_stockactual_edit">
               <property name="placeholderText">
                <string>Stock (positivo)...</string>
               </property>
@@ -608,13 +724,13 @@ QLineEdit{
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>34</height>
+                <height>39</height>
                </size>
               </property>
              </spacer>
             </item>
             <item>
-             <widget class="QLineEdit" name="LnEdit_stockminimo">
+             <widget class="QLineEdit" name="LnEdit_stockminimo_edit">
               <property name="placeholderText">
                <string>Stock (minimo)...</string>
               </property>
@@ -653,7 +769,7 @@ QPushButton:hover {
 </string>
               </property>
               <property name="text">
-               <string>Agregar</string>
+               <string>Editar</string>
               </property>
               <property name="icon">
                <iconset>

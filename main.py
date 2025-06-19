@@ -1,10 +1,8 @@
-from PyQt6.QtWidgets import QApplication
-from views.ventana_principal import VentanaPrincipal
 import sys
+from PyQt6.QtWidgets import QApplication
+from Backend.controlador import Controlador
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ventana = VentanaPrincipal()
-    ventana.show()
+    controlador = Controlador()
     sys.exit(app.exec())

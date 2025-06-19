@@ -5,6 +5,6 @@ class Miconexion():
         return pymysql.connect(
             host="localhost",
             user="root",
-            password="",  # tu contraseña si aplica
+            password="Jadac03s",  # tu contraseña si aplica
             database="inventario_pymes"
         )

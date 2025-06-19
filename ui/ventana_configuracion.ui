@@ -120,7 +120,7 @@ QPushButton:hover {
          <item>
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Ventana Inventario</string>
+            <string>Ventana Configuracion</string>
            </property>
           </widget>
          </item>
@@ -419,7 +419,7 @@ QPushButton:hover {
            <property name="frameShadow">
             <enum>QFrame::Raised</enum>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,6,1">
+           <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,6">
             <property name="spacing">
              <number>0</number>
             </property>
@@ -457,6 +457,12 @@ QLineEdit{
 	border: 1px solid #000000;
 	border-radius:10px;
 	height:40px;
+	font: 20pt &quot;Swis721 BlkCn BT&quot;;
+}
+QLabel {
+	color: black;
+    border: none;
+    padding: 5px;
 	font: 20pt &quot;Swis721 BlkCn BT&quot;;
 }</string>
               </property>
@@ -518,32 +524,9 @@ QLineEdit{
                 </spacer>
                </item>
                <item>
-                <widget class="QLineEdit" name="Linedit_busqueda">
-                 <property name="inputMask">
-                  <string/>
-                 </property>
+                <widget class="QLabel" name="label_4">
                  <property name="text">
-                  <string/>
-                 </property>
-                 <property name="placeholderText">
-                  <string>Buscar producto</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="btn_busqueda">
-                 <property name="text">
-                  <string/>
-                 </property>
-                 <property name="icon">
-                  <iconset>
-                   <normaloff>../models/buscar.svg</normaloff>../models/buscar.svg</iconset>
-                 </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>50</width>
-                   <height>50</height>
-                  </size>
+                  <string>Configuracion de tiempos</string>
                  </property>
                 </widget>
                </item>
@@ -563,23 +546,6 @@ QLineEdit{
                  </property>
                 </spacer>
                </item>
-               <item>
-                <widget class="QPushButton" name="btn_filtrar">
-                 <property name="text">
-                  <string/>
-                 </property>
-                 <property name="icon">
-                  <iconset>
-                   <normaloff>../models/filtrar.svg</normaloff>../models/filtrar.svg</iconset>
-                 </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>50</width>
-                   <height>50</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
               </layout>
              </widget>
             </item>
@@ -591,7 +557,7 @@ QLineEdit{
               <property name="frameShadow">
                <enum>QFrame::Raised</enum>
               </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="0,5">
+              <layout class="QVBoxLayout" name="verticalLayout_5" stretch="7,1">
                <property name="spacing">
                 <number>0</number>
                </property>
@@ -608,100 +574,290 @@ QLineEdit{
                 <number>0</number>
                </property>
                <item>
-                <widget class="QFrame" name="frame_barrafiltro">
-                 <property name="styleSheet">
-                  <string notr="true">QFrame {
-	background-color: #60B0C3
-}
-QPushButton{
-	background-color: #0068BC;       
-    color: #FFFFFF;                    /* Texto blanco */
-    border: none;                    /* Sin borde de línea */
-    border-radius: 12px;             /* Bordes redondeados */
-    padding: 10px 20px;              /* Relleno interno */
-    font: bold 12pt &quot;Arial&quot;; 
-}
-QPushButton#btn_resumen{
-background-color: #ffffff
-}
-QPushButton#btn_resumen:hover{
-background-color: #5DADE2;
-}
-QPushButton:hover {
-    background-color: #5DADE2;       /* Color cuando el mouse pasa encima */
-}</string>
-                 </property>
+                <widget class="QFrame" name="frame_2">
                  <property name="frameShape">
                   <enum>QFrame::StyledPanel</enum>
                  </property>
                  <property name="frameShadow">
                   <enum>QFrame::Raised</enum>
                  </property>
-                 <layout class="QVBoxLayout" name="verticalLayout_5">
+                 <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="5,5">
+                  <property name="spacing">
+                   <number>0</number>
+                  </property>
+                  <property name="leftMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
                   <item>
-                   <widget class="QPushButton" name="btn_alfabeticamente">
-                    <property name="text">
-                     <string>Alfabeticamente</string>
+                   <widget class="QFrame" name="frame_4">
+                    <property name="styleSheet">
+                     <string notr="true">QLabel {
+	color: #FFFFFF;
+    border: none;
+    padding: 5px;
+	font: 15pt &quot;Swis721 BlkCn BT&quot;;
+	text-align: right;
+}</string>
                     </property>
-                    <property name="icon">
-                     <iconset>
-                      <normaloff>../models/alfabeticamente.svg</normaloff>../models/alfabeticamente.svg</iconset>
+                    <property name="frameShape">
+                     <enum>QFrame::StyledPanel</enum>
                     </property>
-                    <property name="iconSize">
-                     <size>
-                      <width>30</width>
-                      <height>30</height>
-                     </size>
+                    <property name="frameShadow">
+                     <enum>QFrame::Raised</enum>
                     </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_8">
+                     <property name="spacing">
+                      <number>0</number>
+                     </property>
+                     <property name="leftMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <spacer name="verticalSpacer">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>65</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_5">
+                       <property name="text">
+                        <string>Tiempo en actualizar el stock automáticamente</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                       </property>
+                       <property name="wordWrap">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <spacer name="verticalSpacer_2">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>66</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_3">
+                       <property name="text">
+                        <string>Tiempo en verificar si hay productos con stock bajo </string>
+                       </property>
+                       <property name="textFormat">
+                        <enum>Qt::AutoText</enum>
+                       </property>
+                       <property name="scaledContents">
+                        <bool>false</bool>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                       </property>
+                       <property name="wordWrap">
+                        <bool>true</bool>
+                       </property>
+                       <property name="openExternalLinks">
+                        <bool>false</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <spacer name="verticalSpacer_3">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>66</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_2">
+                       <property name="text">
+                        <string>Tiempo en generar reportes automáticos </string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                       </property>
+                       <property name="wordWrap">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <spacer name="verticalSpacer_4">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>65</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                    </layout>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="btn_mayoramenor">
-                    <property name="text">
-                     <string>Mayor a menor</string>
+                   <widget class="QFrame" name="frame_5">
+                    <property name="styleSheet">
+                     <string notr="true">QFrame{
+	background-color: #C0E4E5
+}
+QLineEdit{
+	background-color: rgb(232, 232, 232);
+	border-radius: 10px;
+	height: 30px;
+	font: 20pt &quot;Swis721 BlkCn BT&quot;;
+	
+}</string>
                     </property>
-                    <property name="icon">
-                     <iconset>
-                      <normaloff>../models/mayor_a_menor.svg</normaloff>../models/mayor_a_menor.svg</iconset>
+                    <property name="frameShape">
+                     <enum>QFrame::StyledPanel</enum>
                     </property>
-                    <property name="iconSize">
-                     <size>
-                      <width>30</width>
-                      <height>30</height>
-                     </size>
+                    <property name="frameShadow">
+                     <enum>QFrame::Raised</enum>
                     </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QPushButton" name="btn_menormayor">
-                    <property name="text">
-                     <string>Menor a mayor</string>
-                    </property>
-                    <property name="icon">
-                     <iconset>
-                      <normaloff>../models/menor_a_mayor.svg</normaloff>../models/menor_a_mayor.svg</iconset>
-                    </property>
-                    <property name="iconSize">
-                     <size>
-                      <width>30</width>
-                      <height>30</height>
-                     </size>
-                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_7">
+                     <property name="spacing">
+                      <number>0</number>
+                     </property>
+                     <property name="leftMargin">
+                      <number>9</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>9</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <spacer name="verticalSpacer_5">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>80</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QLineEdit" name="lineEdit">
+                       <property name="alignment">
+                        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                       </property>
+                       <property name="placeholderText">
+                        <string>En minutos...</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <spacer name="verticalSpacer_6">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>89</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QLineEdit" name="lineEdit_2">
+                       <property name="placeholderText">
+                        <string>En minutos...</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <spacer name="verticalSpacer_7">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>88</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QLineEdit" name="lineEdit_3">
+                       <property name="placeholderText">
+                        <string>En semanas...</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <spacer name="verticalSpacer_8">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>89</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                    </layout>
                    </widget>
                   </item>
                  </layout>
                 </widget>
                </item>
                <item>
-                <widget class="QTableView" name="tableInventario"/>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <widget class="QFrame" name="frame_exportar">
-              <property name="styleSheet">
-               <string notr="true">QFrame{
+                <widget class="QFrame" name="frame_3">
+                 <property name="styleSheet">
+                  <string notr="true">QFrame{
 	background-color: #ffffff
 }
 QPushButton {
@@ -721,78 +877,49 @@ QLineEdit{
 	height:40px;
 	font: 20pt &quot;Swis721 BlkCn BT&quot;;
 }</string>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_4">
-               <property name="spacing">
-                <number>6</number>
-               </property>
-               <property name="leftMargin">
-                <number>5</number>
-               </property>
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <property name="rightMargin">
-                <number>5</number>
-               </property>
-               <property name="bottomMargin">
-                <number>0</number>
-               </property>
-               <item>
-                <widget class="QPushButton" name="btn_exportar">
-                 <property name="text">
-                  <string>Exportar a txt</string>
                  </property>
-                 <property name="icon">
-                  <iconset>
-                   <normaloff>../models/exportar.svg</normaloff>../models/exportar.svg</iconset>
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
                  </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>25</width>
-                   <height>25</height>
-                  </size>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
                  </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="btn_agregar">
-                 <property name="text">
-                  <string>Agregar producto</string>
-                 </property>
-                 <property name="icon">
-                  <iconset>
-                   <normaloff>../models/agregar.svg</normaloff>../models/agregar.svg</iconset>
-                 </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>25</width>
-                   <height>25</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="btn_editareliminar">
-                 <property name="text">
-                  <string>Editar o eliminar</string>
-                 </property>
-                 <property name="icon">
-                  <iconset>
-                   <normaloff>../models/basura.svg</normaloff>../models/basura.svg</iconset>
-                 </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>25</width>
-                   <height>25</height>
-                  </size>
-                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_5">
+                  <item>
+                   <widget class="QPushButton" name="btn_modificar">
+                    <property name="text">
+                     <string>Modificar tiempos</string>
+                    </property>
+                    <property name="icon">
+                     <iconset>
+                      <normaloff>../models/agregartiempo.svg</normaloff>../models/agregartiempo.svg</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>25</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="btn_mostrar">
+                    <property name="text">
+                     <string>Mostrar actuales tiempos</string>
+                    </property>
+                    <property name="icon">
+                     <iconset>
+                      <normaloff>../models/tiempo.svg</normaloff>../models/tiempo.svg</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>25</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                </item>
               </layout>

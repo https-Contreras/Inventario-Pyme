@@ -1,18 +1,16 @@
 import os
-from PyQt6.QtWidgets import QWidget, QSizeGrip, QHeaderView, QTableWidgetItem
-from PyQt6.QtCore import Qt, QPropertyAnimation, QEasingCurve, QDateTime
-from PyQt6.QtGui import QColor, QIcon, QPixmap
-from ui.ventana_principal_ui import Ui_Form
-from views.ventana_inventario import VentanaInventario
+from PyQt6.QtWidgets import QWidget, QSizeGrip
+from PyQt6.QtCore import Qt, QPropertyAnimation, QEasingCurve
+from PyQt6.QtGui import QColor
+from PyQt6.QtGui import QIcon
+from PyQt6.QtGui import QPixmap
+from ui.ventana_configuracion_ui import Ui_Form
 from PyQt6 import QtWidgets, QtGui
-from Backend.inventario import Inventario
-from Backend.claseHilo import RelojThread, NotificacionesThread
-from Backend.conexion import Miconexion
 
-class VentanaPrincipal(QWidget):
+class VentanaConfiguracion(QWidget):
     def __init__(self, controlador):# constructor de la clase VentanaPrincipal
-        super().__init__()
         self.controlador = controlador
+        super().__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
@@ -20,23 +18,12 @@ class VentanaPrincipal(QWidget):
 
         self.ui.frame_barra.setMinimumWidth(0)         
         self.ui.frame_barra.setMaximumWidth(260)     
-    
 
         self.cargar_iconos()
         
         self.inicializar_animaciones()
-    
-    
-        #EVENTOS DE BOTONES
-        
-        self.ui.toolBox.currentChanged.connect(self.seccion_toolbox)
-        
-        self.inicializar_reloj()
-        self.inicializar_hilo_alertas()
-
-            
         self.eventos()
-
+        
     def inicializar_animaciones(self): # metodo para inicializar las animaciones y configuraciones de la ventana principal
 
         self.ui.bt_ocultar.clicked.connect(self.animacion_barra)
@@ -44,9 +31,8 @@ class VentanaPrincipal(QWidget):
         # Ocultar el botón al inicio
         self.ui.btn_achicar.hide()
         self.ui.bt_mostrar.hide()
-        # Dando sombra a los frames
+
         self.sombra_frame(self.ui.frame_cuerpo)
-        self.sombra_frame(self.ui.toolBox)
         self.sombra_frame(self.ui.btn_alertas)
         self.sombra_frame(self.ui.btn_configuracion)
         self.sombra_frame(self.ui.btn_entradas)
@@ -68,8 +54,7 @@ class VentanaPrincipal(QWidget):
         layout = QtWidgets.QVBoxLayout(self)
         layout.addWidget(self.grip, 0, Qt.AlignmentFlag.AlignBottom | Qt.AlignmentFlag.AlignRight)
         layout.setContentsMargins(0, 0, 0, 0)
-        self.setLayout(layout)  # ⛔ ESTA LÍNEA CIERRA TU APP SI YA HAY LAYOUT
-
+        self.setLayout(layout)
         self.evento_mover_desde_frame()
 
     def animacion_barra(self): 
@@ -92,6 +77,7 @@ class VentanaPrincipal(QWidget):
         self.animacion.setDuration(400)
         self.animacion.setEasingCurve(QEasingCurve.Type.InQuad)
         self.animacion.start()
+
 
     def sombra_frame(self, frame): #metodo para dar sombra a los frames
         sombra = QtWidgets.QGraphicsDropShadowEffect(self)
@@ -143,13 +129,13 @@ class VentanaPrincipal(QWidget):
         ruta_hacergrande = os.path.join(root_dir, "models", "hacergrande.svg")
         ruta_inventario = os.path.join(root_dir, "models", "inventario.svg")
         ruta_izquierda = os.path.join(root_dir, "models", "izquierda.svg")
-        ruta_logo1 = os.path.join(root_dir, "models", "logoIMSreduce.png")
-        ruta_logo2 = os.path.join(root_dir, "models", "logoIMSreduce2.png")
         ruta_minimizar = os.path.join(root_dir, "models", "minimizar.svg")
-        ruta_paginas = os.path.join(root_dir, "models", "paginas.svg")
         ruta_reportes = os.path.join(root_dir, "models", "reportes.svg")
         ruta_salidas = os.path.join(root_dir, "models", "salida.svg")
-        
+        ruta_logo1 = os.path.join(root_dir, "models", "logoIMSreduce.png")
+        ruta_agregartiempo = os.path.join(root_dir, "models", "agregartiempo.svg")
+        ruta_tiempo = os.path.join(root_dir, "models", "tiempo.svg")
+ 
         # Establecer íconos
         self.ui.btn_alertas.setIcon(QtGui.QIcon(ruta_alertas))
         self.ui.btn_cerrar.setIcon(QtGui.QIcon(ruta_cerrar))
@@ -161,87 +147,18 @@ class VentanaPrincipal(QWidget):
         self.ui.btn_inventario.setIcon(QtGui.QIcon(ruta_inventario))
         self.ui.bt_ocultar.setIcon(QtGui.QIcon(ruta_izquierda))
         self.ui.btn_resumen.setIcon(QtGui.QIcon(ruta_logo1))
-        self.ui.logo_letras.setPixmap(QPixmap(ruta_logo2))
         self.ui.btn_minimizar.setIcon(QtGui.QIcon(ruta_minimizar))
-        self.ui.toolBox.setItemIcon(0, QIcon(ruta_paginas))
-        self.ui.toolBox.setItemIcon(1, QIcon(ruta_paginas))
-        self.ui.toolBox.setItemIcon(2, QIcon(ruta_paginas))
         self.ui.btn_reportes.setIcon(QtGui.QIcon(ruta_reportes))
         self.ui.btn_salidas.setIcon(QtGui.QIcon(ruta_salidas))
-        
+        self.ui.btn_mostrar.setIcon(QtGui.QIcon(ruta_tiempo))
+        self.ui.btn_modificar.setIcon(QtGui.QIcon(ruta_agregartiempo))
 
-        
-    
-    
-    #Esto es para las listas de la ventana principal
-    def seccion_toolbox(self, index):
-        try:
-            if index == 0:
-                self.ui.listWidget.clear()
-                productos = Inventario.obtener_lista_productos()
-                self.ui.listWidget.addItems(productos)
-            elif index == 1:
-                self.ui.listWidget_2.clear()
-                productos_stock_bajo=Inventario.prod_stock_bajo()
-                self.ui.listWidget_2.addItems(productos_stock_bajo)
-            elif index == 2:
-                self.ui.tableWidget.clear()
-                self.ui.tableWidget.setColumnCount(4)
-                self.ui.tableWidget.setHorizontalHeaderLabels(["Tipo de movimiento", "Artículo", "Stock", "Fecha"])
-                self.ui.tableWidget.setRowCount(0)
-
-                try:
-                    conexion = Miconexion.obtener_conexion()
-                    with conexion.cursor() as cursor:
-                        cursor.execute("""
-                                SELECT tipo, producto, cantidad, fecha 
-                                FROM movimientos 
-                                ORDER BY fecha DESC 
-                                LIMIT 10
-                            """)
-                        resultados = cursor.fetchall()
-
-                    for fila_idx, fila in enumerate(resultados):
-                        self.ui.tableWidget.insertRow(fila_idx)
-                        for col_idx, valor in enumerate(fila):
-                            item = QTableWidgetItem(str(valor))
-                            self.ui.tableWidget.setItem(fila_idx, col_idx, item)
-
-                    self.ui.tableWidget.resizeColumnsToContents()
-                    self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-                    self.ui.tableWidget.horizontalHeader().setDefaultAlignment(Qt.AlignmentFlag.AlignCenter)
-                except Exception as e:
-                        print("❌ Error al cargar movimientos recientes:", e)
-                finally:
-                    if conexion:
-                        conexion.close()
-        except Exception as e:
-            print("❌ Excepción atrapada:", e)
-            
-            
-    #Esto es para mostrar ventana de inventario
     def eventos(self): # metodo para conectar los eventos de los botones
-        #vetanas principales
-        self.ui.btn_inventario.clicked.connect(self.controlador.mostrar_ventana_inventario)
-        self.ui.btn_entradas.clicked.connect(self.controlador.mostrar_ventana_entradas)
-        self.ui.btn_salidas.clicked.connect(self.controlador.mostrar_ventana_salidas)
-        self.ui.btn_reportes.clicked.connect(self.controlador.mostrar_ventana_reportes)
-        self.ui.btn_alertas.clicked.connect(self.controlador.mostrar_ventana_alertas)
-        self.ui.btn_configuracion.clicked.connect(self.controlador.mostrar_ventana_configuracion)
-    
-    
-    def inicializar_reloj(self):
-        self.reloj = RelojThread()
-        self.reloj.nueva_fecha.connect(self.actualizar_fecha)
-        self.reloj.start()
+        self.ui.btn_resumen.clicked.connect(lambda: self.controlador.mostrar_ventana_principal())
+        self.ui.btn_inventario.clicked.connect(lambda: self.controlador.mostrar_ventana_inventario())
+        self.ui.btn_salidas.clicked.connect(lambda: self.controlador.mostrar_ventana_salidas())
+        self.ui.btn_reportes.clicked.connect(lambda: self.controlador.mostrar_ventana_reportes())
+        self.ui.btn_entradas.clicked.connect(lambda: self.controlador.mostrar_ventana_entradas())
+        self.ui.btn_alertas.clicked.connect(lambda: self.controlador.mostrar_ventana_alertas())
 
-    def actualizar_fecha(self, fecha):
-        self.ui.dateTimeEdit_tiempo.setDateTime(fecha)  # Suponiendo que tu QDateTimeEdit se llama así
-        
-    def inicializar_hilo_alertas(self):
-        self.hilo_alertas = NotificacionesThread()
-        self.hilo_alertas.nuevas_alertas.connect(self.actualizar_label_alertas)
-        self.hilo_alertas.start()
-        
-    def actualizar_label_alertas(self, cantidad):
-        self.ui.label_notificaciones.setText(f"🔔 {cantidad} productos con stock bajo")
+

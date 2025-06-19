@@ -384,30 +384,7 @@ QPushButton:hover {
             <item>
              <widget class="QLabel" name="label_4">
               <property name="text">
-               <string>Descripcion del producto</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="verticalSpacer_4">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>23</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_5">
-              <property name="text">
-               <string>Categoria del producto</string>
+               <string>Precio del producto</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -556,27 +533,7 @@ QLineEdit{
             <item>
              <widget class="QLineEdit" name="LnEdit_descripcion">
               <property name="placeholderText">
-               <string>Descripcion...</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="verticalSpacer_11">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>31</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="LnEdit_categoria">
-              <property name="placeholderText">
-               <string>Categoria...</string>
+               <string>Precio...</string>
               </property>
              </widget>
             </item>

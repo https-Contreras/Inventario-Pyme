@@ -707,7 +707,7 @@ QLineEdit{
                         <item>
                          <widget class="QLabel" name="label_3">
                           <property name="text">
-                           <string>Cantidad a disminuir</string>
+                           <string>Cantidad a incrementar</string>
                           </property>
                           <property name="alignment">
                            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -845,7 +845,7 @@ QLineEdit{
                            <set>Qt::AlignCenter</set>
                           </property>
                           <property name="placeholderText">
-                           <string>dd/mm/aaaa</string>
+                           <string>aaaa/mm/dd</string>
                           </property>
                          </widget>
                         </item>

@@ -57,6 +57,7 @@ class VentanaReportes(QWidget):
         self.sombra_frame(self.ui.btn_actual_a_antiguo)
         self.sombra_frame(self.ui.btn_entradas_2)
         self.sombra_frame(self.ui.btn_salidas_2)
+        self.sombra_frame(self.ui.btn_restablecer)
 
         self.sombra_frame(self.ui.frame_cuerpo)
         self.sombra_frame(self.ui.btn_alertas)
@@ -184,6 +185,7 @@ class VentanaReportes(QWidget):
         ruta_stock = os.path.join(root_dir, "models", "stock.svg")
         ruta_mayor_a_menor = os.path.join(root_dir, "models", "mayor_a_menor.svg")
         ruta_menor_a_mayor = os.path.join(root_dir, "models", "menor_a_mayor.svg")
+        ruta_restablecer = os.path.join(root_dir, "models", "restablecer.svg")
 
 
         # Establecer íconos
@@ -209,6 +211,7 @@ class VentanaReportes(QWidget):
         self.ui.btn_entradas_2.setIcon(QtGui.QIcon(ruta_entrada))
         self.ui.btn_salidas_2.setIcon(QtGui.QIcon(ruta_salidas))
         self.ui.btn_graficar.setIcon(QtGui.QIcon(ruta_stock))
+        self.ui.btn_restablecer.setIcon(QtGui.QIcon(ruta_restablecer))
 
     def eventos(self): # metodo para conectar los eventos de los botones
         #ventanas principales

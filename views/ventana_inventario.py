@@ -9,14 +9,35 @@ from PyQt6 import QtWidgets, QtGui
 from PyQt6.QtGui import QStandardItemModel, QStandardItem
 from Backend.inventario import Inventario
 from PyQt6.QtWidgets import QHeaderView
+from PyQt6.QtCore import QSortFilterProxyModel,QModelIndex, QVariant
+
+
+
+
+#CLASE PARA EL BUEN FUNCIONAMIENTO DEL ORDENAMIENTO DEL INVENTRIOO (NO MOVER)
+class ProxyPersonalizado(QSortFilterProxyModel):
+    def lessThan(self, left: QModelIndex, right: QModelIndex) -> bool:
+        left_data = left.data(Qt.ItemDataRole.UserRole)
+        right_data = right.data(Qt.ItemDataRole.UserRole)
+
+        if isinstance(left_data, (int, float)) and isinstance(right_data, (int, float)):
+            return left_data < right_data
+        return str(left.data()).lower() < str(right.data()).lower()
+
+
+
+
 class VentanaInventario(QWidget):
     def __init__(self, ventana_principal):# constructor de la clase VentanaPrincipal
         super().__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
-
+        #Estas 3 lineas Aseguran el funcionamiento del ordenamiento
+        self.proxy_model = ProxyPersonalizado()#
+        self.ui.tableInventario.setModel(self.proxy_model)#
+        self.ui.tableInventario.setSortingEnabled(True)#
+        
         self.resize(870, 650)  # Esto asegura que la ventana tenga el tamaño correcto inicial
-
         self.ui.frame_barra.setMinimumWidth(0)         
         self.ui.frame_barra.setMaximumWidth(260)     
 
@@ -33,7 +54,9 @@ class VentanaInventario(QWidget):
         self.ui.btn_inventario.clicked.connect(self.mostrar_inventario)
         self.ui.Linedit_busqueda.returnPressed.connect(self.buscar_producto)
         self.ui.btn_busqueda.clicked.connect(self.buscar_producto)
-        
+        self.ui.btn_alfabeticamente.clicked.connect(self.ordenar_alfabeticamente)
+        self.ui.btn_mayoramenor.clicked.connect(self.orden_mayor_menor)
+        self.ui.btn_menormayor.clicked.connect(self.orden_menor_mayor)
         
     def inicializar_animaciones(self): # metodo para inicializar las animaciones y configuraciones de la ventana principal
 
@@ -213,46 +236,69 @@ class VentanaInventario(QWidget):
     def mostrar_inventario(self):
         productos = Inventario.ListarProductos()
 
-        # Crear el modelo
         model = QStandardItemModel()
         model.setHorizontalHeaderLabels(["Código", "Nombre", "Stock", "Stock mínimo", "Precio en pesos"])
 
-        # Agregar filas
         for fila in productos:
-            items = [QStandardItem(str(campo)) for campo in fila]
+            items = []
+            for i, campo in enumerate(fila):
+                # Formato para precio
+                texto = f"${campo:.2f}" if i == 4 else str(campo)
+
+                item = QStandardItem(texto)
+                item.setEditable(False)
+                item.setData(campo, Qt.ItemDataRole.UserRole)  # valor real para ordenamiento
+                items.append(item)
+
             model.appendRow(items)
 
-            # Asignar el modelo a la tabla
-            self.ui.tableInventario.setModel(model)
-            # Ajustar columnas
-            self.ui.tableInventario.resizeColumnsToContents()
-            self.ui.tableInventario.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
-    
+        self.proxy_model.setSourceModel(model)
+        self.ui.tableInventario.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeMode.Stretch)
+            
     def buscar_producto(self):
-        #funcion para la barra de busqueda del inventario
-        texto=self.ui.Linedit_busqueda.text().strip()
-        
-        
+        texto = self.ui.Linedit_busqueda.text().strip()
+
         if not texto:
             self.mostrar_inventario()
-            
-        # Determinar el criterio
-        if texto.isdigit():
-            criterio = "codigo"
-        else:
-            criterio = "nombre"
-        
-        productos = Inventario.BuscarProductos(criterio,texto)
-        # Crear modelo para la tabla
+            return
+
+        criterio = "codigo" if texto.isdigit() else "nombre"
+        productos = Inventario.BuscarProductos(criterio, texto)
+
         model = QStandardItemModel()
         model.setHorizontalHeaderLabels(["Código", "Nombre", "Stock", "Stock mínimo", "Precio en pesos"])
-        
+
         if productos:
             for fila in productos:
-                items = [QStandardItem(str(campo)) for campo in fila]
+                items = []
+                for i, campo in enumerate(fila):
+                    texto_mostrar = f"${campo:.2f}" if i == 4 else str(campo)
+
+                    item = QStandardItem(texto_mostrar)
+                    item.setEditable(False)
+                    item.setData(campo, Qt.ItemDataRole.UserRole)
+                    items.append(item)
+
                 model.appendRow(items)
         else:
-            model.appendRow([QStandardItem("NINGUNA COINCIDENCIA")])
+            model.appendRow([QStandardItem("❌ Ninguna coincidencia encontrada")])
 
-        self.ui.tableInventario.setModel(model)
-        self.ui.tableInventario.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.proxy_model.setSourceModel(model)
+        self.ui.tableInventario.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeMode.Stretch)
+
+
+        
+        
+    def ordenar_alfabeticamente(self):
+        self.ui.tableInventario.setSortingEnabled(True)
+        self.ui.tableInventario.sortByColumn(1, Qt.SortOrder.AscendingOrder)
+        
+        
+    def orden_mayor_menor(self):
+        self.ui.tableInventario.setSortingEnabled(True)
+        self.ui.tableInventario.sortByColumn(2,Qt.SortOrder.DescendingOrder)
+        
+        
+    def orden_menor_mayor(self):
+        self.ui.tableInventario.setSortingEnabled(True)
+        self.ui.tableInventario.sortByColumn(2,Qt.SortOrder.AscendingOrder)

@@ -781,7 +781,7 @@ QDateTimeEdit:focus {
                   </attribute>
                   <layout class="QVBoxLayout" name="verticalLayout_6">
                    <item>
-                    <widget class="QListWidget" name="listWidget"/>
+                    <widget class="QTableWidget" name="tableWidget_3"/>
                    </item>
                   </layout>
                  </widget>
@@ -803,7 +803,7 @@ QDateTimeEdit:focus {
                   </attribute>
                   <layout class="QVBoxLayout" name="verticalLayout_7">
                    <item>
-                    <widget class="QListWidget" name="listWidget_2"/>
+                    <widget class="QTableWidget" name="tableWidget_2"/>
                    </item>
                   </layout>
                  </widget>

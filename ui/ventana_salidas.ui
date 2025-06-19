@@ -845,7 +845,7 @@ QLineEdit{
                            <set>Qt::AlignCenter</set>
                           </property>
                           <property name="placeholderText">
-                           <string>dd/mm/aaaa</string>
+                           <string>aaaa/mm/dd</string>
                           </property>
                          </widget>
                         </item>

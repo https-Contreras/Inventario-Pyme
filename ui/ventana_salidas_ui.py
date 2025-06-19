@@ -434,6 +434,6 @@ class Ui_Form(object):
         self.label_4.setText(_translate("Form", "Fecha de movimiento"))
         self.label_5.setText(_translate("Form", "Observacion"))
         self.LnEdit_entrada.setPlaceholderText(_translate("Form", "Valor absoluto"))
-        self.LnEdit_fecha.setPlaceholderText(_translate("Form", "dd/mm/aaaa"))
+        self.LnEdit_fecha.setPlaceholderText(_translate("Form", "aaaa/mm/dd"))
         self.LnEdit_observaciones.setPlaceholderText(_translate("Form", "Alguna observacion..."))
         self.btn_registrar_entrada.setText(_translate("Form", "Registrar salida"))

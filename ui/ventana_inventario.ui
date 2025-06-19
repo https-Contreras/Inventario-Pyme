@@ -649,8 +649,8 @@ QPushButton:hover {
                     </property>
                     <property name="iconSize">
                      <size>
-                      <width>30</width>
-                      <height>30</height>
+                      <width>40</width>
+                      <height>40</height>
                      </size>
                     </property>
                    </widget>
@@ -666,8 +666,8 @@ QPushButton:hover {
                     </property>
                     <property name="iconSize">
                      <size>
-                      <width>30</width>
-                      <height>30</height>
+                      <width>40</width>
+                      <height>40</height>
                      </size>
                     </property>
                    </widget>
@@ -683,8 +683,25 @@ QPushButton:hover {
                     </property>
                     <property name="iconSize">
                      <size>
-                      <width>30</width>
-                      <height>30</height>
+                      <width>40</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="btn_restablecer">
+                    <property name="text">
+                     <string>Restablecer</string>
+                    </property>
+                    <property name="icon">
+                     <iconset>
+                      <normaloff>../models/restablecer.svg</normaloff>../models/restablecer.svg</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>40</width>
+                      <height>40</height>
                      </size>
                     </property>
                    </widget>

@@ -41,6 +41,7 @@ class VentanaInventario(QWidget):
         self.sombra_frame(self.ui.btn_alfabeticamente)
         self.sombra_frame(self.ui.btn_mayoramenor)
         self.sombra_frame(self.ui.btn_menormayor)
+        self.sombra_frame(self.ui.btn_restablecer)
 
         self.sombra_frame(self.ui.frame_cuerpo)
         self.sombra_frame(self.ui.btn_alertas)
@@ -172,6 +173,7 @@ class VentanaInventario(QWidget):
         ruta_exportar = os.path.join(root_dir, "models", "exportar.svg")
         ruta_agregar = os.path.join(root_dir, "models", "agregar.svg")
         ruta_basura = os.path.join(root_dir, "models", "basura.svg")
+        ruta_restablecer = os.path.join(root_dir, "models", "restablecer.svg")
         # Establecer íconos
         self.ui.btn_alertas.setIcon(QtGui.QIcon(ruta_alertas))
         self.ui.btn_cerrar.setIcon(QtGui.QIcon(ruta_cerrar))
@@ -194,6 +196,7 @@ class VentanaInventario(QWidget):
         self.ui.btn_exportar.setIcon(QtGui.QIcon(ruta_exportar))
         self.ui.btn_agregar.setIcon(QtGui.QIcon(ruta_agregar))
         self.ui.btn_editareliminar.setIcon(QtGui.QIcon(ruta_basura))
+        self.ui.btn_restablecer.setIcon(QtGui.QIcon(ruta_restablecer))
 
     def eventos(self): # metodo para conectar los eventos de los botones
         #ventanas principales

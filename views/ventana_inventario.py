@@ -299,3 +299,18 @@ class VentanaInventario(QWidget):
 
         self.ui.tableInventario.setModel(model)
         self.ui.tableInventario.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        
+        
+    def ordenar_alfabeticamente(self):
+        self.ui.tableInventario.setSortingEnabled(True)
+        self.ui.tableInventario.sortByColumn(1, Qt.SortOrder.AscendingOrder)
+        
+        
+    def orden_mayor_menor(self):
+        self.ui.tableInventario.setSortingEnabled(True)
+        self.ui.tableInventario.sortByColumn(2,Qt.SortOrder.DescendingOrder)
+        
+        
+    def orden_menor_mayor(self):
+        self.ui.tableInventario.setSortingEnabled(True)
+        self.ui.tableInventario.sortByColumn(2,Qt.SortOrder.AscendingOrder)

@@ -1,11 +1,12 @@
 import os
-from PyQt6.QtWidgets import QWidget, QSizeGrip
+from PyQt6.QtWidgets import QWidget, QSizeGrip,  QMessageBox
 from PyQt6.QtCore import Qt, QPropertyAnimation, QEasingCurve
 from PyQt6.QtGui import QColor
 from PyQt6.QtGui import QIcon
 from PyQt6.QtGui import QPixmap
 from ui.ventana_editareliminar_ui import Ui_Form
 from PyQt6 import QtWidgets, QtGui
+from Backend.inventario import Inventario
 
 class VentanaEditarEliminar(QWidget):
     def __init__(self, controlador):# constructor de la clase VentanaPrincipal
@@ -21,6 +22,10 @@ class VentanaEditarEliminar(QWidget):
         self.inicializar_animaciones()
         
         self.eventos()
+        self.ui.btn_eliminar.clicked.connect(self.eliminar_producto)
+        self.ui.btn_agregar.clicked.connect(self.editar_producto)
+        self.ui.btn_buscar.clicked.connect(self.llenar_datos_producto)
+        self.ui.LnEdit_buscar.returnPressed.connect(self.llenar_datos_producto)
 
     def inicializar_animaciones(self): # metodo para inicializar las animaciones y configuraciones de la ventana principal
 
@@ -31,7 +36,6 @@ class VentanaEditarEliminar(QWidget):
         self.sombra_frame(self.ui.LnEdit_id_edit)
         self.sombra_frame(self.ui.LnEdit_producto_edit)
         self.sombra_frame(self.ui.LnEdit_descripcion_edit)
-        self.sombra_frame(self.ui.LnEdit_categoria_edit)
         self.sombra_frame(self.ui.LnEdit_stockactual_edit)
         self.sombra_frame(self.ui.LnEdit_stockminimo_edit)
         self.sombra_frame(self.ui.btn_agregar)
@@ -119,4 +123,80 @@ class VentanaEditarEliminar(QWidget):
         self.ui.btn_regresar.clicked.connect(lambda: self.controlador.volver_a_anterior(self))
     
     
+
+    def eliminar_producto(self):
+        codigo = self.ui.LnEdit_id_edit.text().strip()
+        nombre = self.ui.LnEdit_producto_edit.text().strip()
+
+        criterio = codigo if codigo else nombre
+        if not criterio:
+            QMessageBox.warning(self, "Campo requerido", "⚠️ Ingresa el código o el nombre del producto.")
+            return
+
+        resultado = Inventario().BajaProducto(criterio)
+
+        if resultado == "conexion_fallida":
+            QMessageBox.critical(self, "Error de conexión", "❌ No se pudo conectar a la base de datos.")
+        elif resultado == "exito":
+            QMessageBox.information(self, "Éxito", "✅ Producto dado de baja correctamente.")
+            self.ui.LnEdit_id_edit.clear()
+            self.ui.LnEdit_producto_edit.clear()
+            self.ui.LnEdit_stockactual_edit.clear()
+            self.ui.LnEdit_stockminimo_edit.clear()
+            self.ui.LnEdit_descripcion_edit.clear()
+        elif resultado == "no_encontrado":
+            QMessageBox.warning(self, "No encontrado", "⚠️ Producto no encontrado o ya inactivo.")
+        elif resultado.startswith("error:"):
+            error_msg = resultado.split(":", 1)[1]
+            QMessageBox.critical(self, "Error inesperado", f"❌ Error: {error_msg}")
         
+    def editar_producto(self):
+        try:
+            codigo = int(self.ui.LnEdit_id_edit.text())
+            nombre = self.ui.LnEdit_producto_edit.text().strip()
+            stock = int(self.ui.LnEdit_stockactual_edit.text())
+            stock_minimo = int(self.ui.LnEdit_stockminimo_edit.text())
+            precio = float(self.ui.LnEdit_descripcion_edit.text())
+
+            if not nombre:
+                QMessageBox.warning(self, "Campo requerido", "⚠️ El nombre no puede estar vacío.")
+                return
+
+            resultado = Inventario().EditarProducto(codigo, nombre, stock, stock_minimo, precio)
+
+            if resultado == "conexion_fallida":
+                QMessageBox.critical(self, "Error de conexión", "❌ No se pudo conectar a la base de datos.")
+            elif resultado == "exito":
+                QMessageBox.information(self, "Éxito", "✅ Producto editado correctamente.")
+            elif resultado == "no_encontrado":
+                QMessageBox.warning(self, "No encontrado", "⚠️ Producto no encontrado o está inactivo.")
+            elif resultado.startswith("error:"):
+                error_msg = resultado.split(":", 1)[1]
+                QMessageBox.critical(self, "Error inesperado", f"❌ Error: {error_msg}")
+
+        except ValueError:
+            QMessageBox.critical(self, "Error de formato", "❌ Todos los campos deben tener valores válidos.")
+            
+    def llenar_datos_producto(self):
+        #Funcion para llenar los lineedits de los campos mas rapido
+        texto = self.ui.LnEdit_buscar.text().strip()
+
+        if not texto:
+            QMessageBox.warning(self, "Campo vacío", "⚠️ Ingresa el código o nombre del producto.")
+            return
+
+        criterio = "codigo" if texto.isdigit() else "nombre"
+        productos = Inventario.BuscarProductos(criterio, texto)
+
+        if not productos:
+            QMessageBox.information(self, "No encontrado", "❌ No se encontró ningún producto con ese criterio.")
+            return
+
+        # Tomamos el primer resultado
+        codigo, nombre, stock, stock_minimo, precio = productos[0]
+
+        self.ui.LnEdit_id_edit.setText(str(codigo))
+        self.ui.LnEdit_producto_edit.setText(nombre)
+        self.ui.LnEdit_stockactual_edit.setText(str(stock))
+        self.ui.LnEdit_stockminimo_edit.setText(str(stock_minimo))
+        self.ui.LnEdit_descripcion_edit.setText(f"{precio:.2f}")

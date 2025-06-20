@@ -1,13 +1,12 @@
 import os
-from PyQt6.QtWidgets import QWidget, QSizeGrip
+from PyQt6.QtWidgets import QWidget, QSizeGrip,  QMessageBox
 from PyQt6.QtCore import Qt, QPropertyAnimation, QEasingCurve
 from PyQt6.QtGui import QColor
 from PyQt6.QtGui import QIcon
 from PyQt6.QtGui import QPixmap
 from ui.ventana_agregar_ui import Ui_Form
 from PyQt6 import QtWidgets, QtGui
-from Backend.conexion import Miconexion
-
+from Backend.inventario import Inventario
 class VentanaAgregar(QWidget):
     def __init__(self, controlador):# constructor de la clase VentanaPrincipal
         super().__init__()
@@ -22,6 +21,8 @@ class VentanaAgregar(QWidget):
         self.inicializar_animaciones()
         
         self.eventos()
+        
+        self.ui.btn_agregar.clicked.connect( self.registrar_producto)
 
     def inicializar_animaciones(self): # metodo para inicializar las animaciones y configuraciones de la ventana principal
 
@@ -32,7 +33,6 @@ class VentanaAgregar(QWidget):
         self.sombra_frame(self.ui.LnEdit_id)
         self.sombra_frame(self.ui.LnEdit_producto)
         self.sombra_frame(self.ui.LnEdit_descripcion)
-        self.sombra_frame(self.ui.LnEdit_categoria)
         self.sombra_frame(self.ui.LnEdit_stockactual)
         self.sombra_frame(self.ui.LnEdit_stockminimo)
         self.sombra_frame(self.ui.btn_agregar)
@@ -115,5 +115,28 @@ class VentanaAgregar(QWidget):
         self.ui.btn_regresar.clicked.connect(lambda: self.controlador.volver_a_anterior(self))
     
     
-    def agregar_producto(self):
-        
+    def registrar_producto(self):
+        try:
+            codigo = int(self.ui.LnEdit_id.text())
+            nombre = self.ui.LnEdit_producto.text().strip()
+            stock = int(self.ui.LnEdit_stockactual.text())
+            stock_minimo = int(self.ui.LnEdit_stockminimo.text())
+            precio = int(self.ui.LnEdit_descripcion.text())
+
+            if not nombre:
+                QMessageBox.warning(self, "Campo vacío", "El nombre no puede estar vacío.")
+                return
+
+            Inventario().agregar_producto(codigo,nombre,stock,stock_minimo,precio)
+            QMessageBox.information(self, "Éxito", "✅ Producto agregado correctamente.")
+            # Opcional: limpiar campos
+            self.ui.LnEdit_id.clear()
+            self.ui.LnEdit_descripcion.clear()
+            self.ui.LnEdit_producto.clear()
+            self.ui.LnEdit_stockactual.clear()
+            self.ui.LnEdit_stockminimo.clear()
+
+        except ValueError:
+            QMessageBox.critical(self, "Error de formato", "❌ Todos los campos deben tener valores numéricos válidos.")
+        except Exception as e:
+            QMessageBox.critical(self, "Error inesperado", f"❌ No se pudo agregar el producto:\n{e}")

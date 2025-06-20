@@ -177,13 +177,37 @@ class VentanaPrincipal(QWidget):
     def seccion_toolbox(self, index):
         try:
             if index == 0:
-                self.ui.listWidget.clear()
-                productos = Inventario.obtener_lista_productos()
-                self.ui.listWidget.addItems(productos)
+                self.ui.tableWidget_3.clear()
+                self.ui.tableWidget_3.setColumnCount(3)
+                self.ui.tableWidget_3.setHorizontalHeaderLabels(["Nombre", "Stock", "Precio"])
+                self.ui.tableWidget_3.setRowCount(0)
+
+                productos = Inventario.obtener_lista_productos()  
+
+                for fila_idx, (nombre, stock, precio) in enumerate(productos):
+                    self.ui.tableWidget_3.insertRow(fila_idx)
+                    self.ui.tableWidget_3.setItem(fila_idx, 0, QTableWidgetItem(nombre))
+                    self.ui.tableWidget_3.setItem(fila_idx, 1, QTableWidgetItem(str(stock)))
+                    self.ui.tableWidget_3.setItem(fila_idx, 2, QTableWidgetItem(f"${precio:.2f}"))
+
+                self.ui.tableWidget_3.resizeColumnsToContents()
+                self.ui.tableWidget_3.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
             elif index == 1:
-                self.ui.listWidget_2.clear()
-                productos_stock_bajo=Inventario.prod_stock_bajo()
-                self.ui.listWidget_2.addItems(productos_stock_bajo)
+                self.ui.tableWidget_2.clear()
+                self.ui.tableWidget_2.setColumnCount(3)
+                self.ui.tableWidget_2.setHorizontalHeaderLabels(["Nombre", "Stock actual", "Stock mínimo"])
+                self.ui.tableWidget_2.setRowCount(0)
+
+                productos_stock_bajo = Inventario.prod_stock_bajo()
+
+                for fila_idx, (nombre, stock, stock_minimo) in enumerate(productos_stock_bajo):
+                    self.ui.tableWidget_2.insertRow(fila_idx)
+                    self.ui.tableWidget_2.setItem(fila_idx, 0, QTableWidgetItem(nombre))
+                    self.ui.tableWidget_2.setItem(fila_idx, 1, QTableWidgetItem(str(stock)))
+                    self.ui.tableWidget_2.setItem(fila_idx, 2, QTableWidgetItem(str(stock_minimo)))
+
+                self.ui.tableWidget_2.resizeColumnsToContents()
+                self.ui.tableWidget_2.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
             elif index == 2:
                 self.ui.tableWidget.clear()
                 self.ui.tableWidget.setColumnCount(4)

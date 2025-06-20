@@ -41,6 +41,7 @@ class VentanaReportes(QWidget):
         self.ui.btn_antiguo_a_actual.clicked.connect(self.ordenar_antiguos)
         self.ui.btn_entradas_2.clicked.connect(lambda: self.filtrar_tipo("Entrada"))
         self.ui.btn_salidas_2.clicked.connect(lambda: self.filtrar_tipo("Salida"))
+        self.ui.btn_restablecer.clicked.connect(lambda: self.proxy_movimientos.setFilterFixedString(""))
         
     def inicializar_animaciones(self): # metodo para inicializar las animaciones y configuraciones de la ventana principal
 
@@ -264,3 +265,6 @@ class VentanaReportes(QWidget):
     def filtrar_tipo(self, tipo):
         self.proxy_movimientos.setFilterKeyColumn(0)  # Columna "Tipo de movimiento"
         self.proxy_movimientos.setFilterFixedString(tipo)
+
+    
+        

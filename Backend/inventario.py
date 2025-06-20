@@ -1,25 +1,30 @@
 from Backend.conexion import Miconexion
+from PyQt6.QtWidgets import QMessageBox
 from Backend.modelos.claseProducto import Producto
 
 
 class Inventario():
-    def agregar_producto(self, producto):
-        conexion=Miconexion.obtener_conexion()
+    def agregar_producto(self, codigo, nombre, stock, stock_minimo, precio):
+        conexion = Miconexion.obtener_conexion()
         if not conexion:
             print("No se pudo conectar para agregar el producto.")
             return
         try:
-            cursor=conexion.cursor()
-            sql="INSERT INTO productos (Codigo, Nombre, Stock, Stock_minimo, Precio) VALUES (%s, %s, %s, %s, %s)"
-            datos=(producto.codigo, producto.nombre, producto.stock, producto.stock_minimo, producto.precio)
-            cursor.execute(sql,datos)
+            cursor = conexion.cursor()
+            sql = """
+                INSERT INTO productos (Codigo, Nombre, Stock, Stock_minimo, Precio)
+                VALUES (%s, %s, %s, %s, %s)
+            """
+            datos = (codigo, nombre, stock, stock_minimo, precio)
+            cursor.execute(sql, datos)
             conexion.commit()
-            print("Producto agregado correctamente")
+            print("✅ Producto agregado correctamente")
         except Exception as e:
-            print("Error al agregar producto: ", e)
+            print("❌ Error al agregar producto:", e)
         finally:
             cursor.close()
             conexion.close()
+
             
     def ListarProductos():
         conexion = Miconexion.obtener_conexion()
@@ -73,29 +78,64 @@ class Inventario():
 
 
             
-    def BajaProducto(self, codigo_producto):
-        conexion=Miconexion.obtener_conexion()
+    def BajaProducto(self, criterio):
+        conexion = Miconexion.obtener_conexion()
         if not conexion:
-            print("No se pudo enlazar a la base de datos.")
-            return 
+            return "conexion_fallida"
+
         try:
-            cursor=conexion.cursor()
-            cursor.execute("SELECT * FROM productos WHERE codigo = %s AND activo = 1", (codigo_producto,))
-            resultado=cursor.fetchone()
-            if resultado:
-                cursor.execute("UPDATE productos SET activo = 0 WHERE codigo = %s", (codigo_producto,))
-                conexion.commit()
-                print(f"Producto con codigo {codigo_producto} dado de baja exitosamente")
+            cursor = conexion.cursor()
+
+            if criterio.isdigit():
+                sql_check = "SELECT * FROM productos WHERE Codigo = %s AND Activo = 1"
+                sql_baja = "UPDATE productos SET Activo = 0 WHERE Codigo = %s"
             else:
-                print("Producto no encontrado o ya esta dado de baja")
+                sql_check = "SELECT * FROM productos WHERE Nombre = %s AND Activo = 1"
+                sql_baja = "UPDATE productos SET Activo = 0 WHERE Nombre = %s"
+
+            cursor.execute(sql_check, (criterio,))
+            resultado = cursor.fetchone()
+
+            if resultado:
+                cursor.execute(sql_baja, (criterio,))
+                conexion.commit()
+                return "exito"
+            else:
+                return "no_encontrado"
         except Exception as e:
-            print("Error al dar de b aja el producto. ",e)
+            return f"error:{e}"
         finally:
             cursor.close()
             conexion.close()
+
             
-            
-        
+
+    def EditarProducto(self, codigo, nombre, stock, stock_minimo, precio):
+        conexion = Miconexion.obtener_conexion()
+        if not conexion:
+            return "conexion_fallida"
+
+        try:
+            cursor = conexion.cursor()
+            cursor.execute("SELECT * FROM productos WHERE Codigo = %s AND Activo = 1", (codigo,))
+            resultado = cursor.fetchone()
+
+            if resultado:
+                sql = """
+                    UPDATE productos 
+                    SET Nombre = %s, Stock = %s, Stock_minimo = %s, Precio = %s 
+                    WHERE Codigo = %s
+                """
+                cursor.execute(sql, (nombre, stock, stock_minimo, precio, codigo))
+                conexion.commit()
+                return "exito"
+            else:
+                return "no_encontrado"
+        except Exception as e:
+            return f"error:{e}"
+        finally:
+            cursor.close()
+            conexion.close()
 
     def obtener_lista_productos():
         conexion = Miconexion.obtener_conexion()
@@ -103,12 +143,7 @@ class Inventario():
         try:
             with conexion.cursor() as cursor:
                 cursor.execute("SELECT Nombre, Stock, Precio FROM productos WHERE Activo = 1")
-                resultados = cursor.fetchall()
-                # Construir textos amigables para la lista
-                productos = [
-                    f"{nombre.ljust(35)} | Stock: {str(stock).ljust(20)} | Precio unitario:  ${precio:>7.2f}"
-                    for nombre, stock, precio in resultados
-                ]
+                productos = cursor.fetchall()  # ya son tuplas: (nombre, stock, precio)
         except Exception as e:
             print("❌ Error:", e)
         finally:
@@ -123,16 +158,15 @@ class Inventario():
 
         try:
             with conexion.cursor() as cursor:
-                cursor.execute("SELECT Nombre, Stock, Stock_minimo FROM productos WHERE Stock < Stock_minimo AND Activo = 1")
-                resultados = cursor.fetchall()
-                productos_stock_bajo = [
-                    f"{nombre.ljust(25)} | Stock: {str(stock).ljust(25)} | Mínimo requerido: {stock_minimo}"
-                    for nombre, stock, stock_minimo in resultados
-                ]
+                cursor.execute("""
+                    SELECT Nombre, Stock, Stock_minimo
+                    FROM productos
+                    WHERE Stock < Stock_minimo AND Activo = 1
+                """)
+                productos_stock_bajo = cursor.fetchall()  # Lista de tuplas
         except Exception as e:
             print("❌ Error al obtener productos con stock bajo:", e)
         finally:
             conexion.close()
 
         return productos_stock_bajo
-

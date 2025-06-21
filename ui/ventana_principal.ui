@@ -377,23 +377,6 @@ QPushButton:hover {
               </property>
              </widget>
             </item>
-            <item>
-             <widget class="QPushButton" name="btn_configuracion">
-              <property name="text">
-               <string>Configuracion</string>
-              </property>
-              <property name="icon">
-               <iconset>
-                <normaloff>../models/configuracion.svg</normaloff>../models/configuracion.svg</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>30</width>
-                <height>30</height>
-               </size>
-              </property>
-             </widget>
-            </item>
            </layout>
           </widget>
          </item>

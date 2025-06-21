@@ -1,5 +1,5 @@
 import os
-from PyQt6.QtWidgets import QWidget, QSizeGrip
+from PyQt6.QtWidgets import QWidget, QSizeGrip, QMessageBox, QFileDialog
 from PyQt6.QtCore import Qt, QPropertyAnimation, QEasingCurve
 from PyQt6.QtGui import QColor
 from PyQt6.QtGui import QIcon
@@ -42,6 +42,7 @@ class VentanaReportes(QWidget):
         self.ui.btn_entradas_2.clicked.connect(lambda: self.filtrar_tipo("Entrada"))
         self.ui.btn_salidas_2.clicked.connect(lambda: self.filtrar_tipo("Salida"))
         self.ui.btn_restablecer.clicked.connect(lambda: self.proxy_movimientos.setFilterFixedString(""))
+        self.ui.btn_exportar.clicked.connect(self.exportar_reportes_a_txt)
         
     def inicializar_animaciones(self): # metodo para inicializar las animaciones y configuraciones de la ventana principal
 
@@ -266,5 +267,42 @@ class VentanaReportes(QWidget):
         self.proxy_movimientos.setFilterKeyColumn(0)  # Columna "Tipo de movimiento"
         self.proxy_movimientos.setFilterFixedString(tipo)
 
-    
-        
+    def exportar_reportes_a_txt(self):
+        modelo = self.ui.tableInventario.model()
+
+        if not modelo:
+            QMessageBox.warning(self, "Sin datos", "No hay datos para exportar.")
+            return
+
+        # Elegir ruta y nombre del archivo
+        ruta, _ = QFileDialog.getSaveFileName(self, "Guardar reporte", "reporte_movimientos.txt", "Archivos de texto (*.txt)")
+        if not ruta:
+            return  # El usuario canceló
+
+        try:
+            # Obtener datos
+            headers = [modelo.headerData(col, Qt.Orientation.Horizontal) for col in range(modelo.columnCount())]
+            datos = []
+            for fila in range(modelo.rowCount()):
+                fila_datos = []
+                for col in range(modelo.columnCount()):
+                    index = modelo.index(fila, col)
+                    fila_datos.append(str(modelo.data(index)))
+                datos.append(fila_datos)
+
+            # Calcular ancho máximo por columna
+            anchos = [len(str(h)) for h in headers]
+            for fila in datos:
+                for i, campo in enumerate(fila):
+                    anchos[i] = max(anchos[i], len(str(campo)))
+
+            # Escribir archivo con alineación
+            with open(ruta, "w", encoding="utf-8") as archivo:
+                archivo.write(" | ".join(h.ljust(anchos[i]) for i, h in enumerate(headers)) + "\n")
+                archivo.write("-" * (sum(anchos) + 3 * (len(headers) - 1)) + "\n")
+                for fila in datos:
+                    archivo.write(" | ".join(fila[i].ljust(anchos[i]) for i in range(len(headers))) + "\n")
+
+            QMessageBox.information(self, "Éxito", "Reporte exportado correctamente.")
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"No se pudo exportar el archivo:\n{e}")

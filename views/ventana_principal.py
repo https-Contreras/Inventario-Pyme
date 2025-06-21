@@ -269,3 +269,5 @@ class VentanaPrincipal(QWidget):
         
     def actualizar_label_alertas(self, cantidad):
         self.ui.label_notificaciones.setText(f"🔔 {cantidad} productos con stock bajo")
+        
+    

@@ -1,15 +1,13 @@
 import os
-from PyQt6.QtWidgets import QWidget, QSizeGrip, QHeaderView
+from PyQt6.QtWidgets import QWidget, QSizeGrip, QFileDialog, QMessageBox
 from PyQt6.QtCore import Qt, QPropertyAnimation, QEasingCurve
 from PyQt6.QtGui import QColor, QIcon, QPixmap, QStandardItemModel, QStandardItem
 from ui.ventana_inventario_ui import Ui_Form
 from PyQt6 import QtWidgets, QtGui
 from Backend.inventario import Inventario
-from PyQt6.QtWidgets import QHeaderView
 from PyQt6.QtCore import QSortFilterProxyModel,QModelIndex, QVariant
-
-
-
+from PyQt6.QtWidgets import QHeaderView
+from Backend.inventario import Inventario
 
 #CLASE PARA EL BUEN FUNCIONAMIENTO DEL ORDENAMIENTO DEL INVENTRIOO (NO MOVER)
 class ProxyPersonalizado(QSortFilterProxyModel):
@@ -53,6 +51,8 @@ class VentanaInventario(QWidget):
         self.ui.btn_alfabeticamente.clicked.connect(self.ordenar_alfabeticamente)
         self.ui.btn_mayoramenor.clicked.connect(self.orden_mayor_menor)
         self.ui.btn_menormayor.clicked.connect(self.orden_menor_mayor)
+        self.ui.btn_exportar.clicked.connect(self.exportar_a_txt)
+        self.ui.btn_restablecer.clicked.connect(self.restablecer_inventario)
         
     def inicializar_animaciones(self): # metodo para inicializar las animaciones y configuraciones de la ventana principal
 
@@ -256,18 +256,15 @@ class VentanaInventario(QWidget):
         for fila in productos:
             items = []
             for i, campo in enumerate(fila):
-                # Formato para precio
-                texto = f"${campo:.2f}" if i == 4 else str(campo)
-
-                item = QStandardItem(texto)
-                item.setEditable(False)
-                item.setData(campo, Qt.ItemDataRole.UserRole)  # valor real para ordenamiento
-                items.append(item)
-
+                if i == 4:  # Precio
+                    items.append(QStandardItem(f"${campo:.2f}"))
+                else:
+                    items.append(QStandardItem(str(campo)))
             model.appendRow(items)
 
-        self.proxy_model.setSourceModel(model)
-        self.ui.tableInventario.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeMode.Stretch)
+        self.ui.tableInventario.setModel(model)
+        self.ui.tableInventario.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+
             
     def buscar_producto(self):
         texto = self.ui.Linedit_busqueda.text().strip()
@@ -314,3 +311,52 @@ class VentanaInventario(QWidget):
     def orden_menor_mayor(self):
         self.ui.tableInventario.setSortingEnabled(True)
         self.ui.tableInventario.sortByColumn(2,Qt.SortOrder.AscendingOrder)
+        
+        
+    def restablecer_inventario(self):
+        self.ui.Linedit_busqueda.clear()  # Limpiar el campo de búsqueda si existe
+        self.mostrar_inventario()         # Volver a cargar todos los productos
+        
+    
+    def exportar_a_txt(self):
+        try:
+            ruta, _ = QFileDialog.getSaveFileName(self, "Guardar como", "", "Archivos de texto (*.txt)")
+            if not ruta:
+                return
+
+            model = self.ui.tableInventario.model()
+            fila_count = model.rowCount()
+            col_count = model.columnCount()
+
+            # Obtener datos
+            datos = []
+            for fila in range(fila_count):
+                fila_datos = []
+                for col in range(col_count):
+                    index = model.index(fila, col)
+                    valor = str(index.data())
+                    fila_datos.append(valor)
+                datos.append(fila_datos)
+
+            # Obtener encabezados
+            encabezados = [str(model.headerData(col, Qt.Orientation.Horizontal)) for col in range(col_count)]
+
+            # Calcular ancho de cada columna
+            anchos = [len(header) for header in encabezados]
+            for fila in datos:
+                for i, valor in enumerate(fila):
+                    anchos[i] = max(anchos[i], len(valor))
+
+            # Crear líneas con formato alineado
+            def formatear_fila(fila):
+                return " | ".join(valor.ljust(anchos[i]) for i, valor in enumerate(fila))
+
+            with open(ruta, "w", encoding="utf-8") as archivo:
+                archivo.write(formatear_fila(encabezados) + "\n")
+                archivo.write("-" * (sum(anchos) + 3 * (col_count - 1)) + "\n")
+                for fila in datos:
+                    archivo.write(formatear_fila(fila) + "\n")
+
+            QMessageBox.information(self, "Éxito", "✅ Archivo exportado con formato mejorado.")
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"❌ Ocurrió un error: {e}")
